@@ -14,6 +14,9 @@ public class Player : Entity
     InputAction ActivateSpecialItem;
     InputAction ActivateShoot;
 
+    [SerializeField]
+    private float MaxSpeed;
+
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -73,14 +76,38 @@ public class Player : Entity
         Rotation.x = -rotation.y;
         Rotation.y = rotation.x;
 
-        Speed = speed;
 
-        transform.Rotate(Rotation * 10 * Time.deltaTime);
+        if (MovePlayer.IsPressed() && !StopPlayer.IsPressed())
+        {
+            if (Speed < MaxSpeed)
+            {
+                Speed = Speed + speed;
+            }
 
+        }
+        else if (!MovePlayer.IsPressed() && !StopPlayer.IsPressed())
+        {
+            if(Speed > 0)
+            {
+                Speed = Speed - 5.5f * Time.deltaTime;
+            }
+            
+        }
+        else if(StopPlayer.IsPressed() && !MovePlayer.IsPressed())
+        {
+            if (Speed > 0)
+            {
+                Speed = Speed - 1;
+            }
+        }
+
+        transform.Rotate(Rotation * Speed * Time.deltaTime);
+
+        /*
         if(rotation.y == 0 && rotation.x == 0)
         {
-            transform.localRotation = Quaternion.Euler(0, 0, 0);
-        }
+            transform.localRotation = Quaternion.Euler(transform.localEulerAngles.x, transform.localEulerAngles.y, 0);
+        }*/
         
         transform.Translate(Direction * Speed * Time.deltaTime);
     }
