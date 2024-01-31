@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,7 +18,11 @@ public class Player : Entity
 
     [SerializeField]
     private float MaxSpeed;
+    [SerializeField]
+    private int BoostTimer;
 
+    private bool BoostActive;
+    
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -57,13 +63,15 @@ public class Player : Entity
     // Start is called before the first frame update
     void Start()
     {
-        
+        Inventory[0] = null;
+        BoostActive = false;        
     }
 
     // Update is called once per frame
     void Update()
     {
         Move();
+        UseBoost();
     }
 
     private void Move()
@@ -77,15 +85,20 @@ public class Player : Entity
         Rotation.y = rotation.x;
 
 
-        if (MovePlayer.IsPressed() && !StopPlayer.IsPressed())
+        if (MovePlayer.IsPressed() && !StopPlayer.IsPressed()) //press gas
         {
             if (Speed < MaxSpeed)
             {
                 Speed = Speed + speed;
             }
+            else if(Speed > MaxSpeed && !BoostActive) 
+            {
+                Speed = Speed - 1 * Time.deltaTime;
+            }
+            
 
         }
-        else if (!MovePlayer.IsPressed() && !StopPlayer.IsPressed())
+        else if (!MovePlayer.IsPressed() && !StopPlayer.IsPressed() && !BoostActive) //let go gas but not press break
         {
             if(Speed > 0)
             {
@@ -93,7 +106,7 @@ public class Player : Entity
             }
             
         }
-        else if(StopPlayer.IsPressed() && !MovePlayer.IsPressed())
+        else if(StopPlayer.IsPressed() && !MovePlayer.IsPressed() && !BoostActive) //press break
         {
             if (Speed > 0)
             {
@@ -110,5 +123,32 @@ public class Player : Entity
         }*/
         
         transform.Translate(Direction * Speed * Time.deltaTime);
+    }
+
+    private void UseBoost()
+    {
+        if (Inventory[0] != null && ActivateBoost.IsPressed())
+        {
+            Speed = Speed + Boost;
+            Inventory[0] = null;
+            BoostActive = true;
+            StartCoroutine(BoostCountdown(BoostTimer));
+        }
+    }
+
+    IEnumerator BoostCountdown(int timer)
+    {
+        yield return new WaitForSeconds(timer);
+        BoostActive= false;
+        StopAllCoroutines();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("PowerUp") && Inventory[0] == null)
+        {
+            Inventory[0] = other.gameObject;
+            other.gameObject.SetActive(false);
+        }
     }
 }

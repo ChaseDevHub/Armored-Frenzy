@@ -18,7 +18,7 @@ public class Entity : MonoBehaviour
     public float Boost;
     public Vector3 Direction;
     public Vector3 Rotation;
-    public Array Inventory = new Array[1];
+    public GameObject[] Inventory = new GameObject[1];
 
     // Start is called before the first frame update
     void Start()
