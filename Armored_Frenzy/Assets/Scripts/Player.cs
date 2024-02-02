@@ -22,6 +22,8 @@ public class Player : Entity
     private int BoostTimer;
 
     private bool BoostActive;
+
+    Rigidbody rb;
     
     private void Awake()
     {
@@ -64,11 +66,12 @@ public class Player : Entity
     void Start()
     {
         Inventory[0] = null;
-        BoostActive = false;        
+        BoostActive = false;
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Move();
         UseBoost();
@@ -80,7 +83,7 @@ public class Player : Entity
         var speed = MovePlayer.ReadValue<float>();
 
         Direction = Vector3.forward;
-
+        
         Rotation.x = -rotation.y;
         Rotation.y = rotation.x;
 
@@ -114,15 +117,15 @@ public class Player : Entity
             }
         }
 
-        transform.Rotate(Rotation * Speed * Time.deltaTime);
-
         /*
         if(rotation.y == 0 && rotation.x == 0)
         {
             transform.localRotation = Quaternion.Euler(transform.localEulerAngles.x, transform.localEulerAngles.y, 0);
         }*/
+        transform.Rotate(Rotation * Speed * Time.deltaTime);
         
-        transform.Translate(Direction * Speed * Time.deltaTime);
+        rb.velocity = transform.rotation * Direction * Speed; //Help from https://gamedev.stackexchange.com/questions/189313/how-to-do-rigidbody-movement-relative-to-player-rotation-in-unity-c
+
     }
 
     private void UseBoost()
