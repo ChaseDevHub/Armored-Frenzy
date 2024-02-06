@@ -112,6 +112,17 @@ public class Player : Entity
         
         Rotation.x = -rotation.y;
         Rotation.y = rotation.x;
+        
+        if(Rotation.y != 0)
+        {
+            Rotation.z = -rotation.x * 2;
+        }
+        else
+        {
+            //Help from https://forum.unity.com/threads/reset-z-rotation-how.1017607/#:~:text=This%20is%20really%20all%20you,Vector3%20eulers%20%3D%20transform.
+            Vector3 originalPos = transform.eulerAngles;
+            transform.rotation = Quaternion.Euler(originalPos.x, originalPos.y, 0);
+        }
 
         if (MovePlayer.IsPressed() && !StopPlayer.IsPressed()) //press gas
         {
@@ -142,8 +153,11 @@ public class Player : Entity
             }
         }
 
-        transform.Rotate(Rotation * Speed * Time.deltaTime);
+
+        transform.Rotate(Rotation * 30 * Time.deltaTime);
         
+       
+
         rb.velocity = transform.rotation * Direction * Speed; //Help from https://gamedev.stackexchange.com/questions/189313/how-to-do-rigidbody-movement-relative-to-player-rotation-in-unity-c
 
       

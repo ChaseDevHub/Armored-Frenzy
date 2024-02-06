@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.23956624, g: 0.26193565, b: 0.2717589, a: 1}
+  m_IndirectSpecularColor: {r: 0.23953354, g: 0.26195124, b: 0.27169034, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -24236,7 +24236,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 84
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -31695,6 +31695,7 @@ GameObject:
   - component: {fileID: 1641751963}
   - component: {fileID: 1641751962}
   - component: {fileID: 1641751961}
+  - component: {fileID: 1641751964}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -31773,6 +31774,22 @@ Transform:
   - {fileID: 1072559707}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1641751964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641751960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4700f9f03ad19f94baf0367cb7a9c988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Width: 14.65
+  m_Damping: 0.7
+  m_MinFOV: 2.8
+  m_MaxFOV: 84
 --- !u!43 &1711614504
 Mesh:
   m_ObjectHideFlags: 0
