@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Pool;
 
 public class Player : Entity
 {
@@ -34,6 +35,8 @@ public class Player : Entity
 
     bool HitTrack;
 
+    public BulletMachine bm;
+    
     #region InputSetUp
     private void Awake()
     {
@@ -80,6 +83,7 @@ public class Player : Entity
         rb = GetComponent<Rigidbody>();
         PlayerInControl = true;
         HitTrack= false;
+        
     }
 
     // Update is called once per frame
@@ -94,6 +98,7 @@ public class Player : Entity
         {
             Move();
             UseBoost();
+            ShootWeapon();
         }
         else
         {
@@ -156,13 +161,18 @@ public class Player : Entity
 
         transform.Rotate(Rotation * 30 * Time.deltaTime);
         
-       
-
         rb.velocity = transform.rotation * Direction * Speed; //Help from https://gamedev.stackexchange.com/questions/189313/how-to-do-rigidbody-movement-relative-to-player-rotation-in-unity-c
 
       
     }
 
+    private void ShootWeapon()
+    {
+        if(ActivateShoot.IsPressed())
+        {
+            bm.Shoot();
+        }
+    }
     private void UseBoost()
     {
         if (Inventory[0] != null && ActivateBoost.IsPressed())
@@ -217,4 +227,7 @@ public class Player : Entity
             HitTrack = true;
         }
     }
+
+   
+
 }
