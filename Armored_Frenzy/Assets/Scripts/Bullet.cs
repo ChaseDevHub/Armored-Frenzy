@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.Pool;
-
+public enum BulletSide { left, right };
 public class Bullet : MonoBehaviour
 {
     private GameObject BulletMachine;
@@ -13,20 +13,40 @@ public class Bullet : MonoBehaviour
 
     private Rigidbody rb;
 
-    private void Start()
+    public BulletSide side;
+
+    public int DamagePoint { get; private set; }
+
+    private void Awake()
     {
         Aim = GameObject.Find("Aim").transform;
-        BulletMachine = GameObject.Find("BulletSlot");
+    }
 
-        transform.position = BulletMachine.transform.position;
-        StartLocation = transform.position;
+    private void Start()
+    {
+        
+        switch (side)
+        {
+            case BulletSide.left:
+                BulletMachine = GameObject.Find("BulletSlotLeft");
+                break; 
+            case BulletSide.right:
+                BulletMachine = GameObject.Find("BulletSlotRight");
+                break;
+        }
+
+        //transform.position = BulletMachine.transform.position;
+        //StartLocation = transform.position;
         if(rb == null)
         {
             rb = GetComponent<Rigidbody>();
         }
+
+        DamagePoint = 2;
+
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (enabled)
         {
@@ -36,10 +56,17 @@ public class Bullet : MonoBehaviour
         StartLocation = BulletMachine.transform.position;
     }
 
-    private void MoveBullet()
+    //Help from chat.gpt
+    public void FireFrom(Transform firePoint)
+    {
+        transform.position = firePoint.position;
+        StartLocation = transform.position;
+    }
+
+    public void MoveBullet()
     {
         direction = Aim.transform.forward;
-        transform.position += direction;
+        transform.position += direction * 2;
         StartCoroutine(ResetBulletTimer());
     }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -35,7 +36,10 @@ public class Player : Entity
 
     bool HitTrack;
 
-    public BulletMachine bm;
+    public BulletMachine[] bm;
+
+    [SerializeField]
+    AnimationCurve curve;
     
     #region InputSetUp
     private void Awake()
@@ -124,9 +128,12 @@ public class Player : Entity
         }
         else
         {
-            //Help from https://forum.unity.com/threads/reset-z-rotation-how.1017607/#:~:text=This%20is%20really%20all%20you,Vector3%20eulers%20%3D%20transform.
-            Vector3 originalPos = transform.eulerAngles;
-            transform.rotation = Quaternion.Euler(originalPos.x, originalPos.y, 0);
+            //Help from https://forum.unity.com/threads/how-to-lerp-rotation.978078/ and chat.gbt
+            var currentPos = transform.eulerAngles;
+            var current = Quaternion.Euler(currentPos.x, currentPos.y, currentPos.z);
+            var reset = Quaternion.Euler(currentPos.x, currentPos.y, 0f); 
+            float t = 0.1f;
+            transform.rotation = Quaternion.Lerp(current, reset, t);
         }
 
         if (MovePlayer.IsPressed() && !StopPlayer.IsPressed()) //press gas
@@ -170,7 +177,8 @@ public class Player : Entity
     {
         if(ActivateShoot.IsPressed())
         {
-            bm.Shoot();
+            bm[0].Shoot();
+            bm[1].Shoot();
         }
     }
     private void UseBoost()
@@ -210,6 +218,7 @@ public class Player : Entity
         StopAllCoroutines();
     }
 
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("PowerUp") && Inventory[0] == null)
@@ -217,7 +226,7 @@ public class Player : Entity
             Inventory[0] = other.gameObject;
             other.gameObject.SetActive(false);
         }
-    }
+    }*/
 
     private void OnCollisionEnter(Collision collision)
     {

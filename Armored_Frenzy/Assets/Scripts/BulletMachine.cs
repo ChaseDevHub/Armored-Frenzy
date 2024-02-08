@@ -4,23 +4,33 @@ using System.Linq;
 using System.Xml.Schema;
 using UnityEngine;
 
+public enum BulletMachineSide { left, right };
 public class BulletMachine : MonoBehaviour
 {
+    public BulletMachineSide side;
     public GameObject Prefab;
     public List<Bullet> Bullets;
     public int MaxBullets;
 
     private void Start()
     {
-        for (int i = 0; i < MaxBullets; i++)
+        switch (side)
         {
-            GameObject temp = Instantiate(Prefab);
-            Bullets.Add(temp.GetComponent<Bullet>());
-        }
+            case BulletMachineSide.left:
+            case BulletMachineSide.right:
+                for (int i = 0; i < MaxBullets; i++)
+                {
+                    GameObject temp = Instantiate(Prefab);
+                    Bullets.Add(temp.GetComponent<Bullet>());
+                }
 
-        foreach (var v in Bullets)
-        {
-            v.gameObject.SetActive(false);
+                foreach (var v in Bullets)
+                {
+                    v.gameObject.SetActive(false);
+                }
+
+                break;
+        
         }
     }
 
@@ -43,6 +53,7 @@ public class BulletMachine : MonoBehaviour
     IEnumerator Wait(Bullet inactiveBullet)
     {
         yield return new WaitForSeconds(1);
+        inactiveBullet.FireFrom(transform);
         inactiveBullet.gameObject.SetActive(true);
         StopAllCoroutines();
     }
