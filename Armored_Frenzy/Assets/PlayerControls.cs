@@ -64,7 +64,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""PowerUp"",
+                    ""name"": ""Shield"",
                     ""type"": ""Button"",
                     ""id"": ""0b058928-f3a7-4c8e-aa48-96c1e2eed8a4"",
                     ""expectedControlType"": ""Button"",
@@ -113,28 +113,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""XboxController"",
                     ""action"": ""Boost"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f6dc5983-a579-4c4c-b526-079a43bcf050"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""XboxController"",
-                    ""action"": ""PowerUp"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ffb60656-c54d-4e1b-837a-9d57197d41a2"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""XboxController"",
-                    ""action"": ""PowerUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -203,6 +181,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a4671637-9dd2-4885-a2f5-c55d6ec10d9c"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""Shield"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -227,7 +216,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Gas = m_Player.FindAction("Gas", throwIfNotFound: true);
         m_Player_Break = m_Player.FindAction("Break", throwIfNotFound: true);
         m_Player_Boost = m_Player.FindAction("Boost", throwIfNotFound: true);
-        m_Player_PowerUp = m_Player.FindAction("PowerUp", throwIfNotFound: true);
+        m_Player_Shield = m_Player.FindAction("Shield", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
     }
 
@@ -294,7 +283,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Gas;
     private readonly InputAction m_Player_Break;
     private readonly InputAction m_Player_Boost;
-    private readonly InputAction m_Player_PowerUp;
+    private readonly InputAction m_Player_Shield;
     private readonly InputAction m_Player_Shoot;
     public struct PlayerActions
     {
@@ -304,7 +293,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Gas => m_Wrapper.m_Player_Gas;
         public InputAction @Break => m_Wrapper.m_Player_Break;
         public InputAction @Boost => m_Wrapper.m_Player_Boost;
-        public InputAction @PowerUp => m_Wrapper.m_Player_PowerUp;
+        public InputAction @Shield => m_Wrapper.m_Player_Shield;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -327,9 +316,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Boost.started += instance.OnBoost;
             @Boost.performed += instance.OnBoost;
             @Boost.canceled += instance.OnBoost;
-            @PowerUp.started += instance.OnPowerUp;
-            @PowerUp.performed += instance.OnPowerUp;
-            @PowerUp.canceled += instance.OnPowerUp;
+            @Shield.started += instance.OnShield;
+            @Shield.performed += instance.OnShield;
+            @Shield.canceled += instance.OnShield;
             @Shoot.started += instance.OnShoot;
             @Shoot.performed += instance.OnShoot;
             @Shoot.canceled += instance.OnShoot;
@@ -349,9 +338,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Boost.started -= instance.OnBoost;
             @Boost.performed -= instance.OnBoost;
             @Boost.canceled -= instance.OnBoost;
-            @PowerUp.started -= instance.OnPowerUp;
-            @PowerUp.performed -= instance.OnPowerUp;
-            @PowerUp.canceled -= instance.OnPowerUp;
+            @Shield.started -= instance.OnShield;
+            @Shield.performed -= instance.OnShield;
+            @Shield.canceled -= instance.OnShield;
             @Shoot.started -= instance.OnShoot;
             @Shoot.performed -= instance.OnShoot;
             @Shoot.canceled -= instance.OnShoot;
@@ -387,7 +376,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnGas(InputAction.CallbackContext context);
         void OnBreak(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
-        void OnPowerUp(InputAction.CallbackContext context);
+        void OnShield(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
     }
 }

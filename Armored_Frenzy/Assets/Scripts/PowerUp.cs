@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum PowerName { Boost, Shield}
+public enum PowerName { Boost, Shield}
 public class PowerUp : MonoBehaviour
 {
-    [SerializeField]
-    private PowerName Ability;
+    public PowerName Ability;
 
     [SerializeField]
     private int Health;
@@ -26,6 +25,18 @@ public class PowerUp : MonoBehaviour
         if(Health == 0)
         {
             Health = 10;
+        }
+
+        int ran = Random.Range(0, 2);
+
+        switch (ran)
+        {
+            case 0:
+                Ability = PowerName.Boost;
+                break;
+            case 1:
+                Ability = PowerName.Shield;
+                break;
         }
     }
 

@@ -6,7 +6,6 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Pool;
 
 public class Player : Entity
 {
@@ -16,7 +15,7 @@ public class Player : Entity
     InputAction StopPlayer;
     InputAction RotateDirection;
     InputAction ActivateBoost;
-    InputAction ActivateSpecialItem;
+    InputAction ActivateShield;
     InputAction ActivateShoot;
     #endregion
 
@@ -25,7 +24,13 @@ public class Player : Entity
     [SerializeField]
     private int BoostTimer;
 
+    [SerializeField]
+    private int ShieldTimer;
+
+    [SerializeField]
     private bool BoostActive;
+    [SerializeField]
+    private bool ShieldActive;
 
     Rigidbody rb;
 
@@ -38,9 +43,8 @@ public class Player : Entity
 
     public BulletMachine[] bm;
 
-    [SerializeField]
-    AnimationCurve curve;
-    
+    private GameObject Shield;
+
     #region InputSetUp
     private void Awake()
     {
@@ -61,8 +65,8 @@ public class Player : Entity
         ActivateBoost = playerControls.Player.Boost;
         ActivateBoost.Enable();
 
-        ActivateSpecialItem = playerControls.Player.PowerUp;
-        ActivateSpecialItem.Enable();
+        ActivateShield = playerControls.Player.Shield;
+        ActivateShield.Enable();
 
         ActivateShoot= playerControls.Player.Shoot;
         ActivateShoot.Enable();
@@ -75,7 +79,7 @@ public class Player : Entity
         StopPlayer.Disable();
         RotateDirection.Disable();
         ActivateBoost.Disable();
-        ActivateSpecialItem.Disable();
+        ActivateShield.Disable();
         ActivateShoot.Disable();
     }
     #endregion
@@ -84,10 +88,12 @@ public class Player : Entity
     {
         Inventory[0] = null;
         BoostActive = false;
+        ShieldActive = false;
         rb = GetComponent<Rigidbody>();
         PlayerInControl = true;
         HitTrack= false;
-        
+        Shield = GameObject.Find("Shield");
+        Shield.SetActive(false);
     }
 
     // Update is called once per frame
@@ -102,12 +108,22 @@ public class Player : Entity
         {
             Move();
             UseBoost();
+            UseShield();
             ShootWeapon();
         }
         else
         {
             transform.Rotate(new Vector3(0, 0, 360) * Time.fixedDeltaTime / 3);
             StartCoroutine(ResetPlayerControl(ResetTimer));            
+        }
+        
+        if(ShieldActive)
+        {
+            Shield.SetActive(true);
+        }
+        else
+        {
+            Shield.SetActive(false);
         }
         
     }
@@ -181,9 +197,10 @@ public class Player : Entity
             bm[1].Shoot();
         }
     }
+    
     private void UseBoost()
     {
-        if (Inventory[0] != null && ActivateBoost.IsPressed())
+        if (Inventory[0] != null && ActivateBoost.IsPressed() && Inventory[0].GetComponent<PowerUp>().Ability == PowerName.Boost)
         {
             Speed = Speed + Boost;
             Inventory[0] = null;
@@ -192,10 +209,28 @@ public class Player : Entity
         }
     }
 
+    private void UseShield()
+    {
+        if (Inventory[0] != null && ActivateShield.IsPressed() && Inventory[0].GetComponent<PowerUp>().Ability == PowerName.Shield )
+        {
+            //Set gameobject to be active as a bubble around the ship
+            Inventory[0] = null;
+            ShieldActive = true;
+            StartCoroutine(ShieldCountdown(ShieldTimer));
+        }
+    }
+
     IEnumerator BoostCountdown(int timer)
     {
         yield return new WaitForSeconds(timer);
         BoostActive= false;
+        StopAllCoroutines();
+    }
+
+    IEnumerator ShieldCountdown(int timer)
+    {
+        yield return new WaitForSeconds(timer);
+        ShieldActive = false;
         StopAllCoroutines();
     }
 
@@ -238,5 +273,6 @@ public class Player : Entity
     }
 
    
+
 
 }
