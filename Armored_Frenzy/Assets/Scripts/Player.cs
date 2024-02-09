@@ -21,15 +21,27 @@ public class Player : Entity
 
     [SerializeField]
     private float MaxSpeed;
+
+    public float maxspeed { get
+        {
+            return MaxSpeed;
+        }
+        private set
+        {
+            maxspeed = value;
+        }
+    
+    }
+
     [SerializeField]
     private int BoostTimer;
 
     [SerializeField]
     private int ShieldTimer;
 
-    [SerializeField]
+    
     private bool BoostActive;
-    [SerializeField]
+    
     private bool ShieldActive;
 
     Rigidbody rb;
@@ -44,6 +56,12 @@ public class Player : Entity
     public BulletMachine[] bm;
 
     private GameObject Shield;
+
+    [SerializeField]
+    private GameObject GuidePipe;
+
+    [SerializeField]
+    float RotationReset;
 
     #region InputSetUp
     private void Awake()
@@ -94,6 +112,11 @@ public class Player : Entity
         HitTrack= false;
         Shield = GameObject.Find("Shield");
         Shield.SetActive(false);
+        
+        if(GuidePipe == null)
+        {
+            GuidePipe = GameObject.FindGameObjectWithTag("GuidePipe");
+        }
     }
 
     // Update is called once per frame
@@ -125,7 +148,11 @@ public class Player : Entity
         {
             Shield.SetActive(false);
         }
-        
+
+        Quaternion guidePipeRotation = GuidePipe.transform.rotation;
+        RotationReset = guidePipeRotation.eulerAngles.y;
+        //RotationReset = GuidePipe.transform.localRotation.z;
+
     }
 
     private void Move()
@@ -248,7 +275,11 @@ public class Player : Entity
         PlayerInControl = true;
         //Push out
 
-        transform.rotation = Quaternion.Euler(transform.rotation.x, 0, transform.rotation.z);
+        //maybe have the rotation reset based on the Z axis of the track marks?
+        
+        
+        transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
+        
         
         StopAllCoroutines();
     }
@@ -272,7 +303,13 @@ public class Player : Entity
         }
     }
 
-   
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("GuidePipe"))
+        {
+            GuidePipe = other.gameObject;
+        }
+    }
 
 
 }

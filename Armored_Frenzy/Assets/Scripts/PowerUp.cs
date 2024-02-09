@@ -10,9 +10,11 @@ public class PowerUp : MonoBehaviour
     [SerializeField]
     private int Health;
 
+    private int ConstHealth;
+
     private Player player;
 
-    //Color oriented: Read the material. If one color, assign one ability, if another color assign the other ability
+    //Color oriented: Maybe assign the material/shader based on the ability type it randomly gets
 
     // Start is called before the first frame update
     void Start()
@@ -24,8 +26,10 @@ public class PowerUp : MonoBehaviour
 
         if(Health == 0)
         {
-            Health = 10;
+            Health = 4;
         }
+
+        ConstHealth = Health;
 
         int ran = Random.Range(0, 2);
 
@@ -60,5 +64,10 @@ public class PowerUp : MonoBehaviour
         {
             Health -= other.gameObject.GetComponent<Bullet>().DamagePoint;
         }
+    }
+
+    public void ResetHealth()
+    {
+        Health = ConstHealth;
     }
 }

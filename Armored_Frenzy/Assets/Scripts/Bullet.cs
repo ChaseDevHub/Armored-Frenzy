@@ -15,16 +15,23 @@ public class Bullet : MonoBehaviour
 
     public BulletSide side;
 
+    private Player player;
+
+    private float BulletSpeed;
+
     public int DamagePoint { get; private set; }
 
     private void Awake()
     {
         Aim = GameObject.Find("Aim").transform;
+        if(player == null)
+        {
+            player = GameObject.Find("Player").GetComponent<Player>();
+        }
     }
 
     private void Start()
     {
-        
         switch (side)
         {
             case BulletSide.left:
@@ -35,8 +42,7 @@ public class Bullet : MonoBehaviour
                 break;
         }
 
-        //transform.position = BulletMachine.transform.position;
-        //StartLocation = transform.position;
+       
         if(rb == null)
         {
             rb = GetComponent<Rigidbody>();
@@ -44,9 +50,18 @@ public class Bullet : MonoBehaviour
 
         DamagePoint = 2;
 
+        if(player.Speed > player.maxspeed) //if there is a boost
+        {
+            BulletSpeed = player.Speed * 3;
+        }
+        else
+        {
+            BulletSpeed = player.maxspeed * 3;
+        }
+       
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (enabled)
         {
@@ -66,7 +81,8 @@ public class Bullet : MonoBehaviour
     public void MoveBullet()
     {
         direction = Aim.transform.forward;
-        transform.position += direction * 2;
+        //transform.position += direction * 2;
+        rb.velocity = direction * BulletSpeed;
         StartCoroutine(ResetBulletTimer());
     }
 
