@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -8,23 +9,43 @@ using UnityEngine.InputSystem;
 
 public class Player : Entity
 {
+    #region Input Fields
     private PlayerControls playerControls;
     InputAction MovePlayer;
     InputAction StopPlayer;
     InputAction RotateDirection;
     InputAction ActivateBoost;
-    InputAction ActivateSpecialItem;
+    InputAction ActivateShield;
     InputAction ActivateShoot;
+    #endregion
 
     [SerializeField]
     private float MaxSpeed;
     [SerializeField]
     private int BoostTimer;
 
+    [SerializeField]
+    private int ShieldTimer;
+
+    [SerializeField]
     private bool BoostActive;
+    [SerializeField]
+    private bool ShieldActive;
 
     Rigidbody rb;
-    
+
+    bool PlayerInControl;
+
+    [SerializeField]
+    private int ResetTimer;
+
+    bool HitTrack;
+
+    public BulletMachine[] bm;
+
+    private GameObject Shield;
+
+    #region InputSetUp
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -44,8 +65,8 @@ public class Player : Entity
         ActivateBoost = playerControls.Player.Boost;
         ActivateBoost.Enable();
 
-        ActivateSpecialItem = playerControls.Player.PowerUp;
-        ActivateSpecialItem.Enable();
+        ActivateShield = playerControls.Player.Shield;
+        ActivateShield.Enable();
 
         ActivateShoot= playerControls.Player.Shoot;
         ActivateShoot.Enable();
@@ -58,23 +79,53 @@ public class Player : Entity
         StopPlayer.Disable();
         RotateDirection.Disable();
         ActivateBoost.Disable();
-        ActivateSpecialItem.Disable();
+        ActivateShield.Disable();
         ActivateShoot.Disable();
     }
-
+    #endregion
     // Start is called before the first frame update
     void Start()
     {
         Inventory[0] = null;
         BoostActive = false;
+        ShieldActive = false;
         rb = GetComponent<Rigidbody>();
+        PlayerInControl = true;
+        HitTrack= false;
+        Shield = GameObject.Find("Shield");
+        Shield.SetActive(false);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Move();
-        UseBoost();
+        if(HitTrack)
+        {
+            StartCoroutine(TrackCollisionCooldown(10));
+        }
+
+        if(PlayerInControl)
+        {
+            Move();
+            UseBoost();
+            UseShield();
+            ShootWeapon();
+        }
+        else
+        {
+            transform.Rotate(new Vector3(0, 0, 360) * Time.fixedDeltaTime / 3);
+            StartCoroutine(ResetPlayerControl(ResetTimer));            
+        }
+        
+        if(ShieldActive)
+        {
+            Shield.SetActive(true);
+        }
+        else
+        {
+            Shield.SetActive(false);
+        }
+        
     }
 
     private void Move()
@@ -86,7 +137,20 @@ public class Player : Entity
         
         Rotation.x = -rotation.y;
         Rotation.y = rotation.x;
-
+        
+        if(Rotation.y != 0)
+        {
+            Rotation.z = -rotation.x * 2;
+        }
+        else
+        {
+            //Help from https://forum.unity.com/threads/how-to-lerp-rotation.978078/ and chat.gbt
+            var currentPos = transform.eulerAngles;
+            var current = Quaternion.Euler(currentPos.x, currentPos.y, currentPos.z);
+            var reset = Quaternion.Euler(currentPos.x, currentPos.y, 0f); 
+            float t = 0.1f;
+            transform.rotation = Quaternion.Lerp(current, reset, t);
+        }
 
         if (MovePlayer.IsPressed() && !StopPlayer.IsPressed()) //press gas
         {
@@ -117,25 +181,42 @@ public class Player : Entity
             }
         }
 
-        /*
-        if(rotation.y == 0 && rotation.x == 0)
-        {
-            transform.localRotation = Quaternion.Euler(transform.localEulerAngles.x, transform.localEulerAngles.y, 0);
-        }*/
-        transform.Rotate(Rotation * Speed * Time.deltaTime);
+
+        transform.Rotate(Rotation * 30 * Time.deltaTime);
         
         rb.velocity = transform.rotation * Direction * Speed; //Help from https://gamedev.stackexchange.com/questions/189313/how-to-do-rigidbody-movement-relative-to-player-rotation-in-unity-c
 
+      
     }
 
+    private void ShootWeapon()
+    {
+        if(ActivateShoot.IsPressed())
+        {
+            bm[0].Shoot();
+            bm[1].Shoot();
+        }
+    }
+    
     private void UseBoost()
     {
-        if (Inventory[0] != null && ActivateBoost.IsPressed())
+        if (Inventory[0] != null && ActivateBoost.IsPressed() && Inventory[0].GetComponent<PowerUp>().Ability == PowerName.Boost)
         {
             Speed = Speed + Boost;
             Inventory[0] = null;
             BoostActive = true;
             StartCoroutine(BoostCountdown(BoostTimer));
+        }
+    }
+
+    private void UseShield()
+    {
+        if (Inventory[0] != null && ActivateShield.IsPressed() && Inventory[0].GetComponent<PowerUp>().Ability == PowerName.Shield )
+        {
+            //Set gameobject to be active as a bubble around the ship
+            Inventory[0] = null;
+            ShieldActive = true;
+            StartCoroutine(ShieldCountdown(ShieldTimer));
         }
     }
 
@@ -146,6 +227,33 @@ public class Player : Entity
         StopAllCoroutines();
     }
 
+    IEnumerator ShieldCountdown(int timer)
+    {
+        yield return new WaitForSeconds(timer);
+        ShieldActive = false;
+        StopAllCoroutines();
+    }
+
+    IEnumerator TrackCollisionCooldown(int timer)
+    {
+        yield return new WaitForSeconds(timer);
+        HitTrack = false;
+        StopAllCoroutines();
+    }
+
+    IEnumerator ResetPlayerControl(int timer)
+    {
+        yield return new WaitForSeconds(timer);
+        
+        PlayerInControl = true;
+        //Push out
+
+        transform.rotation = Quaternion.Euler(transform.rotation.x, 0, transform.rotation.z);
+        
+        StopAllCoroutines();
+    }
+
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("PowerUp") && Inventory[0] == null)
@@ -153,5 +261,18 @@ public class Player : Entity
             Inventory[0] = other.gameObject;
             other.gameObject.SetActive(false);
         }
+    }*/
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Track") && HitTrack == false)
+        {
+            PlayerInControl = false;
+            HitTrack = true;
+        }
     }
+
+   
+
+
 }

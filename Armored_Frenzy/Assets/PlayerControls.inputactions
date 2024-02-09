@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "PowerUp",
+                    "name": "Shield",
                     "type": "Button",
                     "id": "0b058928-f3a7-4c8e-aa48-96c1e2eed8a4",
                     "expectedControlType": "Button",
@@ -91,28 +91,6 @@
                     "processors": "",
                     "groups": "XboxController",
                     "action": "Boost",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f6dc5983-a579-4c4c-b526-079a43bcf050",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "XboxController",
-                    "action": "PowerUp",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ffb60656-c54d-4e1b-837a-9d57197d41a2",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "XboxController",
-                    "action": "PowerUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -181,6 +159,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "a4671637-9dd2-4885-a2f5-c55d6ec10d9c",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XboxController",
+                    "action": "Shield",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
