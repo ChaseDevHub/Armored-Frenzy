@@ -23413,7 +23413,7 @@ MonoBehaviour:
   Rotation: {x: 0, y: 0, z: 0}
   Inventory:
   - {fileID: 0}
-  MaxSpeed: 120
+  MaxSpeed: 110
   BoostTimer: 3
   ShieldTimer: 6
   ResetTimer: 2
