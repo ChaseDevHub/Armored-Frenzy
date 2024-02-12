@@ -63,6 +63,9 @@ public class Player : Entity
     [SerializeField]
     float RotationReset;
 
+    [SerializeField]
+    private GameObject ParticleEffect;
+
     #region InputSetUp
     private void Awake()
     {
@@ -117,6 +120,8 @@ public class Player : Entity
         {
             GuidePipe = GameObject.FindGameObjectWithTag("GuidePipe");
         }
+
+        ParticleEffect.SetActive(false);
     }
 
     // Update is called once per frame
@@ -189,8 +194,6 @@ public class Player : Entity
             {
                 Speed = Speed - 1 * Time.deltaTime;
             }
-            
-
         }
         else if (!MovePlayer.IsPressed() && !StopPlayer.IsPressed() && !BoostActive) //let go gas but not press break
         {
@@ -213,7 +216,19 @@ public class Player : Entity
         
         rb.velocity = transform.rotation * Direction * Speed; //Help from https://gamedev.stackexchange.com/questions/189313/how-to-do-rigidbody-movement-relative-to-player-rotation-in-unity-c
 
-      
+        VisualEffect();
+    }
+
+    private void VisualEffect()
+    {
+        if (Speed <= 0)
+        {
+            ParticleEffect.SetActive(false);
+        }
+        else
+        {
+            ParticleEffect.SetActive(true);
+        }
     }
 
     private void ShootWeapon()

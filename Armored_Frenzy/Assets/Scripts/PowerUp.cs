@@ -48,7 +48,7 @@ public class PowerUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Health == 0)
+        if(Health <= 0)
         {
             this.gameObject.SetActive(false);
             if (player.Inventory[0] == null)

@@ -52,7 +52,7 @@ public class BulletMachine : MonoBehaviour
 
     IEnumerator Wait(Bullet inactiveBullet)
     {
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.5f);
         inactiveBullet.FireFrom(transform);
         inactiveBullet.gameObject.SetActive(true);
         StopAllCoroutines();
