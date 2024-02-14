@@ -292,9 +292,7 @@ public class Player : Entity
 
         //maybe have the rotation reset based on the Z axis of the track marks?
         
-        
         transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
-        
         
         StopAllCoroutines();
     }
@@ -315,6 +313,10 @@ public class Player : Entity
         {
             PlayerInControl = false;
             HitTrack = true;
+        }
+        else if(collision.gameObject.CompareTag("DestroyableObject"))
+        {
+            PlayerInControl = false;
         }
     }
 

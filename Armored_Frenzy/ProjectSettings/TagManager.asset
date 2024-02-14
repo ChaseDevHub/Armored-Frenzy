@@ -8,6 +8,7 @@ TagManager:
   - Track
   - Bullet
   - GuidePipe
+  - DestroyableObject
   layers:
   - Default
   - TransparentFX
