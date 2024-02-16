@@ -24708,8 +24708,8 @@ GameObject:
   - component: {fileID: 871420846}
   - component: {fileID: 871420845}
   - component: {fileID: 871420844}
-  - component: {fileID: 871420848}
   - component: {fileID: 871420849}
+  - component: {fileID: 871420848}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -24827,6 +24827,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 0
+  StrafeSpeed: 0
+  HoverSpeed: 0
   Boost: 30
   Direction: {x: 0, y: 0, z: 0}
   Rotation: {x: 0, y: 0, z: 0}
@@ -24839,7 +24841,7 @@ MonoBehaviour:
   bm:
   - {fileID: 1531547501}
   - {fileID: 1847495408}
-  GuidePipe: {fileID: 0}
+  GuidePipe: {fileID: 332238039}
   RotationReset: 0
   ParticleEffect: {fileID: 1285057125}
 --- !u!54 &871420849
