@@ -17,19 +17,32 @@ public class Player : Entity
     InputAction ActivateBoost;
     InputAction ActivateShield;
     InputAction ActivateShoot;
+    InputAction RotatePlayer;
     #endregion
 
     [SerializeField]
     private float MaxSpeed;
+
+    public float maxspeed { get
+        {
+            return MaxSpeed;
+        }
+        private set
+        {
+            maxspeed = value;
+        }
+    
+    }
+
     [SerializeField]
     private int BoostTimer;
 
     [SerializeField]
     private int ShieldTimer;
 
-    [SerializeField]
+    
     private bool BoostActive;
-    [SerializeField]
+    
     private bool ShieldActive;
 
     Rigidbody rb;
@@ -45,6 +58,21 @@ public class Player : Entity
 
     private GameObject Shield;
 
+    [SerializeField]
+    private GameObject GuidePipe;
+
+    [SerializeField]
+    float RotationReset;
+
+    [SerializeField]
+    private GameObject ParticleEffect;
+
+    private float ActiveForwardSpeed, ActiveStrafeSpeed, ActiveHoverSpeed;
+    private float ForwardAcceleration, StrafeAcceleration, HoverAcceleration;
+
+    private float LookRotateSpeed = 90f;
+    private Vector3 LookRotation;
+   
     #region InputSetUp
     private void Awake()
     {
@@ -71,6 +99,9 @@ public class Player : Entity
         ActivateShoot= playerControls.Player.Shoot;
         ActivateShoot.Enable();
 
+        RotatePlayer = playerControls.Player.Rotate;
+        RotatePlayer.Enable();
+
     }
 
     private void OnDisable()
@@ -81,6 +112,7 @@ public class Player : Entity
         ActivateBoost.Disable();
         ActivateShield.Disable();
         ActivateShoot.Disable();
+        RotatePlayer.Disable();
     }
     #endregion
     // Start is called before the first frame update
@@ -94,6 +126,26 @@ public class Player : Entity
         HitTrack= false;
         Shield = GameObject.Find("Shield");
         Shield.SetActive(false);
+        
+        if(GuidePipe == null)
+        {
+            GuidePipe = GameObject.FindGameObjectWithTag("GuidePipe");
+        }
+
+        ParticleEffect.SetActive(false);
+
+        Speed = 110f;
+        StrafeSpeed = 24.5f;
+        HoverSpeed = 22f;
+
+        ForwardAcceleration = 2.5f;
+        StrafeAcceleration = 2f;
+        HoverAcceleration = 2f;
+
+        if(MaxSpeed != Speed)
+        {
+            MaxSpeed = Speed;
+        }
     }
 
     // Update is called once per frame
@@ -125,11 +177,44 @@ public class Player : Entity
         {
             Shield.SetActive(false);
         }
-        
+
+        Quaternion guidePipeRotation = GuidePipe.transform.rotation;
+        RotationReset = guidePipeRotation.eulerAngles.y;
+        //RotationReset = GuidePipe.transform.localRotation.z;
+
     }
 
     private void Move()
     {
+        ActiveForwardSpeed = Mathf.Lerp(ActiveForwardSpeed, MovePlayer.ReadValue<float>() * Speed, ForwardAcceleration * Time.deltaTime);
+        ActiveStrafeSpeed = Mathf.Lerp(ActiveStrafeSpeed, RotateDirection.ReadValue<Vector3>().x * StrafeSpeed, StrafeAcceleration * Time.deltaTime); //move side 
+        ActiveHoverSpeed = Mathf.Lerp(ActiveHoverSpeed, RotateDirection.ReadValue<Vector3>().y * HoverSpeed, HoverAcceleration * Time.deltaTime); //move up/down
+
+        var rotatePlayer = RotatePlayer.ReadValue<Vector3>();
+        LookRotation.x = -rotatePlayer.y;
+        LookRotation.y = rotatePlayer.x;
+        LookRotation.z = -rotatePlayer.x;
+        
+        //transform.position += transform.forward * ActiveForwardSpeed * Time.deltaTime;
+        //transform.position += (transform.right * ActiveStrafeSpeed * Time.deltaTime) + (transform.up * ActiveHoverSpeed * Time.deltaTime);
+
+        transform.Rotate(LookRotation * LookRotateSpeed * Time.deltaTime, Space.Self);
+
+        rb.velocity = transform.forward * ActiveForwardSpeed;
+        rb.velocity += (transform.right * ActiveStrafeSpeed) + (transform.up * ActiveHoverSpeed);
+
+        if(rotatePlayer.y == 0 || rotatePlayer.x == 0 || rotatePlayer.z == 0)
+        {
+            //Help from https://forum.unity.com/threads/how-to-lerp-rotation.978078/ and chat.gbt
+            var currentPos = transform.eulerAngles;
+            var current = Quaternion.Euler(currentPos.x, currentPos.y, currentPos.z);
+            var reset = Quaternion.Euler(0, currentPos.y, 0f);
+            float t = 0.1f;
+            transform.rotation = Quaternion.Lerp(current, reset, t);
+        }
+
+
+        /*
         var rotation = RotateDirection.ReadValue<Vector3>();
         var speed = MovePlayer.ReadValue<float>();
 
@@ -162,8 +247,6 @@ public class Player : Entity
             {
                 Speed = Speed - 1 * Time.deltaTime;
             }
-            
-
         }
         else if (!MovePlayer.IsPressed() && !StopPlayer.IsPressed() && !BoostActive) //let go gas but not press break
         {
@@ -185,8 +268,26 @@ public class Player : Entity
         transform.Rotate(Rotation * 30 * Time.deltaTime);
         
         rb.velocity = transform.rotation * Direction * Speed; //Help from https://gamedev.stackexchange.com/questions/189313/how-to-do-rigidbody-movement-relative-to-player-rotation-in-unity-c
+        */
 
-      
+        VisualEffect();
+    }
+
+    private void VisualEffect()
+    {
+        float stillThreshold = 0.1f; 
+
+        bool isPlayerStill = rb.velocity.magnitude < stillThreshold;
+
+        //Above two lines helf from Chat.gpt        
+        if (isPlayerStill)
+        {
+            ParticleEffect.SetActive(false);
+        }
+        else
+        {
+            ParticleEffect.SetActive(true);
+        }
     }
 
     private void ShootWeapon()
@@ -248,7 +349,9 @@ public class Player : Entity
         PlayerInControl = true;
         //Push out
 
-        transform.rotation = Quaternion.Euler(transform.rotation.x, 0, transform.rotation.z);
+        //maybe have the rotation reset based on the Z axis of the track marks?
+        
+        transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
         
         StopAllCoroutines();
     }
@@ -270,9 +373,19 @@ public class Player : Entity
             PlayerInControl = false;
             HitTrack = true;
         }
+        else if(collision.gameObject.CompareTag("DestroyableObject"))
+        {
+            PlayerInControl = false;
+        }
     }
 
-   
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("GuidePipe"))
+        {
+            GuidePipe = other.gameObject;
+        }
+    }
 
 
 }
