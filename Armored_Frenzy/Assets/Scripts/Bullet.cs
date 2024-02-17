@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.Pool;
+using static UnityEngine.ProBuilder.AutoUnwrapSettings;
+
 public enum BulletSide { left, right };
 public class Bullet : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class Bullet : MonoBehaviour
     private Vector3 StartLocation;
     private Transform Aim;
     private Vector3 direction;
+   
 
     private Rigidbody rb;
 
@@ -19,11 +22,14 @@ public class Bullet : MonoBehaviour
 
     private float BulletSpeed;
 
+    float timeRemaining = 1;
+    float timeDefault;
+
     public int DamagePoint { get; private set; }
 
     private void Awake()
     {
-        Aim = GameObject.Find("Aim").transform;
+        Aim = GameObject.Find("Reticle").transform;
         if(player == null)
         {
             player = GameObject.Find("Player").GetComponent<Player>();
@@ -58,7 +64,9 @@ public class Bullet : MonoBehaviour
         {
             BulletSpeed = player.maxspeed * 3;
         }
-       
+
+        
+        timeDefault = timeRemaining;
     }
 
     private void FixedUpdate()
@@ -80,9 +88,16 @@ public class Bullet : MonoBehaviour
 
     public void MoveBullet()
     {
-        direction = Aim.transform.forward;
-        //transform.position += direction * 2;
-        rb.velocity = direction * BulletSpeed;
+        
+
+        Vector3 targetPosition = Aim.transform.position;
+
+        var dir = (targetPosition - transform.position).normalized;
+
+        rb.velocity = (dir * 15);
+
+        //direction = Aim.transform.forward;
+
         StartCoroutine(ResetBulletTimer());
     }
 

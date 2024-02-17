@@ -33148,7 +33148,7 @@ Transform:
   m_GameObject: {fileID: 1531547496}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.236, y: -0.21700001, z: 0.504}
+  m_LocalPosition: {x: -2.236, y: -0.88, z: 6.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41671,7 +41671,7 @@ Transform:
   m_GameObject: {fileID: 1847495406}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.28, y: -0.21700001, z: 0.504}
+  m_LocalPosition: {x: 2.28, y: -0.88, z: 6.6999993}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46058,8 +46058,9 @@ GameObject:
   - component: {fileID: 2096386841}
   - component: {fileID: 2096386843}
   - component: {fileID: 2096386842}
+  - component: {fileID: 2096386844}
   m_Layer: 0
-  m_Name: Aim
+  m_Name: Reticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46074,7 +46075,7 @@ Transform:
   m_GameObject: {fileID: 2096386839}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.04, y: 0.57, z: 9.07}
+  m_LocalPosition: {x: 0, y: 0.57, z: 11.99}
   m_LocalScale: {x: 2.8897033, y: 1.4419, z: 1.4419}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46097,7 +46098,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -46151,6 +46152,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2096386844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096386839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d0c43044aeec6a42816c3ce6bddc317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Movement: {x: 0, y: 0}
+  RetSpeed: 10
 --- !u!43 &2106172162
 Mesh:
   m_ObjectHideFlags: 0
