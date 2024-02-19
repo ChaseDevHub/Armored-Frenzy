@@ -88,13 +88,30 @@ public class Bullet : MonoBehaviour
 
     public void MoveBullet()
     {
-        
+        /*
+         Vector3 targetPosition = Aim.transform.position;
 
+        var dir = (targetPosition - transform.position);
+
+        if (!hitReticle)
+        {
+            rb.velocity = dir * BulletSpeed;
+            //rb.AddForce(dir* BulletSpeed);
+
+        }
+        else
+        {
+            rb.velocity = Aim.transform.forward * BulletSpeed;
+            //rb.AddForce(Aim.transform.forward * BulletSpeed);
+        }
+         */
+
+        //Aim.GetComponent<ReticleMovement>().AimPosition.transform.position;
         Vector3 targetPosition = Aim.transform.position;
 
         var dir = (targetPosition - transform.position).normalized;
 
-        rb.velocity = (dir * 15);
+        rb.velocity = (dir * BulletSpeed);
 
         //direction = Aim.transform.forward;
 
