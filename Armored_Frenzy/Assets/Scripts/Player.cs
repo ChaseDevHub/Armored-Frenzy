@@ -296,7 +296,7 @@ public class Player : Entity
             ParticleEffect.SetActive(true);
         }*/
 
-        if(Speed == 0)
+        if(Speed <= 0)
         {
             ParticleEffect.SetActive(false);
         }
