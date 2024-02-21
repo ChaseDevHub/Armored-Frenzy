@@ -20,10 +20,7 @@ MonoBehaviour:
       y: 0
       width: 100
       height: 100
-    contents:
-    - model: {fileID: 8926484042661614635}
-      id: 0
-      isStickyNote: 0
+    contents: []
   stickyNoteInfos: []
   categories: []
   uiBounds:
@@ -31,7 +28,7 @@ MonoBehaviour:
     x: 0
     y: -1506
     width: 1875
-    height: 2100
+    height: 2081
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
