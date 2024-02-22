@@ -11,7 +11,7 @@ public class ReticleMovement : MonoBehaviour
     InputAction ResetRetical;
 
     public Vector2 Movement;
-    public float RetSpeed;
+    public float MoveSpeed;
 
     public Transform AimPosition;
 
@@ -25,6 +25,14 @@ public class ReticleMovement : MonoBehaviour
     private float Left;
     [SerializeField]
     private float Right;
+
+    [SerializeField]
+    private Material NormalMaterial;
+
+    [SerializeField]
+    private Material LockedMaterial;
+
+    private Renderer rend;
 
     private void Awake()
     {
@@ -51,9 +59,9 @@ public class ReticleMovement : MonoBehaviour
     void Start()
     {
         AimPosition = null;
-        if (RetSpeed == 0)
+        if (MoveSpeed == 0)
         {
-            RetSpeed = 10;
+            MoveSpeed = 15;
         }
 
         if (player == null)
@@ -61,6 +69,9 @@ public class ReticleMovement : MonoBehaviour
             player = GameObject.Find("Player");
         }
 
+        rend = GetComponent<MeshRenderer>();  
+
+        rend.material = NormalMaterial;
     }
 
     // Update is called once per frame
@@ -78,7 +89,7 @@ public class ReticleMovement : MonoBehaviour
         Movement.x = move.x;
         Movement.y = move.y;
 
-        transform.Translate(Movement * RetSpeed * Time.deltaTime);
+        transform.Translate(Movement * MoveSpeed * Time.deltaTime);
 
         //help from https://discussions.unity.com/t/restricting-movement-with-mathf-clamp/133376/2
         Vector3 pos = transform.localPosition;
@@ -91,9 +102,9 @@ public class ReticleMovement : MonoBehaviour
 
     private void LookAhead()
     {
-        //Should this only look forward from a certain distance?
 
-        Vector3 move = Vector3.forward;
+        //Help with getting aim to look forward based on direction: https://discussions.unity.com/t/casting-ray-forward-from-transform-position/48120/2
+        Vector3 move = transform.TransformDirection(Vector3.forward);
 
         if (Movement.x > 0)
         {
@@ -116,15 +127,25 @@ public class ReticleMovement : MonoBehaviour
 
         Vector3 dir = move * 2;
 
+        //Is there a way to use lerp here?
         if (Physics.Raycast(transform.position, dir, out RaycastHit hit))
         {
+            //This is used to see the line that it is displaying correct 
             Debug.DrawRay(transform.position, dir * 100, Color.yellow);
-
 
             if (hit.collider)
             {
                 AimPosition = hit.collider.gameObject.transform;
             }
+
+            if (hit.collider.gameObject.CompareTag("GuidePipe") || hit.collider.gameObject.CompareTag("Track"))
+            {
+                ChangeMaterial(false);
+            }
+            else
+            {
+                ChangeMaterial(true);
+            }    
         }
     }
 
@@ -133,6 +154,18 @@ public class ReticleMovement : MonoBehaviour
         if (ResetRetical.IsPressed())
         {
             transform.localPosition = new Vector3(0, 2, transform.localPosition.z);
+        }
+    }
+    
+    public void ChangeMaterial(bool LockedIn)
+    {
+        if(LockedIn)
+        {
+            rend.material = LockedMaterial;
+        }
+        else
+        {
+            rend.material = NormalMaterial;
         }
     }
 }

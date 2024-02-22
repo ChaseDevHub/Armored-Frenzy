@@ -11,8 +11,6 @@ public class Bullet : MonoBehaviour
     private GameObject BulletMachine;
     private Vector3 StartLocation;
     private Transform Aim;
-    private Vector3 direction;
-   
 
     private Rigidbody rb;
 
@@ -21,10 +19,7 @@ public class Bullet : MonoBehaviour
     private Player player;
 
     private float BulletSpeed;
-
-    float timeRemaining = 1;
-    float timeDefault;
-
+ 
     public int DamagePoint { get; private set; }
 
     private void Awake()
@@ -56,7 +51,7 @@ public class Bullet : MonoBehaviour
 
         DamagePoint = 2;
 
-        if(player.Speed > player.maxspeed) //if there is a boost
+        if (player.Speed > player.maxspeed) //if there is a boost
         {
             BulletSpeed = player.Speed * 3;
         }
@@ -64,9 +59,6 @@ public class Bullet : MonoBehaviour
         {
             BulletSpeed = player.maxspeed * 3;
         }
-
-        
-        timeDefault = timeRemaining;
     }
 
     private void FixedUpdate()
@@ -107,15 +99,23 @@ public class Bullet : MonoBehaviour
          */
 
         //Aim.GetComponent<ReticleMovement>().AimPosition.transform.position;
-        Vector3 targetPosition = Aim.transform.position;
+        Vector3 targetPosition = Aim.GetComponent<ReticleMovement>().AimPosition.transform.position; //Aim.transform.position;
 
         var dir = (targetPosition - transform.position).normalized;
+        
 
-        rb.velocity = (dir * BulletSpeed);
-
-        //direction = Aim.transform.forward;
-
-        StartCoroutine(ResetBulletTimer());
+        if (Aim.GetComponent<ReticleMovement>().AimPosition.gameObject.CompareTag("GuidePipe") || Aim.GetComponent<ReticleMovement>().AimPosition.gameObject.CompareTag("Track"))
+        {
+            rb.velocity = Aim.transform.forward * BulletSpeed;
+            StartCoroutine(ResetBulletTimer(5));
+        }
+        else
+        {
+            rb.velocity = (dir * BulletSpeed);
+            StartCoroutine(ResetBulletTimer(2));
+        }
+        
+        //direction = Aim.transform.forward; 
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -128,9 +128,18 @@ public class Bullet : MonoBehaviour
         
     }
 
-    IEnumerator ResetBulletTimer()
+    private void OnTriggerEnter(Collider other)
     {
-        yield return new WaitForSeconds(5);
+        if(other.gameObject.CompareTag("PowerUp"))
+        {
+            ResetBullet();
+            this.gameObject.SetActive(false);
+        }
+    }
+
+    IEnumerator ResetBulletTimer(int time)
+    {
+        yield return new WaitForSeconds(time);
         ResetBullet();
         this.gameObject.SetActive(false);
         StopAllCoroutines();

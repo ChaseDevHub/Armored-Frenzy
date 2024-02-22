@@ -181,8 +181,6 @@ public class Player : Entity
 
         Quaternion guidePipeRotation = GuidePipe.transform.rotation;
         RotationReset = guidePipeRotation.eulerAngles.y;
-        //RotationReset = GuidePipe.transform.localRotation.z;
-
     }
 
     private void Move()
@@ -372,7 +370,7 @@ public class Player : Entity
         StopAllCoroutines();
     }
 
-    /*
+    /* //This is for just passing through the item box
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("PowerUp") && Inventory[0] == null)

@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - GuidePipe
   - DestroyableObject
+  - Reticle
   layers:
   - Default
   - TransparentFX

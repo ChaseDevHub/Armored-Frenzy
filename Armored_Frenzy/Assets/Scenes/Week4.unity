@@ -27240,11 +27240,23 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: c030e85edcd34924da733e27fbeef1ec, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: c030e85edcd34924da733e27fbeef1ec, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 64d9f7c7b1308e043914b683023b65f2, type: 2}
+    - target: {fileID: -7511558181221131132, guid: c030e85edcd34924da733e27fbeef1ec, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3306d290de3d5b9469d8fc9c8b7c11ef, type: 2}
     - target: {fileID: 919132149155446097, guid: c030e85edcd34924da733e27fbeef1ec, type: 3}
       propertyPath: m_Name
+      value: Reticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c030e85edcd34924da733e27fbeef1ec, type: 3}
+      propertyPath: m_TagString
       value: Reticle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -27254,6 +27266,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c030e85edcd34924da733e27fbeef1ec, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1461171903}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c030e85edcd34924da733e27fbeef1ec, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1461171906}
   m_SourcePrefab: {fileID: 100100000, guid: c030e85edcd34924da733e27fbeef1ec, type: 3}
 --- !u!4 &1032547641 stripped
 Transform:
@@ -32727,12 +32742,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Movement: {x: 0, y: 0}
-  RetSpeed: 10
+  MoveSpeed: 20
   AimPosition: {fileID: 0}
   Up: 5
   Down: -1
   Left: -5
   Right: 5
+  NormalMaterial: {fileID: 2100000, guid: 64d9f7c7b1308e043914b683023b65f2, type: 2}
+  LockedMaterial: {fileID: 2100000, guid: 3306d290de3d5b9469d8fc9c8b7c11ef, type: 2}
+--- !u!65 &1461171906
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461171900}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 9.290302, y: 9.290302, z: 9.290484}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1483761160
 GameObject:
   m_ObjectHideFlags: 0
@@ -46271,12 +46309,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Movement: {x: 0, y: 0}
-  RetSpeed: 10
+  MoveSpeed: 0
   AimPosition: {fileID: 0}
   Up: 0
   Down: 0
   Left: 0
   Right: 0
+  NormalMaterial: {fileID: 0}
+  LockedMaterial: {fileID: 0}
 --- !u!43 &2106172162
 Mesh:
   m_ObjectHideFlags: 0
