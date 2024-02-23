@@ -17,7 +17,7 @@ public class Player : Entity
     InputAction ActivateBoost;
     InputAction ActivateShield;
     InputAction ActivateShoot;
-    InputAction RotatePlayer;
+    
     #endregion
 
     [SerializeField]
@@ -67,11 +67,12 @@ public class Player : Entity
     [SerializeField]
     private GameObject ParticleEffect;
 
+    /*
     private float ActiveForwardSpeed, ActiveStrafeSpeed, ActiveHoverSpeed;
     private float ForwardAcceleration, StrafeAcceleration, HoverAcceleration;
 
     private float LookRotateSpeed = 90f;
-    private Vector3 LookRotation;
+    private Vector3 LookRotation;*/
    
     #region InputSetUp
     private void Awake()
@@ -99,8 +100,8 @@ public class Player : Entity
         ActivateShoot= playerControls.Player.Shoot;
         ActivateShoot.Enable();
 
-        RotatePlayer = playerControls.Player.Rotate;
-        RotatePlayer.Enable();
+        //RotatePlayer = playerControls.Player.Rotate;
+        //RotatePlayer.Enable();
 
     }
 
@@ -112,7 +113,7 @@ public class Player : Entity
         ActivateBoost.Disable();
         ActivateShield.Disable();
         ActivateShoot.Disable();
-        RotatePlayer.Disable();
+        //RotatePlayer.Disable();
     }
     #endregion
     // Start is called before the first frame update
@@ -134,18 +135,18 @@ public class Player : Entity
 
         ParticleEffect.SetActive(false);
 
-        Speed = 110f;
+        //Speed = 110f;
         StrafeSpeed = 24.5f;
         HoverSpeed = 22f;
-
+        /*
         ForwardAcceleration = 2.5f;
         StrafeAcceleration = 2f;
         HoverAcceleration = 2f;
-
+        
         if(MaxSpeed != Speed)
         {
             MaxSpeed = Speed;
-        }
+        }*/
     }
 
     // Update is called once per frame
@@ -180,19 +181,21 @@ public class Player : Entity
 
         Quaternion guidePipeRotation = GuidePipe.transform.rotation;
         RotationReset = guidePipeRotation.eulerAngles.y;
-        //RotationReset = GuidePipe.transform.localRotation.z;
-
     }
 
     private void Move()
     {
+        /*
+         left joystick - forward = gas backward = break
+         */
+        /*
         ActiveForwardSpeed = Mathf.Lerp(ActiveForwardSpeed, MovePlayer.ReadValue<float>() * Speed, ForwardAcceleration * Time.deltaTime);
         ActiveStrafeSpeed = Mathf.Lerp(ActiveStrafeSpeed, RotateDirection.ReadValue<Vector3>().x * StrafeSpeed, StrafeAcceleration * Time.deltaTime); //move side 
         ActiveHoverSpeed = Mathf.Lerp(ActiveHoverSpeed, RotateDirection.ReadValue<Vector3>().y * HoverSpeed, HoverAcceleration * Time.deltaTime); //move up/down
 
         var rotatePlayer = RotatePlayer.ReadValue<Vector3>();
-        LookRotation.x = -rotatePlayer.y;
-        LookRotation.y = rotatePlayer.x;
+        //LookRotation.x = -rotatePlayer.y;
+        //LookRotation.y = rotatePlayer.x;
         LookRotation.z = -rotatePlayer.x;
         
         //transform.position += transform.forward * ActiveForwardSpeed * Time.deltaTime;
@@ -211,10 +214,11 @@ public class Player : Entity
             var reset = Quaternion.Euler(0, currentPos.y, 0f);
             float t = 0.1f;
             transform.rotation = Quaternion.Lerp(current, reset, t);
-        }
+        }*/
 
+        //Need to add boost back into script
 
-        /*
+        
         var rotation = RotateDirection.ReadValue<Vector3>();
         var speed = MovePlayer.ReadValue<float>();
 
@@ -268,19 +272,29 @@ public class Player : Entity
         transform.Rotate(Rotation * 30 * Time.deltaTime);
         
         rb.velocity = transform.rotation * Direction * Speed; //Help from https://gamedev.stackexchange.com/questions/189313/how-to-do-rigidbody-movement-relative-to-player-rotation-in-unity-c
-        */
+        
 
         VisualEffect();
     }
 
     private void VisualEffect()
     {
+        /*
         float stillThreshold = 0.1f; 
 
         bool isPlayerStill = rb.velocity.magnitude < stillThreshold;
 
         //Above two lines helf from Chat.gpt        
         if (isPlayerStill)
+        {
+            ParticleEffect.SetActive(false);
+        }
+        else
+        {
+            ParticleEffect.SetActive(true);
+        }*/
+
+        if(Speed <= 0)
         {
             ParticleEffect.SetActive(false);
         }
@@ -356,7 +370,7 @@ public class Player : Entity
         StopAllCoroutines();
     }
 
-    /*
+    /* //This is for just passing through the item box
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("PowerUp") && Inventory[0] == null)

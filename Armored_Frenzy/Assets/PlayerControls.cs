@@ -89,6 +89,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResetReticle"",
+                    ""type"": ""Button"",
+                    ""id"": ""74d8660c-e822-42cd-b8cd-672992ea0c2e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -256,6 +265,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54250ff8-dbfb-45bb-8970-b740bf095543"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""ResetReticle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -283,6 +303,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Boost = m_Player.FindAction("Boost", throwIfNotFound: true);
         m_Player_Shield = m_Player.FindAction("Shield", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
+        m_Player_ResetReticle = m_Player.FindAction("ResetReticle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -351,6 +372,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Boost;
     private readonly InputAction m_Player_Shield;
     private readonly InputAction m_Player_Shoot;
+    private readonly InputAction m_Player_ResetReticle;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -362,6 +384,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Boost => m_Wrapper.m_Player_Boost;
         public InputAction @Shield => m_Wrapper.m_Player_Shield;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
+        public InputAction @ResetReticle => m_Wrapper.m_Player_ResetReticle;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -392,6 +415,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Shoot.started += instance.OnShoot;
             @Shoot.performed += instance.OnShoot;
             @Shoot.canceled += instance.OnShoot;
+            @ResetReticle.started += instance.OnResetReticle;
+            @ResetReticle.performed += instance.OnResetReticle;
+            @ResetReticle.canceled += instance.OnResetReticle;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -417,6 +443,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Shoot.started -= instance.OnShoot;
             @Shoot.performed -= instance.OnShoot;
             @Shoot.canceled -= instance.OnShoot;
+            @ResetReticle.started -= instance.OnResetReticle;
+            @ResetReticle.performed -= instance.OnResetReticle;
+            @ResetReticle.canceled -= instance.OnResetReticle;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -452,5 +481,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnBoost(InputAction.CallbackContext context);
         void OnShield(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnResetReticle(InputAction.CallbackContext context);
     }
 }

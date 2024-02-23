@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.Pool;
+using static UnityEngine.ProBuilder.AutoUnwrapSettings;
+
 public enum BulletSide { left, right };
 public class Bullet : MonoBehaviour
 {
     private GameObject BulletMachine;
     private Vector3 StartLocation;
     private Transform Aim;
-    private Vector3 direction;
 
     private Rigidbody rb;
 
@@ -18,12 +19,12 @@ public class Bullet : MonoBehaviour
     private Player player;
 
     private float BulletSpeed;
-
+ 
     public int DamagePoint { get; private set; }
 
     private void Awake()
     {
-        Aim = GameObject.Find("Aim").transform;
+        Aim = GameObject.Find("Reticle").transform;
         if(player == null)
         {
             player = GameObject.Find("Player").GetComponent<Player>();
@@ -50,7 +51,7 @@ public class Bullet : MonoBehaviour
 
         DamagePoint = 2;
 
-        if(player.Speed > player.maxspeed) //if there is a boost
+        if (player.Speed > player.maxspeed) //if there is a boost
         {
             BulletSpeed = player.Speed * 3;
         }
@@ -58,7 +59,6 @@ public class Bullet : MonoBehaviour
         {
             BulletSpeed = player.maxspeed * 3;
         }
-       
     }
 
     private void FixedUpdate()
@@ -80,10 +80,42 @@ public class Bullet : MonoBehaviour
 
     public void MoveBullet()
     {
-        direction = Aim.transform.forward;
-        //transform.position += direction * 2;
-        rb.velocity = direction * BulletSpeed;
-        StartCoroutine(ResetBulletTimer());
+        /*
+         Vector3 targetPosition = Aim.transform.position;
+
+        var dir = (targetPosition - transform.position);
+
+        if (!hitReticle)
+        {
+            rb.velocity = dir * BulletSpeed;
+            //rb.AddForce(dir* BulletSpeed);
+
+        }
+        else
+        {
+            rb.velocity = Aim.transform.forward * BulletSpeed;
+            //rb.AddForce(Aim.transform.forward * BulletSpeed);
+        }
+         */
+
+        //Aim.GetComponent<ReticleMovement>().AimPosition.transform.position;
+        Vector3 targetPosition = Aim.GetComponent<ReticleMovement>().AimPosition.transform.position; //Aim.transform.position;
+
+        var dir = (targetPosition - transform.position).normalized;
+        
+
+        if (Aim.GetComponent<ReticleMovement>().AimPosition.gameObject.CompareTag("GuidePipe") || Aim.GetComponent<ReticleMovement>().AimPosition.gameObject.CompareTag("Track"))
+        {
+            rb.velocity = Aim.transform.forward * BulletSpeed;
+            StartCoroutine(ResetBulletTimer(5));
+        }
+        else
+        {
+            rb.velocity = (dir * BulletSpeed);
+            StartCoroutine(ResetBulletTimer(2));
+        }
+        
+        //direction = Aim.transform.forward; 
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -96,9 +128,18 @@ public class Bullet : MonoBehaviour
         
     }
 
-    IEnumerator ResetBulletTimer()
+    private void OnTriggerEnter(Collider other)
     {
-        yield return new WaitForSeconds(5);
+        if(other.gameObject.CompareTag("PowerUp"))
+        {
+            ResetBullet();
+            this.gameObject.SetActive(false);
+        }
+    }
+
+    IEnumerator ResetBulletTimer(int time)
+    {
+        yield return new WaitForSeconds(time);
         ResetBullet();
         this.gameObject.SetActive(false);
         StopAllCoroutines();
