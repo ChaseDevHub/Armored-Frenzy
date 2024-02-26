@@ -80,41 +80,25 @@ public class Bullet : MonoBehaviour
 
     public void MoveBullet()
     {
-        /*
-         Vector3 targetPosition = Aim.transform.position;
-
-        var dir = (targetPosition - transform.position);
-
-        if (!hitReticle)
-        {
-            rb.velocity = dir * BulletSpeed;
-            //rb.AddForce(dir* BulletSpeed);
-
-        }
-        else
-        {
-            rb.velocity = Aim.transform.forward * BulletSpeed;
-            //rb.AddForce(Aim.transform.forward * BulletSpeed);
-        }
-         */
-
+        rb.velocity = (Vector3.forward * BulletSpeed);
         //Aim.GetComponent<ReticleMovement>().AimPosition.transform.position;
-        Vector3 targetPosition = Aim.GetComponent<ReticleMovement>().AimPosition.transform.position; //Aim.transform.position;
+        /*
+         Vector3 targetPosition = Aim.GetComponent<ReticleMovement>().AimPosition.transform.position; //Aim.transform.position;
 
-        var dir = (targetPosition - transform.position).normalized;
-        
+         var dir = (targetPosition - transform.position).normalized;
 
-        if (Aim.GetComponent<ReticleMovement>().AimPosition.gameObject.CompareTag("GuidePipe") || Aim.GetComponent<ReticleMovement>().AimPosition.gameObject.CompareTag("Track"))
-        {
-            rb.velocity = Aim.transform.forward * BulletSpeed;
-            StartCoroutine(ResetBulletTimer(5));
-        }
-        else
-        {
-            rb.velocity = (dir * BulletSpeed);
-            StartCoroutine(ResetBulletTimer(2));
-        }
-        
+
+         if (Aim.GetComponent<ReticleMovement>().AimPosition.gameObject.CompareTag("GuidePipe") || Aim.GetComponent<ReticleMovement>().AimPosition.gameObject.CompareTag("Track"))
+         {
+             rb.velocity = Aim.transform.forward * BulletSpeed;
+             StartCoroutine(ResetBulletTimer(5));
+         }
+         else
+         {
+             rb.velocity = (dir * BulletSpeed);
+             StartCoroutine(ResetBulletTimer(2));
+         }
+         */
         //direction = Aim.transform.forward; 
     }
 

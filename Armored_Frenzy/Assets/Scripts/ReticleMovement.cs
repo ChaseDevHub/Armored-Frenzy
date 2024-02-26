@@ -1,12 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+public enum Controls { Inverted, Standard}
 
 public class ReticleMovement : MonoBehaviour
 {
     private PlayerControls playerControls;
+    
+    InputAction MoveReticalPosition;
+    InputAction ReticleSpeed;
 
+    [SerializeField]
+    Vector3 Direction;
+
+    [SerializeField]
+    float Speed;
+
+    float MaxSpeed;
+    float DefaultSpeed;
+
+    Rigidbody rb;
+
+    [SerializeField]
+    private Controls controlInput;
+
+    /*
     InputAction MoveRetical;
     InputAction ResetRetical;
 
@@ -32,7 +53,7 @@ public class ReticleMovement : MonoBehaviour
     [SerializeField]
     private Material LockedMaterial;
 
-    private Renderer rend;
+    private Renderer rend;*/
 
     private void Awake()
     {
@@ -41,23 +62,47 @@ public class ReticleMovement : MonoBehaviour
 
     private void OnEnable()
     {
+        MoveReticalPosition = playerControls.NewPlayer.Move;
+        MoveReticalPosition.Enable();
+
+        ReticleSpeed = playerControls.NewPlayer.Acceleration;
+        ReticleSpeed.Enable();
+        /*
         MoveRetical = playerControls.Player.Rotate;
         MoveRetical.Enable();
 
         ResetRetical = playerControls.Player.ResetReticle;
-        ResetRetical.Enable();
+        ResetRetical.Enable();*/
     }
 
     private void OnDisable()
     {
+        MoveReticalPosition.Disable();
+        ReticleSpeed.Disable();
+        /*
         MoveRetical.Disable();
-        ResetRetical.Disable();
+        ResetRetical.Disable();*/
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
+        if(Speed == 0)
+        {
+            Speed = 130;
+        }
+
+        MaxSpeed = Speed + 20;
+
+        //DefaultSpeed = Speed;
+
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+        #region OLDStart
+        /*
         AimPosition = null;
         if (MoveSpeed == 0)
         {
@@ -72,15 +117,56 @@ public class ReticleMovement : MonoBehaviour
         rend = GetComponent<MeshRenderer>();  
 
         rend.material = NormalMaterial;
+        */
+        #endregion
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        MoveRet();
-        LookAhead();
+        MoveReticle();
+        //MoveRet();
+        //LookAhead();
     }
 
+    private void MoveReticle()
+    {
+        var move = MoveReticalPosition.ReadValue<Vector3>();
+
+        switch (controlInput)
+        { 
+            case Controls.Inverted:
+                Direction.x = -move.x;
+                Direction.y = -move.y;
+                break;
+            case Controls.Standard:
+                Direction.x = move.x;
+                Direction.y = move.y;
+                break;
+        }
+
+        if(ReticleSpeed.IsPressed())
+        {
+            Direction.z = 1;
+            if(Speed < MaxSpeed)
+            {
+                Speed += 1;
+            }
+        }
+        else
+        {
+            Direction.z = 0;
+            if(Speed > 0)
+            {
+                Speed -= 1;
+            }
+        }
+
+        rb.velocity = Direction * Speed * Time.fixedDeltaTime;
+    }
+
+    #region OLD
+    /*
     private void MoveRet()
     {
         //limit how much it can move
@@ -168,4 +254,6 @@ public class ReticleMovement : MonoBehaviour
             rend.material = NormalMaterial;
         }
     }
+    */
+    #endregion
 }

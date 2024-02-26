@@ -159,10 +159,10 @@ public class Player : Entity
 
         if(PlayerInControl)
         {
-            Move();
+            //Move();
             UseBoost();
             UseShield();
-            ShootWeapon();
+            //ShootWeapon();
         }
         else
         {
