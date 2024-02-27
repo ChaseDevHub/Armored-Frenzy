@@ -2,21 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Transactions;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Debug = UnityEngine.Debug;
 
 public class Player : Entity
 {
     #region Input Fields
     private PlayerControls playerControls;
-    InputAction MovePlayer;
-    InputAction StopPlayer;
-    InputAction RotateDirection;
-    InputAction ActivateBoost;
-    InputAction ActivateShield;
     InputAction ActivateShoot;
+    InputAction ActivateBoost;
     
     #endregion
 
@@ -67,6 +65,8 @@ public class Player : Entity
     [SerializeField]
     private GameObject ParticleEffect;
 
+    private ReticleMovement reticle;
+
     /*
     private float ActiveForwardSpeed, ActiveStrafeSpeed, ActiveHoverSpeed;
     private float ForwardAcceleration, StrafeAcceleration, HoverAcceleration;
@@ -82,38 +82,17 @@ public class Player : Entity
 
     private void OnEnable()
     {
-        MovePlayer = playerControls.Player.Gas;
-        MovePlayer.Enable();
-
-        StopPlayer = playerControls.Player.Break;
-        StopPlayer.Enable();
-
-        RotateDirection = playerControls.Player.Move; //for rotation, not actual movement
-        RotateDirection.Enable();
-
-        ActivateBoost = playerControls.Player.Boost;
-        ActivateBoost.Enable();
-
-        ActivateShield = playerControls.Player.Shield;
-        ActivateShield.Enable();
-
-        ActivateShoot= playerControls.Player.Shoot;
+        ActivateShoot= playerControls.NewPlayer.Shoot;
         ActivateShoot.Enable();
 
-        //RotatePlayer = playerControls.Player.Rotate;
-        //RotatePlayer.Enable();
-
+        ActivateBoost = playerControls.NewPlayer.Boost;
+        ActivateBoost.Enable();
     }
 
     private void OnDisable()
     {
-        MovePlayer.Disable();
-        StopPlayer.Disable();
-        RotateDirection.Disable();
-        ActivateBoost.Disable();
-        ActivateShield.Disable();
         ActivateShoot.Disable();
-        //RotatePlayer.Disable();
+        ActivateBoost.Disable();
     }
     #endregion
     // Start is called before the first frame update
@@ -134,6 +113,11 @@ public class Player : Entity
         }
 
         ParticleEffect.SetActive(false);
+
+        if(reticle == null)
+        {
+            reticle = GameObject.Find("Reticle").GetComponent<ReticleMovement>();
+        }
 
         //Speed = 110f;
         StrafeSpeed = 24.5f;
@@ -159,13 +143,15 @@ public class Player : Entity
 
         if(PlayerInControl)
         {
-            //Move();
+            FollowReticle();
+            
             UseBoost();
-            UseShield();
-            //ShootWeapon();
+           
+            ShootWeapon();
         }
         else
         {
+            
             transform.Rotate(new Vector3(0, 0, 360) * Time.fixedDeltaTime / 3);
             StartCoroutine(ResetPlayerControl(ResetTimer));            
         }
@@ -181,43 +167,30 @@ public class Player : Entity
 
         Quaternion guidePipeRotation = GuidePipe.transform.rotation;
         RotationReset = guidePipeRotation.eulerAngles.y;
+
+        reticle.PlayerControl = PlayerInControl;
     }
 
+    private void FollowReticle()
+    {
+        
+        if(reticle.Move)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, reticle.transform.position, reticle.speed * Time.deltaTime);
+            
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
+        }
+        
+
+        transform.LookAt(reticle.transform.localPosition); //mainly for if object is child
+    }
+
+    /*
     private void Move()
     {
-        /*
-         left joystick - forward = gas backward = break
-         */
-        /*
-        ActiveForwardSpeed = Mathf.Lerp(ActiveForwardSpeed, MovePlayer.ReadValue<float>() * Speed, ForwardAcceleration * Time.deltaTime);
-        ActiveStrafeSpeed = Mathf.Lerp(ActiveStrafeSpeed, RotateDirection.ReadValue<Vector3>().x * StrafeSpeed, StrafeAcceleration * Time.deltaTime); //move side 
-        ActiveHoverSpeed = Mathf.Lerp(ActiveHoverSpeed, RotateDirection.ReadValue<Vector3>().y * HoverSpeed, HoverAcceleration * Time.deltaTime); //move up/down
-
-        var rotatePlayer = RotatePlayer.ReadValue<Vector3>();
-        //LookRotation.x = -rotatePlayer.y;
-        //LookRotation.y = rotatePlayer.x;
-        LookRotation.z = -rotatePlayer.x;
-        
-        //transform.position += transform.forward * ActiveForwardSpeed * Time.deltaTime;
-        //transform.position += (transform.right * ActiveStrafeSpeed * Time.deltaTime) + (transform.up * ActiveHoverSpeed * Time.deltaTime);
-
-        transform.Rotate(LookRotation * LookRotateSpeed * Time.deltaTime, Space.Self);
-
-        rb.velocity = transform.forward * ActiveForwardSpeed;
-        rb.velocity += (transform.right * ActiveStrafeSpeed) + (transform.up * ActiveHoverSpeed);
-
-        if(rotatePlayer.y == 0 || rotatePlayer.x == 0 || rotatePlayer.z == 0)
-        {
-            //Help from https://forum.unity.com/threads/how-to-lerp-rotation.978078/ and chat.gbt
-            var currentPos = transform.eulerAngles;
-            var current = Quaternion.Euler(currentPos.x, currentPos.y, currentPos.z);
-            var reset = Quaternion.Euler(0, currentPos.y, 0f);
-            float t = 0.1f;
-            transform.rotation = Quaternion.Lerp(current, reset, t);
-        }*/
-
-        //Need to add boost back into script
-
         
         var rotation = RotateDirection.ReadValue<Vector3>();
         var speed = MovePlayer.ReadValue<float>();
@@ -275,7 +248,7 @@ public class Player : Entity
         
 
         VisualEffect();
-    }
+    }*/
 
     private void VisualEffect()
     {
@@ -313,28 +286,24 @@ public class Player : Entity
         }
     }
     
+    //Need some changing
     private void UseBoost()
     {
+        /*
         if (Inventory[0] != null && ActivateBoost.IsPressed() && Inventory[0].GetComponent<PowerUp>().Ability == PowerName.Boost)
         {
             Speed = Speed + Boost;
             Inventory[0] = null;
             BoostActive = true;
             StartCoroutine(BoostCountdown(BoostTimer));
-        }
-    }
+        }*/
 
-    private void UseShield()
-    {
-        if (Inventory[0] != null && ActivateShield.IsPressed() && Inventory[0].GetComponent<PowerUp>().Ability == PowerName.Shield )
+        if(ActivateBoost.IsPressed())
         {
-            //Set gameobject to be active as a bubble around the ship
-            Inventory[0] = null;
-            ShieldActive = true;
-            StartCoroutine(ShieldCountdown(ShieldTimer));
+            Debug.Log("Boost has been pressed");
         }
     }
-
+   
     IEnumerator BoostCountdown(int timer)
     {
         yield return new WaitForSeconds(timer);
@@ -370,16 +339,6 @@ public class Player : Entity
         StopAllCoroutines();
     }
 
-    /* //This is for just passing through the item box
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.CompareTag("PowerUp") && Inventory[0] == null)
-        {
-            Inventory[0] = other.gameObject;
-            other.gameObject.SetActive(false);
-        }
-    }*/
-
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Track") && HitTrack == false)
@@ -398,6 +357,13 @@ public class Player : Entity
         if (other.gameObject.CompareTag("GuidePipe"))
         {
             GuidePipe = other.gameObject;
+        }
+
+        //Passing through object
+        if (other.gameObject.CompareTag("PowerUp") && Inventory[0] == null)
+        {
+            Inventory[0] = other.gameObject;
+            other.gameObject.SetActive(false);
         }
     }
 

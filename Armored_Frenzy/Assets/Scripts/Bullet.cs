@@ -81,6 +81,7 @@ public class Bullet : MonoBehaviour
     public void MoveBullet()
     {
         rb.velocity = (Vector3.forward * BulletSpeed);
+        StartCoroutine(ResetBulletTimer(2));
         //Aim.GetComponent<ReticleMovement>().AimPosition.transform.position;
         /*
          Vector3 targetPosition = Aim.GetComponent<ReticleMovement>().AimPosition.transform.position; //Aim.transform.position;

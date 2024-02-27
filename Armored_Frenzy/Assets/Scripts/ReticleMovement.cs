@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,14 +15,28 @@ public class ReticleMovement : MonoBehaviour
     InputAction ReticleSpeed;
 
     [SerializeField]
-    Vector3 Direction;
+    public Vector3 Direction;
 
     [SerializeField]
     float Speed;
 
-    float MaxSpeed;
-    float DefaultSpeed;
+    public bool Move;
 
+    public float speed { 
+        get
+        {
+            return Speed;
+        }
+        private set
+        {
+            speed = value;
+        }
+    }
+
+    public bool PlayerControl;
+
+    float MaxSpeed;
+   
     Rigidbody rb;
 
     [SerializeField]
@@ -93,9 +108,11 @@ public class ReticleMovement : MonoBehaviour
             Speed = 130;
         }
 
-        MaxSpeed = Speed + 20;
+        MaxSpeed = Speed;
 
-        //DefaultSpeed = Speed;
+        Move = false;
+
+        PlayerControl = true;
 
         if (rb == null)
         {
@@ -124,7 +141,16 @@ public class ReticleMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        MoveReticle();
+
+        if(PlayerControl)
+        {
+            MoveReticle();
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
+        }
+       
         //MoveRet();
         //LookAhead();
     }
@@ -133,10 +159,23 @@ public class ReticleMovement : MonoBehaviour
     {
         var move = MoveReticalPosition.ReadValue<Vector3>();
 
+        Vector3 Rot = new Vector3(-move.y, move.x, 0);
+        
+        
+        if(Rot.y == 0 && Rot.x == 0)
+        {
+            //Help from https://forum.unity.com/threads/how-to-lerp-rotation.978078/ and chat.gbt
+            var currentPos = transform.eulerAngles;
+            var current = Quaternion.Euler(currentPos.x, currentPos.y, currentPos.z);
+            var reset = Quaternion.Euler(currentPos.x, currentPos.y, 0f);
+            float t = 0.1f;
+            transform.rotation = Quaternion.Lerp(current, reset, t);
+        }
+
         switch (controlInput)
         { 
             case Controls.Inverted:
-                Direction.x = -move.x;
+                Direction.x = move.x;
                 Direction.y = -move.y;
                 break;
             case Controls.Standard:
@@ -145,24 +184,31 @@ public class ReticleMovement : MonoBehaviour
                 break;
         }
 
+
         if(ReticleSpeed.IsPressed())
         {
+            Move = true; 
             Direction.z = 1;
-            if(Speed < MaxSpeed)
+            /*if(Speed < MaxSpeed)
             {
                 Speed += 1;
-            }
+            }*/
         }
         else
         {
             Direction.z = 0;
-            if(Speed > 0)
+            Move = false;
+            /*if(Speed > 0)
             {
                 Speed -= 1;
-            }
+            }*/
         }
 
-        rb.velocity = Direction * Speed * Time.fixedDeltaTime;
+
+        transform.Rotate(Rot * 20 * Time.deltaTime);
+
+        rb.velocity = transform.rotation * Direction * Speed;
+
     }
 
     #region OLD
