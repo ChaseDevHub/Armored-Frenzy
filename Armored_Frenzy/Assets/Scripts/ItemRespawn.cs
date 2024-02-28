@@ -37,6 +37,6 @@ public class ItemRespawn : MonoBehaviour
     {
         yield return new WaitForSeconds(timer);
         itemBox.gameObject.SetActive(true);
-        itemBox.ResetHealth();
+        itemBox.ResetPowerUp();
     }
 }

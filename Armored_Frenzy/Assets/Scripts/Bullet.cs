@@ -113,6 +113,7 @@ public class Bullet : MonoBehaviour
         
     }
 
+    /* //Not needed anymore
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("PowerUp"))
@@ -120,7 +121,7 @@ public class Bullet : MonoBehaviour
             ResetBullet();
             this.gameObject.SetActive(false);
         }
-    }
+    }*/
 
     IEnumerator ResetBulletTimer(int time)
     {

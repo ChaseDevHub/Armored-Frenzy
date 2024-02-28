@@ -300,6 +300,7 @@ public class Player : Entity
 
         if(ActivateBoost.IsPressed())
         {
+            Inventory[0] = null;
             Debug.Log("Boost has been pressed");
         }
     }

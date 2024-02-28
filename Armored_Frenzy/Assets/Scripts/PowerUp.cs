@@ -7,14 +7,9 @@ public class PowerUp : MonoBehaviour
 {
     public PowerName Ability;
 
-    [SerializeField]
-    private int Health;
-
-    private int ConstHealth;
+    private bool Collected;
 
     private Player player;
-
-    //Color oriented: Maybe assign the material/shader based on the ability type it randomly gets
 
     // Start is called before the first frame update
     void Start()
@@ -24,12 +19,7 @@ public class PowerUp : MonoBehaviour
             player = GameObject.Find("Player").GetComponent<Player>();
         }
 
-        if(Health == 0)
-        {
-            Health = 4;
-        }
-
-        ConstHealth = Health;
+        Collected = false;
 
         int ran = Random.Range(0, 2);
 
@@ -48,7 +38,7 @@ public class PowerUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Health <= 0)
+        if(Collected) //if powerup has been collected, turn it off/deactivate
         {
             this.gameObject.SetActive(false);
             if (player.Inventory[0] == null)
@@ -60,14 +50,14 @@ public class PowerUp : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Bullet") && Health > 0)
+        if(other.gameObject.CompareTag("Bullet")) 
         {
-            Health -= other.gameObject.GetComponent<Bullet>().DamagePoint;
+            Collected = true;
         }
     }
 
-    public void ResetHealth()
+    public void ResetPowerUp()
     {
-        Health = ConstHealth;
+        Collected = false;
     }
 }
