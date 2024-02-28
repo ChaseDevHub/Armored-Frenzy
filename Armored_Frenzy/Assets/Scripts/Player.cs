@@ -67,17 +67,20 @@ public class Player : Entity
 
     private ReticleMovement reticle;
 
-    /*
-    private float ActiveForwardSpeed, ActiveStrafeSpeed, ActiveHoverSpeed;
-    private float ForwardAcceleration, StrafeAcceleration, HoverAcceleration;
-
-    private float LookRotateSpeed = 90f;
-    private Vector3 LookRotation;*/
+    [SerializeField]
+    private int SetEnergy; //Can set the Energy in the inspector for however much Energy the player has
+    public int Energy { get; private set; }
    
     #region InputSetUp
     private void Awake()
     {
         playerControls = new PlayerControls();
+        if (SetEnergy == 0)
+        {
+            SetEnergy = 10;
+        }
+
+        Energy = SetEnergy;
     }
 
     private void OnEnable()
@@ -118,19 +121,6 @@ public class Player : Entity
         {
             reticle = GameObject.Find("Reticle").GetComponent<ReticleMovement>();
         }
-
-        //Speed = 110f;
-        StrafeSpeed = 24.5f;
-        HoverSpeed = 22f;
-        /*
-        ForwardAcceleration = 2.5f;
-        StrafeAcceleration = 2f;
-        HoverAcceleration = 2f;
-        
-        if(MaxSpeed != Speed)
-        {
-            MaxSpeed = Speed;
-        }*/
     }
 
     // Update is called once per frame
@@ -173,11 +163,9 @@ public class Player : Entity
 
     private void FollowReticle()
     {
-        
         if(reticle.Move)
         {
             transform.position = Vector3.MoveTowards(transform.position, reticle.transform.position, reticle.speed * Time.deltaTime);
-            
         }
         else
         {
@@ -186,6 +174,8 @@ public class Player : Entity
         
 
         transform.LookAt(reticle.transform.localPosition); //mainly for if object is child
+
+        VisualEffect();
     }
 
     /*
@@ -252,22 +242,7 @@ public class Player : Entity
 
     private void VisualEffect()
     {
-        /*
-        float stillThreshold = 0.1f; 
-
-        bool isPlayerStill = rb.velocity.magnitude < stillThreshold;
-
-        //Above two lines helf from Chat.gpt        
-        if (isPlayerStill)
-        {
-            ParticleEffect.SetActive(false);
-        }
-        else
-        {
-            ParticleEffect.SetActive(true);
-        }*/
-
-        if(Speed <= 0)
+        if(!reticle.Move)
         {
             ParticleEffect.SetActive(false);
         }
@@ -298,9 +273,11 @@ public class Player : Entity
             StartCoroutine(BoostCountdown(BoostTimer));
         }*/
 
-        if(ActivateBoost.IsPressed())
+        if(ActivateBoost.IsPressed() && Inventory[0] != null) //Can only use boost if player has an item in their inventory
         {
+            reticle.IncreaseSpeedWithBoost(20);
             Inventory[0] = null;
+            Energy -= 1;
             Debug.Log("Boost has been pressed");
         }
     }
@@ -346,11 +323,17 @@ public class Player : Entity
         {
             PlayerInControl = false;
             HitTrack = true;
+            Energy -= 1;
         }
         else if(collision.gameObject.CompareTag("DestroyableObject"))
         {
             PlayerInControl = false;
         }
+
+        //Energy -= 1; //should it lose Energy from hitting everything or
+                     //only with certain objects?
+                     //no, because it brings down the Energy too fast when hitting everything 
+                     //Unless that is something we want?
     }
 
     private void OnTriggerEnter(Collider other)
