@@ -278,6 +278,138 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""NewPlayer"",
+            ""id"": ""b039db25-0eb2-44e5-a42e-8cde76b3adef"",
+            ""actions"": [
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""acc68947-f79f-4fa0-9fd7-057c765194f1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""dde712bc-b3db-4344-b74e-780afbbb7a30"",
+                    ""expectedControlType"": ""Vector3"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Boost"",
+                    ""type"": ""Button"",
+                    ""id"": ""1a39f827-fbb2-4c69-bb0f-929aee310ca5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Acceleration"",
+                    ""type"": ""Button"",
+                    ""id"": ""e419b0e0-11a7-4dfc-b25d-b7c9f41505e5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""206567ee-1a04-4f8b-b8e7-be68c64a80bb"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""3D Vector"",
+                    ""id"": ""2300210b-8708-42af-a531-f0f7d0f81def"",
+                    ""path"": ""3DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""f628dfdc-18e7-4825-b7cf-f437a08ba84b"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""20988d20-b7df-4bc5-b31e-87e89b162596"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""a69e769d-a458-489d-98b3-4d472129bf3e"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""c0df3649-3271-4125-854f-f256df105ec6"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b9f77dbd-b9d1-489d-9f69-b8d656534edb"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""Boost"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a636f1a8-d8b2-456f-9d75-c5b90620b94b"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""Acceleration"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -304,6 +436,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Shield = m_Player.FindAction("Shield", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_ResetReticle = m_Player.FindAction("ResetReticle", throwIfNotFound: true);
+        // NewPlayer
+        m_NewPlayer = asset.FindActionMap("NewPlayer", throwIfNotFound: true);
+        m_NewPlayer_Shoot = m_NewPlayer.FindAction("Shoot", throwIfNotFound: true);
+        m_NewPlayer_Move = m_NewPlayer.FindAction("Move", throwIfNotFound: true);
+        m_NewPlayer_Boost = m_NewPlayer.FindAction("Boost", throwIfNotFound: true);
+        m_NewPlayer_Acceleration = m_NewPlayer.FindAction("Acceleration", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -463,6 +601,76 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // NewPlayer
+    private readonly InputActionMap m_NewPlayer;
+    private List<INewPlayerActions> m_NewPlayerActionsCallbackInterfaces = new List<INewPlayerActions>();
+    private readonly InputAction m_NewPlayer_Shoot;
+    private readonly InputAction m_NewPlayer_Move;
+    private readonly InputAction m_NewPlayer_Boost;
+    private readonly InputAction m_NewPlayer_Acceleration;
+    public struct NewPlayerActions
+    {
+        private @PlayerControls m_Wrapper;
+        public NewPlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Shoot => m_Wrapper.m_NewPlayer_Shoot;
+        public InputAction @Move => m_Wrapper.m_NewPlayer_Move;
+        public InputAction @Boost => m_Wrapper.m_NewPlayer_Boost;
+        public InputAction @Acceleration => m_Wrapper.m_NewPlayer_Acceleration;
+        public InputActionMap Get() { return m_Wrapper.m_NewPlayer; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(NewPlayerActions set) { return set.Get(); }
+        public void AddCallbacks(INewPlayerActions instance)
+        {
+            if (instance == null || m_Wrapper.m_NewPlayerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_NewPlayerActionsCallbackInterfaces.Add(instance);
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @Boost.started += instance.OnBoost;
+            @Boost.performed += instance.OnBoost;
+            @Boost.canceled += instance.OnBoost;
+            @Acceleration.started += instance.OnAcceleration;
+            @Acceleration.performed += instance.OnAcceleration;
+            @Acceleration.canceled += instance.OnAcceleration;
+        }
+
+        private void UnregisterCallbacks(INewPlayerActions instance)
+        {
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @Boost.started -= instance.OnBoost;
+            @Boost.performed -= instance.OnBoost;
+            @Boost.canceled -= instance.OnBoost;
+            @Acceleration.started -= instance.OnAcceleration;
+            @Acceleration.performed -= instance.OnAcceleration;
+            @Acceleration.canceled -= instance.OnAcceleration;
+        }
+
+        public void RemoveCallbacks(INewPlayerActions instance)
+        {
+            if (m_Wrapper.m_NewPlayerActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(INewPlayerActions instance)
+        {
+            foreach (var item in m_Wrapper.m_NewPlayerActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_NewPlayerActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public NewPlayerActions @NewPlayer => new NewPlayerActions(this);
     private int m_XboxControllerSchemeIndex = -1;
     public InputControlScheme XboxControllerScheme
     {
@@ -482,5 +690,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnShield(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnResetReticle(InputAction.CallbackContext context);
+    }
+    public interface INewPlayerActions
+    {
+        void OnShoot(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
+        void OnBoost(InputAction.CallbackContext context);
+        void OnAcceleration(InputAction.CallbackContext context);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Rendering.Universal;
 using static UnityEngine.ProBuilder.AutoUnwrapSettings;
 
 public enum BulletSide { left, right };
@@ -10,7 +11,8 @@ public class Bullet : MonoBehaviour
 {
     private GameObject BulletMachine;
     private Vector3 StartLocation;
-    private Transform Aim;
+    
+    private GameObject Reticle;
 
     private Rigidbody rb;
 
@@ -19,12 +21,14 @@ public class Bullet : MonoBehaviour
     private Player player;
 
     private float BulletSpeed;
- 
+
+    private bool HitReticle;
+
     public int DamagePoint { get; private set; }
 
     private void Awake()
     {
-        Aim = GameObject.Find("Reticle").transform;
+        Reticle = GameObject.Find("Reticle");
         if(player == null)
         {
             player = GameObject.Find("Player").GetComponent<Player>();
@@ -59,6 +63,8 @@ public class Bullet : MonoBehaviour
         {
             BulletSpeed = player.maxspeed * 3;
         }
+
+        HitReticle = false;
     }
 
     private void FixedUpdate()
@@ -80,42 +86,23 @@ public class Bullet : MonoBehaviour
 
     public void MoveBullet()
     {
-        /*
-         Vector3 targetPosition = Aim.transform.position;
+        Vector3 forward = Reticle.transform.localPosition - transform.position;
+        Vector3 straight = Reticle.GetComponent<ReticleMovement>().ForwardPosition;
 
-        var dir = (targetPosition - transform.position);
+        Debug.DrawRay(transform.position, forward, Color.green);
 
-        if (!hitReticle)
+        if(!HitReticle)
         {
-            rb.velocity = dir * BulletSpeed;
-            //rb.AddForce(dir* BulletSpeed);
-
+            rb.velocity = forward * BulletSpeed * Time.fixedDeltaTime;
         }
         else
         {
-            rb.velocity = Aim.transform.forward * BulletSpeed;
-            //rb.AddForce(Aim.transform.forward * BulletSpeed);
+            rb.velocity = straight * BulletSpeed * 5 * Time.fixedDeltaTime;
         }
-         */
 
-        //Aim.GetComponent<ReticleMovement>().AimPosition.transform.position;
-        Vector3 targetPosition = Aim.GetComponent<ReticleMovement>().AimPosition.transform.position; //Aim.transform.position;
-
-        var dir = (targetPosition - transform.position).normalized;
         
-
-        if (Aim.GetComponent<ReticleMovement>().AimPosition.gameObject.CompareTag("GuidePipe") || Aim.GetComponent<ReticleMovement>().AimPosition.gameObject.CompareTag("Track"))
-        {
-            rb.velocity = Aim.transform.forward * BulletSpeed;
-            StartCoroutine(ResetBulletTimer(5));
-        }
-        else
-        {
-            rb.velocity = (dir * BulletSpeed);
-            StartCoroutine(ResetBulletTimer(2));
-        }
+        StartCoroutine(ResetBulletTimer(2));
         
-        //direction = Aim.transform.forward; 
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -130,10 +117,9 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("PowerUp"))
+        if(other.gameObject.CompareTag("Reticle"))
         {
-            ResetBullet();
-            this.gameObject.SetActive(false);
+            HitReticle = true;
         }
     }
 
@@ -147,6 +133,7 @@ public class Bullet : MonoBehaviour
 
     private void ResetBullet()
     {
+        HitReticle= false;
         transform.position = StartLocation;
     }
 }
