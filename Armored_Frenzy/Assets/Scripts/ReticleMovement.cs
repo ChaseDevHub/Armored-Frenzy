@@ -4,6 +4,7 @@ using Unity.Collections.LowLevel.Unsafe;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public enum Controls { Inverted, Standard}
 
@@ -41,6 +42,8 @@ public class ReticleMovement : MonoBehaviour
 
     [SerializeField]
     private Controls controlInput;
+
+    public Vector3 ForwardPosition;
 
     /*
     [SerializeField]
@@ -170,6 +173,9 @@ public class ReticleMovement : MonoBehaviour
 
         rb.velocity = transform.rotation * Direction * Speed;
 
+        ForwardPosition = transform.TransformDirection(Vector3.forward);
+
+        Debug.DrawRay(transform.position, ForwardPosition, Color.yellow);
     }
 
     public void IncreaseSpeedWithBoost(float sp)

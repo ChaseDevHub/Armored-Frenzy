@@ -165,7 +165,11 @@ public class Player : Entity
     {
         if(reticle.Move)
         {
-            transform.position = Vector3.MoveTowards(transform.position, reticle.transform.position, reticle.speed * Time.deltaTime);
+            //transform.position = Vector3.MoveTowards(transform.position, reticle.transform.position, reticle.speed * Time.deltaTime);
+            Vector3 dir = (reticle.transform.localPosition - rb.position).normalized;//Vector3.MoveTowards(transform.position, reticle.transform.localPosition, reticle.speed * Time.deltaTime);
+            Vector3 velocitydir = dir;
+
+            rb.velocity = velocitydir * reticle.speed;
         }
         else
         {
