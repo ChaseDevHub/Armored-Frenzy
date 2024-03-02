@@ -1,12 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Transactions;
 using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
 public class Player : Entity
@@ -15,6 +13,7 @@ public class Player : Entity
     private PlayerControls playerControls;
     InputAction ActivateShoot;
     InputAction ActivateBoost;
+   
     
     #endregion
 
@@ -39,7 +38,7 @@ public class Player : Entity
     private int ShieldTimer;
 
     
-    private bool BoostActive;
+    //private bool BoostActive;
     
     private bool ShieldActive;
 
@@ -96,13 +95,14 @@ public class Player : Entity
     {
         ActivateShoot.Disable();
         ActivateBoost.Disable();
+        
     }
     #endregion
     // Start is called before the first frame update
     void Start()
     {
         Inventory[0] = null;
-        BoostActive = false;
+        //BoostActive = false;
         ShieldActive = false;
         rb = GetComponent<Rigidbody>();
         PlayerInControl = true;
@@ -178,6 +178,28 @@ public class Player : Entity
         
 
         transform.LookAt(reticle.transform.localPosition); //mainly for if object is child
+
+        /*
+        var rotL = Gamepad.current.leftShoulder;
+        var rotR = Gamepad.current.rightShoulder;
+
+        if (rotL.IsPressed())
+        {
+            //help from https://discussions.unity.com/t/restricting-movement-with-mathf-clamp/133376/2
+            Vector3 pos = transform.rotation.eulerAngles;
+            pos.z = Mathf.Clamp(0, 0, -90);
+            
+            transform.Rotate(pos);
+        }
+        else if (rotR.IsPressed())
+        {
+            Vector3 pos = transform.rotation.eulerAngles;
+            pos.z = Mathf.Clamp(0, 0, 180);
+
+            transform.Rotate(pos);
+        }*/
+        
+        //Have it where the player is rotation on the z axis but once everything is FIXED
 
         VisualEffect();
     }
@@ -289,7 +311,7 @@ public class Player : Entity
     IEnumerator BoostCountdown(int timer)
     {
         yield return new WaitForSeconds(timer);
-        BoostActive= false;
+        //BoostActive= false;
         StopAllCoroutines();
     }
 
