@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
 
     public BulletSide side;
 
-    private Player player;
+    private ReticleMovement reticlemovement;
 
     private float BulletSpeed;
 
@@ -29,9 +29,9 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         Reticle = GameObject.Find("Reticle");
-        if(player == null)
+        if(reticlemovement == null)
         {
-            player = GameObject.Find("Player").GetComponent<Player>();
+            reticlemovement = GameObject.Find("Reticle").GetComponent<ReticleMovement>();
         }
     }
 
@@ -55,13 +55,13 @@ public class Bullet : MonoBehaviour
 
         DamagePoint = 2;
 
-        if (player.Speed > player.maxspeed) //if there is a boost
+        if (reticlemovement.DefaultSpeed > reticlemovement.MaxSpeed) //if there is a boost
         {
-            BulletSpeed = player.Speed * 3;
+            BulletSpeed = reticlemovement.speed;
         }
         else
         {
-            BulletSpeed = player.maxspeed * 3;
+            BulletSpeed = reticlemovement.MaxSpeed * 2;
         }
 
         HitReticle = false;
@@ -93,11 +93,11 @@ public class Bullet : MonoBehaviour
 
         if(!HitReticle)
         {
-            rb.velocity = forward * BulletSpeed * Time.fixedDeltaTime;
+            rb.velocity = forward * BulletSpeed;
         }
         else
         {
-            rb.velocity = straight * BulletSpeed * 5 * Time.fixedDeltaTime;
+            rb.velocity = straight * BulletSpeed * 2;
         }
 
         

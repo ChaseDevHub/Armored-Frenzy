@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 using Debug = UnityEngine.Debug;
 
 public class Player : Entity
@@ -69,7 +70,12 @@ public class Player : Entity
     [SerializeField]
     private int SetEnergy; //Can set the Energy in the inspector for however much Energy the player has
     public int Energy { get; private set; }
-   
+
+    [SerializeField]
+    float RotationAmount;
+
+    float timer = 0;
+
     #region InputSetUp
     private void Awake()
     {
@@ -121,6 +127,11 @@ public class Player : Entity
         {
             reticle = GameObject.Find("Reticle").GetComponent<ReticleMovement>();
         }
+
+        if(RotationAmount == 0)
+        {
+            RotationAmount = 45;
+        }
     }
 
     // Update is called once per frame
@@ -161,6 +172,8 @@ public class Player : Entity
         reticle.PlayerControl = PlayerInControl;
     }
 
+   
+
     private void FollowReticle()
     {
         if(reticle.Move)
@@ -176,95 +189,76 @@ public class Player : Entity
             rb.velocity = Vector3.zero;
         }
         
+        //Might have to have this outside of this method ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        transform.LookAt(reticle.transform.localPosition);
 
-        transform.LookAt(reticle.transform.localPosition); //mainly for if object is child
-
-        /*
+        
         var rotL = Gamepad.current.leftShoulder;
         var rotR = Gamepad.current.rightShoulder;
 
         if (rotL.IsPressed())
         {
-            //help from https://discussions.unity.com/t/restricting-movement-with-mathf-clamp/133376/2
-            Vector3 pos = transform.rotation.eulerAngles;
-            pos.z = Mathf.Clamp(0, 0, -90);
-            
-            transform.Rotate(pos);
+
+            Vector3 pos = Vector3.zero;
+            pos.z = RotationAmount;
+
+            if(timer < 1)
+            {
+                timer += Time.deltaTime;
+                transform.Rotate(pos * timer);
+                
+            }
+            else
+            {
+                transform.Rotate(pos);
+            }
+              
         }
         else if (rotR.IsPressed())
         {
-            Vector3 pos = transform.rotation.eulerAngles;
-            pos.z = Mathf.Clamp(0, 0, 180);
+            Vector3 pos = Vector3.zero;
+            pos.z = -RotationAmount;
 
-            transform.Rotate(pos);
-        }*/
-        
-        //Have it where the player is rotation on the z axis but once everything is FIXED
+            if (timer < 1)
+            {
+                timer += Time.deltaTime;
+                transform.Rotate(pos * timer);
 
-        VisualEffect();
-    }
-
-    /*
-    private void Move()
-    {
-        
-        var rotation = RotateDirection.ReadValue<Vector3>();
-        var speed = MovePlayer.ReadValue<float>();
-
-        Direction = Vector3.forward;
-        
-        Rotation.x = -rotation.y;
-        Rotation.y = rotation.x;
-        
-        if(Rotation.y != 0)
-        {
-            Rotation.z = -rotation.x * 2;
+            }
+            else
+            {
+                transform.Rotate(pos);
+            }
         }
         else
         {
-            //Help from https://forum.unity.com/threads/how-to-lerp-rotation.978078/ and chat.gbt
-            var currentPos = transform.eulerAngles;
-            var current = Quaternion.Euler(currentPos.x, currentPos.y, currentPos.z);
-            var reset = Quaternion.Euler(currentPos.x, currentPos.y, 0f); 
-            float t = 0.1f;
-            transform.rotation = Quaternion.Lerp(current, reset, t);
+            timer = 0;
         }
-
-        if (MovePlayer.IsPressed() && !StopPlayer.IsPressed()) //press gas
+        
+        //Have to find a way to reset to original position without it snapping
+        //Otherwise, it works 
+        /*
+        if (!rotL.IsPressed() && !rotR.IsPressed() && transform.localRotation.z != 0)
         {
-            if (Speed < MaxSpeed)
-            {
-                Speed = Speed + speed;
-            }
-            else if(Speed > MaxSpeed && !BoostActive) 
-            {
-                Speed = Speed - 1 * Time.deltaTime;
-            }
-        }
-        else if (!MovePlayer.IsPressed() && !StopPlayer.IsPressed() && !BoostActive) //let go gas but not press break
-        {
-            if(Speed > 0)
-            {
-                Speed = Speed - 5.5f * Time.deltaTime;
-            }
             
-        }
-        else if(StopPlayer.IsPressed() && !MovePlayer.IsPressed() && !BoostActive) //press break
-        {
-            if (Speed > 0)
+
+            float tempT = 0;
+            Vector3 pos = Vector3.zero;
+
+            if (tempT < 1)
             {
-                Speed = Speed - 1;
+                tempT += Time.deltaTime;
+                transform.Rotate(pos * tempT);
+
             }
-        }
-
-
-        transform.Rotate(Rotation * 30 * Time.deltaTime);
-        
-        rb.velocity = transform.rotation * Direction * Speed; //Help from https://gamedev.stackexchange.com/questions/189313/how-to-do-rigidbody-movement-relative-to-player-rotation-in-unity-c
-        
+            else
+            {
+                transform.Rotate(pos);
+            }
+        }*/
 
         VisualEffect();
-    }*/
+    }
 
     private void VisualEffect()
     {
