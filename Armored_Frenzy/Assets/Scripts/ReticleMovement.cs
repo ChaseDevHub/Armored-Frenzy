@@ -14,6 +14,7 @@ public class ReticleMovement : MonoBehaviour
     
     InputAction MoveReticalPosition;
     InputAction ReticleSpeed;
+    InputAction ResetPosition;
 
     [SerializeField]
     public Vector3 Direction;
@@ -34,9 +35,11 @@ public class ReticleMovement : MonoBehaviour
         }
     }
 
+    public float DefaultSpeed;
+
     public bool PlayerControl;
 
-    float MaxSpeed;
+    public float MaxSpeed;
    
     Rigidbody rb;
 
@@ -44,6 +47,10 @@ public class ReticleMovement : MonoBehaviour
     private Controls controlInput;
 
     public Vector3 ForwardPosition;
+
+    private Player player;
+
+    private Transform ReticlePosition;
 
     /*
     [SerializeField]
@@ -66,6 +73,9 @@ public class ReticleMovement : MonoBehaviour
 
         ReticleSpeed = playerControls.NewPlayer.Acceleration;
         ReticleSpeed.Enable();
+
+        ResetPosition = playerControls.NewPlayer.ResetReticle;
+        ResetPosition.Enable();
         /*
         MoveRetical = playerControls.Player.Rotate;
         MoveRetical.Enable();
@@ -78,6 +88,7 @@ public class ReticleMovement : MonoBehaviour
     {
         MoveReticalPosition.Disable();
         ReticleSpeed.Disable();
+        ResetPosition.Disable();
         /*
         MoveRetical.Disable();
         ResetRetical.Disable();*/
@@ -94,6 +105,8 @@ public class ReticleMovement : MonoBehaviour
 
         MaxSpeed = Speed;
 
+        DefaultSpeed = Speed;
+
         Move = false;
 
         PlayerControl = true;
@@ -102,19 +115,26 @@ public class ReticleMovement : MonoBehaviour
         {
             rb = GetComponent<Rigidbody>();
         }
+
+        player = GameObject.Find("Player").GetComponent<Player>();
+        ReticlePosition = GameObject.Find("ReticlePosition").GetComponent<Transform>();
+
+        this.transform.position = ReticlePosition.position;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        if(PlayerControl)
+        transform.LookAt(player.transform.localPosition);
+        
+        if (PlayerControl)
         {
             MoveReticle();
         }
         else
         {
             rb.velocity = Vector3.zero;
+            this.transform.position = ReticlePosition.position;
         }
        
     }
@@ -123,36 +143,22 @@ public class ReticleMovement : MonoBehaviour
     {
         var move = MoveReticalPosition.ReadValue<Vector3>();
 
-        Vector3 Rot = new Vector3(-move.y, move.x, 0);
-        
-        
-        if(Rot.y == 0 && Rot.x == 0)
-        {
-            //Help from https://forum.unity.com/threads/how-to-lerp-rotation.978078/ and chat.gbt
-            var currentPos = transform.eulerAngles;
-            var current = Quaternion.Euler(currentPos.x, currentPos.y, currentPos.z);
-            var reset = Quaternion.Euler(currentPos.x, currentPos.y, 0f);
-            float t = 0.1f;
-            transform.rotation = Quaternion.Lerp(current, reset, t);
-        }
-
         switch (controlInput)
         { 
             case Controls.Inverted:
-                Direction.x = move.x;
+                Direction.x = -move.x;
                 Direction.y = -move.y;
                 break;
             case Controls.Standard:
-                Direction.x = move.x;
+                Direction.x = -move.x;
                 Direction.y = move.y;
                 break;
         }
 
-
         if(ReticleSpeed.IsPressed())
         {
             Move = true; 
-            Direction.z = 1;
+            Direction.z = -1;
             /*if(Speed < MaxSpeed)
             {
                 Speed += 1;
@@ -169,13 +175,15 @@ public class ReticleMovement : MonoBehaviour
             }*/
         }
 
-        transform.Rotate(Rot * 20 * Time.deltaTime);
+        ResetRetPosition();
 
-        rb.velocity = transform.rotation * Direction * Speed;
+        //help with modifying with Chat.gpt
+        Vector3 velocity = new Vector3(Direction.x, Direction.y, Direction.z) * Speed;
+        rb.velocity = transform.rotation * velocity;
 
-        ForwardPosition = transform.TransformDirection(Vector3.forward);
-
-        Debug.DrawRay(transform.position, ForwardPosition, Color.yellow);
+        //Visual for debug
+        ForwardPosition = transform.TransformDirection(Vector3.back);
+        //Debug.DrawRay(transform.position, ForwardPosition, Color.yellow);
     }
 
     public void IncreaseSpeedWithBoost(float sp)
@@ -186,14 +194,14 @@ public class ReticleMovement : MonoBehaviour
         }
     }
 
-    /* might need this 
-    private void ResetPosition()
+     
+    private void ResetRetPosition()
     {
-        if (ResetRetical.IsPressed())
+        if(ResetPosition.IsPressed())
         {
-            transform.localPosition = new Vector3(0, 2, transform.localPosition.z);
+            this.transform.position = ReticlePosition.position;
         }
-    }*/
+    }
 
-   
+
 }

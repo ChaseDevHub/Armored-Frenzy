@@ -318,6 +318,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResetReticle"",
+                    ""type"": ""Button"",
+                    ""id"": ""75001daa-0b6a-46bd-9001-d1c2cda6d930"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -408,6 +417,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Acceleration"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0edb697d-6e66-403d-99fe-82693ef683c7"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""ResetReticle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -442,6 +462,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_NewPlayer_Move = m_NewPlayer.FindAction("Move", throwIfNotFound: true);
         m_NewPlayer_Boost = m_NewPlayer.FindAction("Boost", throwIfNotFound: true);
         m_NewPlayer_Acceleration = m_NewPlayer.FindAction("Acceleration", throwIfNotFound: true);
+        m_NewPlayer_ResetReticle = m_NewPlayer.FindAction("ResetReticle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -609,6 +630,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_NewPlayer_Move;
     private readonly InputAction m_NewPlayer_Boost;
     private readonly InputAction m_NewPlayer_Acceleration;
+    private readonly InputAction m_NewPlayer_ResetReticle;
     public struct NewPlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -617,6 +639,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_NewPlayer_Move;
         public InputAction @Boost => m_Wrapper.m_NewPlayer_Boost;
         public InputAction @Acceleration => m_Wrapper.m_NewPlayer_Acceleration;
+        public InputAction @ResetReticle => m_Wrapper.m_NewPlayer_ResetReticle;
         public InputActionMap Get() { return m_Wrapper.m_NewPlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -638,6 +661,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Acceleration.started += instance.OnAcceleration;
             @Acceleration.performed += instance.OnAcceleration;
             @Acceleration.canceled += instance.OnAcceleration;
+            @ResetReticle.started += instance.OnResetReticle;
+            @ResetReticle.performed += instance.OnResetReticle;
+            @ResetReticle.canceled += instance.OnResetReticle;
         }
 
         private void UnregisterCallbacks(INewPlayerActions instance)
@@ -654,6 +680,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Acceleration.started -= instance.OnAcceleration;
             @Acceleration.performed -= instance.OnAcceleration;
             @Acceleration.canceled -= instance.OnAcceleration;
+            @ResetReticle.started -= instance.OnResetReticle;
+            @ResetReticle.performed -= instance.OnResetReticle;
+            @ResetReticle.canceled -= instance.OnResetReticle;
         }
 
         public void RemoveCallbacks(INewPlayerActions instance)
@@ -697,5 +726,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
         void OnAcceleration(InputAction.CallbackContext context);
+        void OnResetReticle(InputAction.CallbackContext context);
     }
 }

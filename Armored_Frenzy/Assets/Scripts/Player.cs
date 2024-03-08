@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Transactions;
 using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 using Debug = UnityEngine.Debug;
 
 public class Player : Entity
@@ -15,6 +15,7 @@ public class Player : Entity
     private PlayerControls playerControls;
     InputAction ActivateShoot;
     InputAction ActivateBoost;
+   
     
     #endregion
 
@@ -39,7 +40,7 @@ public class Player : Entity
     private int ShieldTimer;
 
     
-    private bool BoostActive;
+    //private bool BoostActive;
     
     private bool ShieldActive;
 
@@ -70,7 +71,14 @@ public class Player : Entity
     [SerializeField]
     private int SetEnergy; //Can set the Energy in the inspector for however much Energy the player has
     public int Energy { get; private set; }
-   
+
+    [SerializeField]
+    float RotationAmount;
+
+    float timer = 0;
+
+    Vector3 pos = Vector3.zero;
+
     #region InputSetUp
     private void Awake()
     {
@@ -96,13 +104,14 @@ public class Player : Entity
     {
         ActivateShoot.Disable();
         ActivateBoost.Disable();
+        
     }
     #endregion
     // Start is called before the first frame update
     void Start()
     {
         Inventory[0] = null;
-        BoostActive = false;
+        //BoostActive = false;
         ShieldActive = false;
         rb = GetComponent<Rigidbody>();
         PlayerInControl = true;
@@ -120,6 +129,11 @@ public class Player : Entity
         if(reticle == null)
         {
             reticle = GameObject.Find("Reticle").GetComponent<ReticleMovement>();
+        }
+
+        if(RotationAmount == 0)
+        {
+            RotationAmount = 45;
         }
     }
 
@@ -164,9 +178,8 @@ public class Player : Entity
     private void FollowReticle()
     {
         if(reticle.Move)
-        {
-            //transform.position = Vector3.MoveTowards(transform.position, reticle.transform.position, reticle.speed * Time.deltaTime);
-            Vector3 dir = (reticle.transform.localPosition - rb.position).normalized;//Vector3.MoveTowards(transform.position, reticle.transform.localPosition, reticle.speed * Time.deltaTime);
+        {          
+            Vector3 dir = (reticle.transform.localPosition - rb.position).normalized;
             Vector3 velocitydir = dir;
 
             rb.velocity = velocitydir * reticle.speed;
@@ -175,74 +188,55 @@ public class Player : Entity
         {
             rb.velocity = Vector3.zero;
         }
-        
 
-        transform.LookAt(reticle.transform.localPosition); //mainly for if object is child
+
+
+        //transform.LookAt(reticle.transform.localPosition);
+        Vector3 rot = Quaternion.LookRotation(reticle.transform.localPosition - transform.position).eulerAngles;
+        rot.z = pos.z;
+
+        var currentPos = transform.eulerAngles;
+        var current = Quaternion.Euler(currentPos.x, currentPos.y, currentPos.z);
+        var next = Quaternion.Euler(rot.x, rot.y, rot.z);
+        float t = 0.1f;
+        
+        transform.rotation = Quaternion.Lerp(current, next, t);
+
+        //transform.rotation = Quaternion.Euler(rot);
+
+        RotatePlayerOnZAxis();
 
         VisualEffect();
     }
 
-    /*
-    private void Move()
+    private void RotatePlayerOnZAxis()
     {
-        
-        var rotation = RotateDirection.ReadValue<Vector3>();
-        var speed = MovePlayer.ReadValue<float>();
+        //I should instead add them to the input controls
+        var rotL = Gamepad.current.leftShoulder;
+        var rotR = Gamepad.current.rightShoulder;
 
-        Direction = Vector3.forward;
-        
-        Rotation.x = -rotation.y;
-        Rotation.y = rotation.x;
-        
-        if(Rotation.y != 0)
+        if (rotL.IsPressed())
         {
-            Rotation.z = -rotation.x * 2;
+            pos.z = -RotationAmount;
+        }
+        else if (rotR.IsPressed())
+        {
+            pos.z = RotationAmount;
+        }
+
+
+        if(rotL.IsPressed() || rotR.IsPressed())
+        {
+            pos.z = Mathf.Clamp(pos.z, -RotationAmount, RotationAmount);
         }
         else
         {
-            //Help from https://forum.unity.com/threads/how-to-lerp-rotation.978078/ and chat.gbt
-            var currentPos = transform.eulerAngles;
-            var current = Quaternion.Euler(currentPos.x, currentPos.y, currentPos.z);
-            var reset = Quaternion.Euler(currentPos.x, currentPos.y, 0f); 
-            float t = 0.1f;
-            transform.rotation = Quaternion.Lerp(current, reset, t);
+            timer = 0;
+            pos.z = 0;
         }
+    }
 
-        if (MovePlayer.IsPressed() && !StopPlayer.IsPressed()) //press gas
-        {
-            if (Speed < MaxSpeed)
-            {
-                Speed = Speed + speed;
-            }
-            else if(Speed > MaxSpeed && !BoostActive) 
-            {
-                Speed = Speed - 1 * Time.deltaTime;
-            }
-        }
-        else if (!MovePlayer.IsPressed() && !StopPlayer.IsPressed() && !BoostActive) //let go gas but not press break
-        {
-            if(Speed > 0)
-            {
-                Speed = Speed - 5.5f * Time.deltaTime;
-            }
-            
-        }
-        else if(StopPlayer.IsPressed() && !MovePlayer.IsPressed() && !BoostActive) //press break
-        {
-            if (Speed > 0)
-            {
-                Speed = Speed - 1;
-            }
-        }
-
-
-        transform.Rotate(Rotation * 30 * Time.deltaTime);
-        
-        rb.velocity = transform.rotation * Direction * Speed; //Help from https://gamedev.stackexchange.com/questions/189313/how-to-do-rigidbody-movement-relative-to-player-rotation-in-unity-c
-        
-
-        VisualEffect();
-    }*/
+    
 
     private void VisualEffect()
     {
@@ -289,7 +283,7 @@ public class Player : Entity
     IEnumerator BoostCountdown(int timer)
     {
         yield return new WaitForSeconds(timer);
-        BoostActive= false;
+        //BoostActive= false;
         StopAllCoroutines();
     }
 
@@ -314,9 +308,8 @@ public class Player : Entity
         PlayerInControl = true;
         //Push out
 
-        //maybe have the rotation reset based on the Z axis of the track marks?
-        
-        transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
+        //transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
+        reticle.transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
         
         StopAllCoroutines();
     }
