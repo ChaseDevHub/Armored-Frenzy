@@ -134,6 +134,7 @@ public class ReticleMovement : MonoBehaviour
         else
         {
             rb.velocity = Vector3.zero;
+            this.transform.position = ReticlePosition.position;
         }
        
     }
@@ -176,11 +177,13 @@ public class ReticleMovement : MonoBehaviour
 
         ResetRetPosition();
 
-        rb.velocity = transform.rotation * Direction * Speed;
+        //help with modifying with Chat.gpt
+        Vector3 velocity = new Vector3(Direction.x, Direction.y, Direction.z) * Speed;
+        rb.velocity = transform.rotation * velocity;
 
         //Visual for debug
         ForwardPosition = transform.TransformDirection(Vector3.back);
-        Debug.DrawRay(transform.position, ForwardPosition, Color.yellow);
+        //Debug.DrawRay(transform.position, ForwardPosition, Color.yellow);
     }
 
     public void IncreaseSpeedWithBoost(float sp)

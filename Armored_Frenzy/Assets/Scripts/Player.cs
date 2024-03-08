@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static UnityEditor.PlayerSettings;
@@ -75,6 +76,8 @@ public class Player : Entity
     float RotationAmount;
 
     float timer = 0;
+
+    Vector3 pos = Vector3.zero;
 
     #region InputSetUp
     private void Awake()
@@ -172,14 +175,11 @@ public class Player : Entity
         reticle.PlayerControl = PlayerInControl;
     }
 
-   
-
     private void FollowReticle()
     {
         if(reticle.Move)
-        {
-            //transform.position = Vector3.MoveTowards(transform.position, reticle.transform.position, reticle.speed * Time.deltaTime);
-            Vector3 dir = (reticle.transform.localPosition - rb.position).normalized;//Vector3.MoveTowards(transform.position, reticle.transform.localPosition, reticle.speed * Time.deltaTime);
+        {          
+            Vector3 dir = (reticle.transform.localPosition - rb.position).normalized;
             Vector3 velocitydir = dir;
 
             rb.velocity = velocitydir * reticle.speed;
@@ -188,77 +188,55 @@ public class Player : Entity
         {
             rb.velocity = Vector3.zero;
         }
-        
-        //Might have to have this outside of this method ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        transform.LookAt(reticle.transform.localPosition);
 
+
+
+        //transform.LookAt(reticle.transform.localPosition);
+        Vector3 rot = Quaternion.LookRotation(reticle.transform.localPosition - transform.position).eulerAngles;
+        rot.z = pos.z;
+
+        var currentPos = transform.eulerAngles;
+        var current = Quaternion.Euler(currentPos.x, currentPos.y, currentPos.z);
+        var next = Quaternion.Euler(rot.x, rot.y, rot.z);
+        float t = 0.1f;
         
+        transform.rotation = Quaternion.Lerp(current, next, t);
+
+        //transform.rotation = Quaternion.Euler(rot);
+
+        RotatePlayerOnZAxis();
+
+        VisualEffect();
+    }
+
+    private void RotatePlayerOnZAxis()
+    {
+        //I should instead add them to the input controls
         var rotL = Gamepad.current.leftShoulder;
         var rotR = Gamepad.current.rightShoulder;
 
         if (rotL.IsPressed())
         {
-
-            Vector3 pos = Vector3.zero;
-            pos.z = RotationAmount;
-
-            if(timer < 1)
-            {
-                timer += Time.deltaTime;
-                transform.Rotate(pos * timer);
-                
-            }
-            else
-            {
-                transform.Rotate(pos);
-            }
-              
+            pos.z = -RotationAmount;
         }
         else if (rotR.IsPressed())
         {
-            Vector3 pos = Vector3.zero;
-            pos.z = -RotationAmount;
+            pos.z = RotationAmount;
+        }
 
-            if (timer < 1)
-            {
-                timer += Time.deltaTime;
-                transform.Rotate(pos * timer);
 
-            }
-            else
-            {
-                transform.Rotate(pos);
-            }
+        if(rotL.IsPressed() || rotR.IsPressed())
+        {
+            pos.z = Mathf.Clamp(pos.z, -RotationAmount, RotationAmount);
         }
         else
         {
             timer = 0;
+            pos.z = 0;
         }
-        
-        //Have to find a way to reset to original position without it snapping
-        //Otherwise, it works 
-        /*
-        if (!rotL.IsPressed() && !rotR.IsPressed() && transform.localRotation.z != 0)
-        {
-            
-
-            float tempT = 0;
-            Vector3 pos = Vector3.zero;
-
-            if (tempT < 1)
-            {
-                tempT += Time.deltaTime;
-                transform.Rotate(pos * tempT);
-
-            }
-            else
-            {
-                transform.Rotate(pos);
-            }
-        }*/
-
-        VisualEffect();
     }
+
+    
 
     private void VisualEffect()
     {
@@ -330,9 +308,8 @@ public class Player : Entity
         PlayerInControl = true;
         //Push out
 
-        //maybe have the rotation reset based on the Z axis of the track marks?
-        
-        transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
+        //transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
+        reticle.transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
         
         StopAllCoroutines();
     }
