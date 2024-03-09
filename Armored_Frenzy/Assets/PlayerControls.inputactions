@@ -305,6 +305,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LeftRot",
+                    "type": "Button",
+                    "id": "50420450-b5b1-43ac-bd49-39c1fc8d5075",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightRot",
+                    "type": "Button",
+                    "id": "74a10190-ae17-4d96-9308-a8f2ce7d8a47",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -404,6 +422,28 @@
                     "processors": "",
                     "groups": "XboxController",
                     "action": "ResetReticle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3fa41028-0c5e-44ea-9db2-52f2688e6956",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XboxController",
+                    "action": "LeftRot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8a8492a8-0c5a-4f69-a6e0-7f6eafb7a5d6",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XboxController",
+                    "action": "RightRot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
