@@ -14,8 +14,8 @@ public class Player : Entity
     #region Input Fields
     private PlayerControls playerControls;
     InputAction ActivateBoost;
-    InputAction LeftRotation;
-    InputAction RightRotation;
+    internal InputAction LeftRotation;
+    internal InputAction RightRotation;
    
     
     #endregion
@@ -76,7 +76,7 @@ public class Player : Entity
     [SerializeField]
     float RotationAmount;
 
-   
+    public bool HasRotated { get; private set; }
 
     Vector3 pos = Vector3.zero;
 
@@ -145,6 +145,8 @@ public class Player : Entity
         {
             RotationAmount = 45;
         }
+
+        HasRotated = false; 
     }
 
     // Update is called once per frame
@@ -233,10 +235,12 @@ public class Player : Entity
         if(LeftRotation.IsPressed() || RightRotation.IsPressed())
         {
             pos.z = Mathf.Clamp(pos.z, -RotationAmount, RotationAmount);
+            HasRotated = true;
         }
         else
         {
             pos.z = 0;
+            HasRotated = false;
         }
     }
 

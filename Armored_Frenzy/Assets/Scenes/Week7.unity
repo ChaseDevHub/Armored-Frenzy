@@ -24192,6 +24192,7 @@ MonoBehaviour:
   Direction: {x: 0, y: 0, z: 0}
   Speed: 40
   Move: 0
+  RotateAngleAddition: 0
   DefaultSpeed: 0
   PlayerControl: 0
   MaxSpeed: 0
@@ -36724,6 +36725,7 @@ MonoBehaviour:
   Direction: {x: 0, y: 0, z: 0}
   Speed: 0
   Move: 0
+  RotateAngleAddition: 0
   DefaultSpeed: 0
   PlayerControl: 0
   MaxSpeed: 0

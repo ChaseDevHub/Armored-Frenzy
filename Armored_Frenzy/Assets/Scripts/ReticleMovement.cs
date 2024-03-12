@@ -24,6 +24,9 @@ public class ReticleMovement : MonoBehaviour
 
     public bool Move;
 
+    [SerializeField]
+    public float RotateAngleAddition;
+
     public float speed { 
         get
         {
@@ -34,6 +37,7 @@ public class ReticleMovement : MonoBehaviour
             speed = value;
         }
     }
+
 
     public float DefaultSpeed;
 
@@ -120,6 +124,11 @@ public class ReticleMovement : MonoBehaviour
         ReticlePosition = GameObject.Find("ReticlePosition").GetComponent<Transform>();
 
         this.transform.position = ReticlePosition.position;
+
+        if(RotateAngleAddition == 0)
+        {
+            RotateAngleAddition = 2;
+        }
     }
 
     // Update is called once per frame
@@ -144,7 +153,7 @@ public class ReticleMovement : MonoBehaviour
         var move = MoveReticalPosition.ReadValue<Vector3>();
 
         switch (controlInput)
-        { 
+        {
             case Controls.Inverted:
                 Direction.x = -move.x;
                 Direction.y = -move.y;
@@ -155,9 +164,9 @@ public class ReticleMovement : MonoBehaviour
                 break;
         }
 
-        if(ReticleSpeed.IsPressed())
+        if (ReticleSpeed.IsPressed())
         {
-            Move = true; 
+            Move = true;
             Direction.z = -1;
             /*if(Speed < MaxSpeed)
             {
@@ -176,6 +185,7 @@ public class ReticleMovement : MonoBehaviour
         }
 
         ResetRetPosition();
+        IncreaseSharpTurn();
 
         //help with modifying with Chat.gpt
         Vector3 velocity = new Vector3(Direction.x, Direction.y, Direction.z) * Speed;
@@ -184,6 +194,19 @@ public class ReticleMovement : MonoBehaviour
         //Visual for debug
         ForwardPosition = transform.TransformDirection(Vector3.back);
         //Debug.DrawRay(transform.position, ForwardPosition, Color.yellow);
+    }
+
+    private void IncreaseSharpTurn()
+    {
+        if (player.HasRotated && player.LeftRotation.IsPressed() && Direction.x == 1)
+        {
+            Direction.x = RotateAngleAddition;
+        }
+        else if (player.HasRotated && player.RightRotation.IsPressed() && Direction.x == -1)
+        {
+            Direction.x = -RotateAngleAddition;
+
+        }
     }
 
     public void IncreaseSpeedWithBoost(float sp)
