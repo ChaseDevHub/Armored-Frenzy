@@ -7,40 +7,47 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BoostMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 952a6db26ac9b374299b8250ead0f9b8, type: 3}
-  m_Parent: {fileID: 2100000, guid: 68f859f662231fd42b0d61aa8cc14180, type: 2}
-  m_ModifiedSerializedProperties: 16
+  m_Name: Tunnel Color
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Parent: {fileID: 2100000, guid: 74316067531679b41a3308af4b7683cc, type: 2}
+  m_ModifiedSerializedProperties: 18
   m_ValidKeywords:
-  - _SPECULAR_SETUP
+  - _EMISSION
+  - _SPECULARHIGHLIGHTS_OFF
+  - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 3000
   stringTagMap:
-    RenderType: Opaque
-  disabledShaderPasses: []
+    RenderType: Transparent
+  disabledShaderPasses:
+  - DepthOnly
+  - SHADOWCASTER
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _DstBlend: 0
+    - _Blend: 1
+    - _DstBlend: 10
+    - _DstBlendAlpha: 10
     - _GlossMapScale: 1
-    - _Glossiness: 1
+    - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Parallax: 0.02
-    - _Smoothness: 1
-    - _Surface: 0
-    - _ZWrite: 1
+    - _SpecularHighlights: 0
+    - _Surface: 1
+    - _WorkflowMode: 1
+    - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0.6108223, g: 0.7755576, b: 0.8679245, a: 1}
-    - _Color: {r: 0.6108223, g: 0.7755576, b: 0.8679245, a: 1}
-    - _Main_Color: {r: 0, g: 0.94503915, b: 0.9647059, a: 0}
+    - _BaseColor: {r: 0.3247597, g: 0.7341337, b: 0.7735849, a: 0.15686275}
+    - _Color: {r: 0.3247597, g: 0.7341337, b: 0.7735849, a: 0.15686275}
+    - _EmissionColor: {r: 0.07862775, g: 0.041384827, b: 0.09433961, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &1921942490106728565
+--- !u!114 &9111525364199579849
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
