@@ -11,7 +11,7 @@ public class BulletMachine : MonoBehaviour
     public GameObject Prefab;
     public List<Bullet> Bullets;
     public int MaxBullets;
-
+    
     private void Start()
     {
         switch (side)
@@ -36,27 +36,13 @@ public class BulletMachine : MonoBehaviour
 
     public void Shoot()
     {
-        //Bullets.Where(x => x.gameObject.activeSelf == false).First().gameObject.SetActive(true);
-
         //Help from Chat.gpt
         var inactiveBullet = Bullets.FirstOrDefault(x => !x.gameObject.activeSelf);
         if(inactiveBullet != null)
         {
-            //StartCoroutine(Wait(inactiveBullet));
             FireBullet(inactiveBullet);
         }
-        else //might add a bool condition to where they can shoot first item right away instead of waiting
-        {
-            //nothing
-        }
-    }
-
-    IEnumerator Wait(Bullet inactiveBullet)
-    {
-        yield return new WaitForSeconds(0.01f);
-        inactiveBullet.FireFrom(transform);
-        inactiveBullet.gameObject.SetActive(true);
-        StopAllCoroutines();
+       
     }
 
     private void FireBullet(Bullet inactiveBullet)

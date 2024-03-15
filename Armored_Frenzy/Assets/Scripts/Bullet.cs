@@ -33,6 +33,8 @@ public class Bullet : MonoBehaviour
         {
             reticlemovement = GameObject.Find("Reticle").GetComponent<ReticleMovement>();
         }
+
+
     }
 
     private void Start()
