@@ -18,6 +18,9 @@ public class UIPlayer : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI EnergyText;
 
+    [SerializeField]
+    private Image BoostIcon;
+
     private int DefaultEnergy;
 
     private PlayerState state;
@@ -37,6 +40,10 @@ public class UIPlayer : MonoBehaviour
         {
             EnergyText = GameObject.FindAnyObjectByType<TextMeshProUGUI>();
         }
+        if(BoostIcon == null)
+        {
+            BoostIcon= GameObject.Find("BoostIcon").GetComponent<Image>();
+        }
 
         DefaultEnergy = player.Energy;
 
@@ -44,6 +51,8 @@ public class UIPlayer : MonoBehaviour
         EnergyBar.minValue = 0;
 
         state = PlayerState.Active;
+
+        BoostIcon.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -54,6 +63,10 @@ public class UIPlayer : MonoBehaviour
         EnergyBar.value = player.Energy;
 
         PlayerGameState();
+
+        bool SetBoostIcon = player.Inventory[0] != null ? true : false;
+
+        BoostIcon.gameObject.SetActive(SetBoostIcon);
     }
 
     private string SetText()
