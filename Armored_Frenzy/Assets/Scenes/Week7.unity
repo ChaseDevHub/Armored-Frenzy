@@ -29890,10 +29890,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Direction: {x: 0, y: 0, z: 0}
-  Speed: 40
+  DefaultSpeed: 0
   Move: 0
   RotateAngleAddition: 0
-  DefaultSpeed: 0
   PlayerControl: 0
   MaxSpeed: 0
   controlInput: 1
@@ -32238,7 +32237,7 @@ MonoBehaviour:
   side: 0
   Prefab: {fileID: 669652557177978674, guid: bd1a613c7e5eb7c468064c36a16c1423, type: 3}
   Bullets: []
-  MaxBullets: 6
+  MaxBullets: 8
 --- !u!1001 &1537525440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39218,7 +39217,7 @@ MonoBehaviour:
   side: 1
   Prefab: {fileID: 4234717837972732422, guid: 7f2a20ea1e5bab643baa89241d908337, type: 3}
   Bullets: []
-  MaxBullets: 6
+  MaxBullets: 8
 --- !u!65 &1847495409
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -48387,10 +48386,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Direction: {x: 0, y: 0, z: 0}
-  Speed: 0
+  DefaultSpeed: 0
   Move: 0
   RotateAngleAddition: 0
-  DefaultSpeed: 0
   PlayerControl: 0
   MaxSpeed: 0
   controlInput: 0

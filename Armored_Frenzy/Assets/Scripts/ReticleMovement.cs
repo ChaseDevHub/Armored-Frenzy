@@ -20,7 +20,9 @@ public class ReticleMovement : MonoBehaviour
     public Vector3 Direction;
 
     [SerializeField]
-    float Speed;
+    public float DefaultSpeed;
+    
+    private float Speed;
 
     public bool Move;
 
@@ -38,8 +40,7 @@ public class ReticleMovement : MonoBehaviour
         }
     }
 
-
-    public float DefaultSpeed;
+   
 
     public bool PlayerControl;
 
@@ -102,14 +103,14 @@ public class ReticleMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(Speed == 0)
+        if(DefaultSpeed == 0)
         {
-            Speed = 130;
+            DefaultSpeed = 40;
         }
 
-        MaxSpeed = Speed;
+        MaxSpeed = DefaultSpeed;
 
-        DefaultSpeed = Speed;
+        Speed = 0;
 
         Move = false;
 
@@ -151,7 +152,8 @@ public class ReticleMovement : MonoBehaviour
     private void MoveReticle()
     {
         var move = MoveReticalPosition.ReadValue<Vector3>();
-
+        Direction.z = -ReticleSpeed.ReadValue<float>();
+        
         switch (controlInput)
         {
             case Controls.Inverted:
@@ -166,30 +168,41 @@ public class ReticleMovement : MonoBehaviour
 
         if (ReticleSpeed.IsPressed())
         {
-            Move = true;
-            Direction.z = -1;
-            /*if(Speed < MaxSpeed)
+            if (Speed < MaxSpeed)
             {
                 Speed += 1;
-            }*/
+            }
         }
         else
         {
-            Direction.z = 0;
-            Move = false;
-            Speed = MaxSpeed;
-            /*if(Speed > 0)
+            if (Speed > 0)
             {
-                Speed -= 1;
-            }*/
+                Speed -= 0.5f;
+                this.transform.position = ReticlePosition.position; //Temp
+            }
+            
+  
         }
+
+        Move = Speed != 0.0f ? true : false;
 
         ResetRetPosition();
         IncreaseSharpTurn();
 
         //help with modifying with Chat.gpt
         Vector3 velocity = new Vector3(Direction.x, Direction.y, Direction.z) * Speed;
-        rb.velocity = transform.rotation * velocity;
+        Vector3 rotate = new Vector3(Direction.x, Direction.y, Direction.z) * DefaultSpeed;
+        
+        if(!Move)
+        {
+            rb.velocity = transform.rotation * rotate;
+        }
+        else
+        {
+            rb.velocity = transform.rotation * velocity;
+        }
+        
+        
 
         //Visual for debug
         ForwardPosition = transform.TransformDirection(Vector3.back);
