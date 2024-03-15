@@ -42,7 +42,8 @@ public class BulletMachine : MonoBehaviour
         var inactiveBullet = Bullets.FirstOrDefault(x => !x.gameObject.activeSelf);
         if(inactiveBullet != null)
         {
-            StartCoroutine(Wait(inactiveBullet));
+            //StartCoroutine(Wait(inactiveBullet));
+            FireBullet(inactiveBullet);
         }
         else //might add a bool condition to where they can shoot first item right away instead of waiting
         {
@@ -52,12 +53,17 @@ public class BulletMachine : MonoBehaviour
 
     IEnumerator Wait(Bullet inactiveBullet)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.01f);
         inactiveBullet.FireFrom(transform);
         inactiveBullet.gameObject.SetActive(true);
         StopAllCoroutines();
     }
 
+    private void FireBullet(Bullet inactiveBullet)
+    {
+        inactiveBullet.FireFrom(transform);
+        inactiveBullet.gameObject.SetActive(true);
+    }
 
    
 }

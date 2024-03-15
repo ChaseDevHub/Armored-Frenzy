@@ -13,8 +13,9 @@ public class Player : Entity
 {
     #region Input Fields
     private PlayerControls playerControls;
-    InputAction ActivateShoot;
     InputAction ActivateBoost;
+    internal InputAction LeftRotation;
+    internal InputAction RightRotation;
    
     
     #endregion
@@ -75,7 +76,7 @@ public class Player : Entity
     [SerializeField]
     float RotationAmount;
 
-    float timer = 0;
+    public bool HasRotated { get; private set; }
 
     Vector3 pos = Vector3.zero;
 
@@ -83,6 +84,11 @@ public class Player : Entity
     private void Awake()
     {
         playerControls = new PlayerControls();
+
+        playerControls.Enable();
+
+        playerControls.NewPlayer.Shoot.performed += ShootWeapon;
+
         if (SetEnergy == 0)
         {
             SetEnergy = 10;
@@ -93,18 +99,22 @@ public class Player : Entity
 
     private void OnEnable()
     {
-        ActivateShoot= playerControls.NewPlayer.Shoot;
-        ActivateShoot.Enable();
-
         ActivateBoost = playerControls.NewPlayer.Boost;
         ActivateBoost.Enable();
+
+        LeftRotation = playerControls.NewPlayer.LeftRot;
+        LeftRotation.Enable();
+
+        RightRotation = playerControls.NewPlayer.RightRot;
+        RightRotation.Enable();
     }
 
     private void OnDisable()
     {
-        ActivateShoot.Disable();
+        /*ActivateShoot.Disable();
         ActivateBoost.Disable();
-        
+        LeftRotation.Disable();
+        RightRotation.Disable();*/
     }
     #endregion
     // Start is called before the first frame update
@@ -135,6 +145,8 @@ public class Player : Entity
         {
             RotationAmount = 45;
         }
+
+        HasRotated = false; 
     }
 
     // Update is called once per frame
@@ -150,8 +162,7 @@ public class Player : Entity
             FollowReticle();
             
             UseBoost();
-           
-            ShootWeapon();
+            
         }
         else
         {
@@ -169,8 +180,8 @@ public class Player : Entity
             Shield.SetActive(false);
         }
 
-        Quaternion guidePipeRotation = GuidePipe.transform.rotation;
-        RotationReset = guidePipeRotation.eulerAngles.y;
+        //Quaternion guidePipeRotation = GuidePipe.transform.rotation;
+        //RotationReset = guidePipeRotation.eulerAngles.y;
 
         reticle.PlayerControl = PlayerInControl;
     }
@@ -188,8 +199,6 @@ public class Player : Entity
         {
             rb.velocity = Vector3.zero;
         }
-
-
 
         //transform.LookAt(reticle.transform.localPosition);
         Vector3 rot = Quaternion.LookRotation(reticle.transform.localPosition - transform.position).eulerAngles;
@@ -211,32 +220,29 @@ public class Player : Entity
 
     private void RotatePlayerOnZAxis()
     {
-        //I should instead add them to the input controls
-        var rotL = Gamepad.current.leftShoulder;
-        var rotR = Gamepad.current.rightShoulder;
-
-        if (rotL.IsPressed())
+        //ADD: If the player rotates, it's a sharper turn
+        if (LeftRotation.IsPressed())
         {
-            pos.z = -RotationAmount;
-        }
-        else if (rotR.IsPressed())
-        {
+            //pos.z = -RotationAmount;
             pos.z = RotationAmount;
         }
+        else if (RightRotation.IsPressed())
+        {
+            //pos.z = RotationAmount;
+            pos.z = -RotationAmount;
+        }
 
-
-        if(rotL.IsPressed() || rotR.IsPressed())
+        if(LeftRotation.IsPressed() || RightRotation.IsPressed())
         {
             pos.z = Mathf.Clamp(pos.z, -RotationAmount, RotationAmount);
+            HasRotated = true;
         }
         else
         {
-            timer = 0;
             pos.z = 0;
+            HasRotated = false;
         }
     }
-
-    
 
     private void VisualEffect()
     {
@@ -250,15 +256,14 @@ public class Player : Entity
         }
     }
 
-    private void ShootWeapon()
+    private void ShootWeapon(InputAction.CallbackContext callback)
     {
-        if(ActivateShoot.IsPressed())
-        {
-            bm[0].Shoot();
-            bm[1].Shoot();
-        }
+        bm[0].Shoot();
+        bm[1].Shoot();
     }
+
     
+
     //Need some changing
     private void UseBoost()
     {

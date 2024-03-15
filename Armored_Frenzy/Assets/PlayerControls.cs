@@ -327,6 +327,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftRot"",
+                    ""type"": ""Button"",
+                    ""id"": ""50420450-b5b1-43ac-bd49-39c1fc8d5075"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightRot"",
+                    ""type"": ""Button"",
+                    ""id"": ""74a10190-ae17-4d96-9308-a8f2ce7d8a47"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -428,6 +446,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""ResetReticle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3fa41028-0c5e-44ea-9db2-52f2688e6956"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""LeftRot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a8492a8-0c5a-4f69-a6e0-7f6eafb7a5d6"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""RightRot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -463,6 +503,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_NewPlayer_Boost = m_NewPlayer.FindAction("Boost", throwIfNotFound: true);
         m_NewPlayer_Acceleration = m_NewPlayer.FindAction("Acceleration", throwIfNotFound: true);
         m_NewPlayer_ResetReticle = m_NewPlayer.FindAction("ResetReticle", throwIfNotFound: true);
+        m_NewPlayer_LeftRot = m_NewPlayer.FindAction("LeftRot", throwIfNotFound: true);
+        m_NewPlayer_RightRot = m_NewPlayer.FindAction("RightRot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -631,6 +673,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_NewPlayer_Boost;
     private readonly InputAction m_NewPlayer_Acceleration;
     private readonly InputAction m_NewPlayer_ResetReticle;
+    private readonly InputAction m_NewPlayer_LeftRot;
+    private readonly InputAction m_NewPlayer_RightRot;
     public struct NewPlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -640,6 +684,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Boost => m_Wrapper.m_NewPlayer_Boost;
         public InputAction @Acceleration => m_Wrapper.m_NewPlayer_Acceleration;
         public InputAction @ResetReticle => m_Wrapper.m_NewPlayer_ResetReticle;
+        public InputAction @LeftRot => m_Wrapper.m_NewPlayer_LeftRot;
+        public InputAction @RightRot => m_Wrapper.m_NewPlayer_RightRot;
         public InputActionMap Get() { return m_Wrapper.m_NewPlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -664,6 +710,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ResetReticle.started += instance.OnResetReticle;
             @ResetReticle.performed += instance.OnResetReticle;
             @ResetReticle.canceled += instance.OnResetReticle;
+            @LeftRot.started += instance.OnLeftRot;
+            @LeftRot.performed += instance.OnLeftRot;
+            @LeftRot.canceled += instance.OnLeftRot;
+            @RightRot.started += instance.OnRightRot;
+            @RightRot.performed += instance.OnRightRot;
+            @RightRot.canceled += instance.OnRightRot;
         }
 
         private void UnregisterCallbacks(INewPlayerActions instance)
@@ -683,6 +735,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ResetReticle.started -= instance.OnResetReticle;
             @ResetReticle.performed -= instance.OnResetReticle;
             @ResetReticle.canceled -= instance.OnResetReticle;
+            @LeftRot.started -= instance.OnLeftRot;
+            @LeftRot.performed -= instance.OnLeftRot;
+            @LeftRot.canceled -= instance.OnLeftRot;
+            @RightRot.started -= instance.OnRightRot;
+            @RightRot.performed -= instance.OnRightRot;
+            @RightRot.canceled -= instance.OnRightRot;
         }
 
         public void RemoveCallbacks(INewPlayerActions instance)
@@ -727,5 +785,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnBoost(InputAction.CallbackContext context);
         void OnAcceleration(InputAction.CallbackContext context);
         void OnResetReticle(InputAction.CallbackContext context);
+        void OnLeftRot(InputAction.CallbackContext context);
+        void OnRightRot(InputAction.CallbackContext context);
     }
 }

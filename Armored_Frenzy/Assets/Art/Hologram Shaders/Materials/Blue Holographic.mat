@@ -26,6 +26,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ALPHAPREMULTIPLY_ON
+  - _SPECULAR_SETUP
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -126,14 +127,14 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _ScrollSpeed: 0.05
+    - _ScrollSpeed: 0.3
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 1
-    - _WorkflowMode: 1
+    - _WorkflowMode: 0
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
@@ -141,8 +142,8 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Fresnel_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Hologram_Tiling: {r: 64, g: 64, b: 0, a: 0}
-    - _Main_Color: {r: 0, g: 0.1476377, b: 0.6981132, a: 0}
+    - _Fresnel_Color: {r: 0, g: 0.19309108, b: 0.6320754, a: 1}
+    - _Hologram_Tiling: {r: 3, g: 3, b: 0, a: 0}
+    - _Main_Color: {r: 0.034665354, g: 0.2617719, b: 0.38679248, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
