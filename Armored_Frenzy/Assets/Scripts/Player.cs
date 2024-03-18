@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using static UnityEditor.PlayerSettings;
 using Debug = UnityEngine.Debug;
 
+
 public class Player : Entity
 {
     #region Input Fields
@@ -80,6 +81,8 @@ public class Player : Entity
 
     Vector3 pos = Vector3.zero;
 
+    
+
     #region InputSetUp
     private void Awake()
     {
@@ -147,6 +150,7 @@ public class Player : Entity
         }
 
         HasRotated = false; 
+       
     }
 
     // Update is called once per frame
@@ -157,19 +161,28 @@ public class Player : Entity
             StartCoroutine(TrackCollisionCooldown(10));
         }
 
-        if(PlayerInControl)
+        if(Energy > 0 && UIPlayer.state == PlayerState.Active)
         {
-            FollowReticle();
-            
-            UseBoost();
-            
+            if (PlayerInControl)
+            {
+                FollowReticle();
+
+                UseBoost();
+
+            }
+            else
+            {
+
+                transform.Rotate(new Vector3(0, 0, 360) * Time.fixedDeltaTime / 3);
+                StartCoroutine(ResetPlayerControl(ResetTimer));
+            }
         }
-        else
+        else if(Energy == 0)
         {
-            
-            transform.Rotate(new Vector3(0, 0, 360) * Time.fixedDeltaTime / 3);
-            StartCoroutine(ResetPlayerControl(ResetTimer));            
+            UIPlayer.state = PlayerState.Lose;
         }
+
+        
         
         if(ShieldActive)
         {
@@ -262,8 +275,6 @@ public class Player : Entity
         bm[1].Shoot();
     }
 
-    
-
     //Need some changing
     private void UseBoost()
     {
@@ -281,24 +292,9 @@ public class Player : Entity
             reticle.IncreaseSpeedWithBoost(20);
             Inventory[0] = null;
             Energy -= 1;
-            Debug.Log("Boost has been pressed");
         }
     }
    
-    IEnumerator BoostCountdown(int timer)
-    {
-        yield return new WaitForSeconds(timer);
-        //BoostActive= false;
-        StopAllCoroutines();
-    }
-
-    IEnumerator ShieldCountdown(int timer)
-    {
-        yield return new WaitForSeconds(timer);
-        ShieldActive = false;
-        StopAllCoroutines();
-    }
-
     IEnumerator TrackCollisionCooldown(int timer)
     {
         yield return new WaitForSeconds(timer);
@@ -353,5 +349,12 @@ public class Player : Entity
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.CompareTag("FinishLine"))
+        {
+            UIPlayer.state = PlayerState.Win;
+        }
+    }
 
 }

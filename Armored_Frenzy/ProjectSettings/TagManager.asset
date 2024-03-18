@@ -10,6 +10,7 @@ TagManager:
   - GuidePipe
   - DestroyableObject
   - Reticle
+  - FinishLine
   layers:
   - Default
   - TransparentFX

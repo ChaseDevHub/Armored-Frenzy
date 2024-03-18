@@ -345,6 +345,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResetButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""2ad7833d-f0cd-4de8-a169-a080cdb4e77f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -468,6 +477,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""RightRot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""252bf4b8-02da-4d8f-a9a2-f8f61a731d1f"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""ResetButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -505,6 +525,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_NewPlayer_ResetReticle = m_NewPlayer.FindAction("ResetReticle", throwIfNotFound: true);
         m_NewPlayer_LeftRot = m_NewPlayer.FindAction("LeftRot", throwIfNotFound: true);
         m_NewPlayer_RightRot = m_NewPlayer.FindAction("RightRot", throwIfNotFound: true);
+        m_NewPlayer_ResetButton = m_NewPlayer.FindAction("ResetButton", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -675,6 +696,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_NewPlayer_ResetReticle;
     private readonly InputAction m_NewPlayer_LeftRot;
     private readonly InputAction m_NewPlayer_RightRot;
+    private readonly InputAction m_NewPlayer_ResetButton;
     public struct NewPlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -686,6 +708,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @ResetReticle => m_Wrapper.m_NewPlayer_ResetReticle;
         public InputAction @LeftRot => m_Wrapper.m_NewPlayer_LeftRot;
         public InputAction @RightRot => m_Wrapper.m_NewPlayer_RightRot;
+        public InputAction @ResetButton => m_Wrapper.m_NewPlayer_ResetButton;
         public InputActionMap Get() { return m_Wrapper.m_NewPlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -716,6 +739,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RightRot.started += instance.OnRightRot;
             @RightRot.performed += instance.OnRightRot;
             @RightRot.canceled += instance.OnRightRot;
+            @ResetButton.started += instance.OnResetButton;
+            @ResetButton.performed += instance.OnResetButton;
+            @ResetButton.canceled += instance.OnResetButton;
         }
 
         private void UnregisterCallbacks(INewPlayerActions instance)
@@ -741,6 +767,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RightRot.started -= instance.OnRightRot;
             @RightRot.performed -= instance.OnRightRot;
             @RightRot.canceled -= instance.OnRightRot;
+            @ResetButton.started -= instance.OnResetButton;
+            @ResetButton.performed -= instance.OnResetButton;
+            @ResetButton.canceled -= instance.OnResetButton;
         }
 
         public void RemoveCallbacks(INewPlayerActions instance)
@@ -787,5 +816,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnResetReticle(InputAction.CallbackContext context);
         void OnLeftRot(InputAction.CallbackContext context);
         void OnRightRot(InputAction.CallbackContext context);
+        void OnResetButton(InputAction.CallbackContext context);
     }
 }
