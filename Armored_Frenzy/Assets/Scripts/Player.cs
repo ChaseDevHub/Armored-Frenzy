@@ -40,9 +40,6 @@ public class Player : Entity
 
     [SerializeField]
     private int ShieldTimer;
-
-    
-    //private bool BoostActive;
     
     private bool ShieldActive;
 
@@ -114,7 +111,8 @@ public class Player : Entity
 
     private void OnDisable()
     {
-        /*ActivateShoot.Disable();
+        playerControls.NewPlayer.Shoot.performed -= ShootWeapon;
+        /*
         ActivateBoost.Disable();
         LeftRotation.Disable();
         RightRotation.Disable();*/
@@ -172,7 +170,7 @@ public class Player : Entity
             }
             else
             {
-
+                rb.velocity = Vector3.zero;
                 transform.Rotate(new Vector3(0, 0, 360) * Time.fixedDeltaTime / 3);
                 StartCoroutine(ResetPlayerControl(ResetTimer));
             }
@@ -309,7 +307,7 @@ public class Player : Entity
         PlayerInControl = true;
         //Push out
 
-        //transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
+        transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
         reticle.transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
         
         StopAllCoroutines();

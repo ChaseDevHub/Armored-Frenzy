@@ -14,7 +14,7 @@ public class Entity : MonoBehaviour
     Inventory -> Array inventory = new Array[1];
      */
 
-    public float Speed, StrafeSpeed, HoverSpeed;
+    public float Speed;
     public float Boost;
     public Vector3 Direction;
     public Vector3 Rotation;

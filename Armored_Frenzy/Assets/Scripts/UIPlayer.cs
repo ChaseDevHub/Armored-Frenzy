@@ -41,6 +41,11 @@ public class UIPlayer : MonoBehaviour
         
     }
 
+    private void OnDisable()
+    {
+        playerControls.NewPlayer.ResetButton.performed -= ResetGame;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -149,7 +154,7 @@ public class UIPlayer : MonoBehaviour
 
     private string SetState(string condition)
     {
-        return $"You {condition} \n Press A to retry";
+        return $"You {condition} \nPress \nto retry";
     }
 
     private void ResetGame(InputAction.CallbackContext callback)

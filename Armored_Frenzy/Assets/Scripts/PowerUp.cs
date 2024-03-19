@@ -21,16 +21,16 @@ public class PowerUp : MonoBehaviour
 
         Collected = false;
 
-        int ran = Random.Range(0, 2);
+        int ran = 0;//Random.Range(0, 2);
 
         switch (ran)
         {
             case 0:
                 Ability = PowerName.Boost;
                 break;
-            case 1:
-                Ability = PowerName.Shield;
-                break;
+            /*case 1:
+                Ability = PowerName.Shield; 
+                break;*/
         }
     }
 
@@ -48,13 +48,14 @@ public class PowerUp : MonoBehaviour
         }
     }
 
+    /* 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Bullet")) 
         {
             Collected = true;
         }
-    }
+    }*/
 
     public void ResetPowerUp()
     {

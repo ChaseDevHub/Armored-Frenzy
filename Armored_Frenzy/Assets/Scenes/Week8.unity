@@ -527,9 +527,10 @@ GameObject:
   - component: {fileID: 22836241}
   - component: {fileID: 22836240}
   - component: {fileID: 22836239}
+  - component: {fileID: 22836242}
   m_Layer: 0
   m_Name: Guide Ring (19)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -621,6 +622,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 22836237}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &22836242
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22836237}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794897, y: 0.02000005, z: 0.012794928}
+  m_Center: {x: -0.000000029187984, y: -0.010000003, z: 0.0000000010800031}
 --- !u!1001 &23331136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2733,9 +2755,10 @@ GameObject:
   - component: {fileID: 91918821}
   - component: {fileID: 91918820}
   - component: {fileID: 91918819}
+  - component: {fileID: 91918822}
   m_Layer: 0
   m_Name: Guide Ring (22)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2827,6 +2850,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 91918817}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &91918822
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91918817}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0127949, y: 0.020000048, z: 0.012794926}
+  m_Center: {x: -0.000000014202677, y: -0.010000003, z: 9.95849e-10}
 --- !u!1 &95544974
 GameObject:
   m_ObjectHideFlags: 0
@@ -3143,9 +3187,10 @@ GameObject:
   - component: {fileID: 103857046}
   - component: {fileID: 103857045}
   - component: {fileID: 103857044}
+  - component: {fileID: 103857047}
   m_Layer: 0
   m_Name: Guide Ring (18)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3237,6 +3282,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 103857042}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &103857047
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103857042}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794897, y: 0.02000005, z: 0.012794928}
+  m_Center: {x: -0.000000029187984, y: -0.010000003, z: -7.8264206e-10}
 --- !u!1 &108066038
 GameObject:
   m_ObjectHideFlags: 0
@@ -3429,9 +3495,10 @@ GameObject:
   - component: {fileID: 115188339}
   - component: {fileID: 115188338}
   - component: {fileID: 115188337}
+  - component: {fileID: 115188340}
   m_Layer: 0
   m_Name: Guide Ring (4)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3523,6 +3590,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115188335}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &115188340
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115188335}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794892, y: 0.02000002, z: 0.01279493}
+  m_Center: {x: -0.000000014202668, y: -0.0100000035, z: 0.000000016065314}
 --- !u!1 &116726921
 GameObject:
   m_ObjectHideFlags: 0
@@ -4435,9 +4523,10 @@ GameObject:
   - component: {fileID: 155278218}
   - component: {fileID: 155278217}
   - component: {fileID: 155278216}
+  - component: {fileID: 155278219}
   m_Layer: 0
   m_Name: Guide Ring (62)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4529,6 +4618,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155278214}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &155278219
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155278214}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794896, y: 0.020000046, z: 0.012794924}
+  m_Center: {x: -0.000000014328899, y: -0.0100009525, z: 0.0000000011010398}
 --- !u!1 &157028252 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7491718128641923141, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
@@ -5228,9 +5338,10 @@ GameObject:
   - component: {fileID: 181629575}
   - component: {fileID: 181629574}
   - component: {fileID: 181629573}
+  - component: {fileID: 181629576}
   m_Layer: 0
   m_Name: Guide Ring (26)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5322,6 +5433,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181629571}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &181629576
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181629571}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794892, y: 0.020000009, z: 0.012794923}
+  m_Center: {x: -0.000000014202668, y: -0.010000118, z: -7.4056805e-10}
 --- !u!1 &182079152
 GameObject:
   m_ObjectHideFlags: 0
@@ -7374,9 +7506,10 @@ GameObject:
   - component: {fileID: 254221408}
   - component: {fileID: 254221407}
   - component: {fileID: 254221406}
+  - component: {fileID: 254221409}
   m_Layer: 0
   m_Name: Guide Ring (48)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7468,6 +7601,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 254221404}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &254221409
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254221404}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0127949, y: 0.020000044, z: 0.012794926}
+  m_Center: {x: -0.000000014202677, y: -0.009999884, z: -0.000000006398186}
 --- !u!1 &255398833
 GameObject:
   m_ObjectHideFlags: 0
@@ -7480,9 +7634,10 @@ GameObject:
   - component: {fileID: 255398837}
   - component: {fileID: 255398836}
   - component: {fileID: 255398835}
+  - component: {fileID: 255398838}
   m_Layer: 0
   m_Name: Guide Ring (63)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7574,6 +7729,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 255398833}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &255398838
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255398833}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794896, y: 0.020000026, z: 0.012794927}
+  m_Center: {x: -0.000000014239924, y: -0.010000956, z: 0.000000001021928}
 --- !u!1 &257202769
 GameObject:
   m_ObjectHideFlags: 0
@@ -7815,9 +7991,10 @@ GameObject:
   - component: {fileID: 261315106}
   - component: {fileID: 261315105}
   - component: {fileID: 261315104}
+  - component: {fileID: 261315107}
   m_Layer: 0
   m_Name: Guide Ring (64)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7909,6 +8086,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261315102}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &261315107
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261315102}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794892, y: 0.019999998, z: 0.012794923}
+  m_Center: {x: 0.00000010500662, y: -0.009999999, z: 9.31323e-10}
 --- !u!1001 &264826981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10081,9 +10279,10 @@ GameObject:
   - component: {fileID: 331841363}
   - component: {fileID: 331841362}
   - component: {fileID: 331841361}
+  - component: {fileID: 331841364}
   m_Layer: 0
   m_Name: Guide Ring
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10175,6 +10374,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 331841359}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &331841364
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331841359}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794892, y: 0.019999994, z: 0.012794921}
+  m_Center: {x: -0.000000014202668, y: -0.009999997, z: 0.0000000013969838}
 --- !u!1 &334217124
 GameObject:
   m_ObjectHideFlags: 0
@@ -10303,15 +10523,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 82.06438
+      value: 2.3998566
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -59.12958
+      value: -1.5000019
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.06588
+      value: 7.9999847
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11230,9 +11450,10 @@ GameObject:
   - component: {fileID: 353983924}
   - component: {fileID: 353983923}
   - component: {fileID: 353983922}
+  - component: {fileID: 353983925}
   m_Layer: 0
   m_Name: Guide Ring (13)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11324,6 +11545,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 353983920}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &353983925
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353983920}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794892, y: 0.019999994, z: 0.012794921}
+  m_Center: {x: -0.000000014202668, y: -0.009999997, z: 0.0000000011641531}
 --- !u!1001 &362164584
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13025,9 +13267,10 @@ GameObject:
   - component: {fileID: 430853581}
   - component: {fileID: 430853580}
   - component: {fileID: 430853579}
+  - component: {fileID: 430853582}
   m_Layer: 0
   m_Name: Guide Ring (21)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13119,6 +13362,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 430853577}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &430853582
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430853577}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794899, y: 0.020000044, z: 0.012794927}
+  m_Center: {x: -0.0000000142399275, y: -0.010000001, z: 0.000000002883143}
 --- !u!1 &452982636
 GameObject:
   m_ObjectHideFlags: 0
@@ -13131,9 +13395,10 @@ GameObject:
   - component: {fileID: 452982640}
   - component: {fileID: 452982639}
   - component: {fileID: 452982638}
+  - component: {fileID: 452982641}
   m_Layer: 0
   m_Name: Guide Ring (10)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13225,6 +13490,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 452982636}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &452982641
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452982636}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794896, y: 0.02000001, z: 0.012794927}
+  m_Center: {x: 0.000000015599651, y: -0.010000003, z: 0.0000000030021499}
 --- !u!1 &456128531
 GameObject:
   m_ObjectHideFlags: 0
@@ -14812,9 +15098,10 @@ GameObject:
   - component: {fileID: 506475676}
   - component: {fileID: 506475675}
   - component: {fileID: 506475674}
+  - component: {fileID: 506475677}
   m_Layer: 0
   m_Name: Guide Ring (61)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14906,6 +15193,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506475672}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &506475677
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506475672}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794894, y: 0.020000018, z: 0.012794924}
+  m_Center: {x: 0.000000015636907, y: -0.010000001, z: 7.691162e-10}
 --- !u!1001 &509194078
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17910,9 +18218,10 @@ GameObject:
   - component: {fileID: 644210449}
   - component: {fileID: 644210448}
   - component: {fileID: 644210447}
+  - component: {fileID: 644210450}
   m_Layer: 0
   m_Name: Guide Ring (27)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18004,6 +18313,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644210445}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &644210450
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644210445}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794897, y: 0.020000046, z: 0.012794928}
+  m_Center: {x: -0.000000014202673, y: -0.010000003, z: 0.0000000028882443}
 --- !u!1 &650306609
 GameObject:
   m_ObjectHideFlags: 0
@@ -18016,9 +18346,10 @@ GameObject:
   - component: {fileID: 650306613}
   - component: {fileID: 650306612}
   - component: {fileID: 650306611}
+  - component: {fileID: 650306614}
   m_Layer: 0
   m_Name: Guide Ring (2)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18110,6 +18441,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 650306609}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &650306614
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650306609}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794892, y: 0.020000005, z: 0.012794926}
+  m_Center: {x: -0.000000014202668, y: -0.009999764, z: 0.0000000013969841}
 --- !u!1 &659602740
 GameObject:
   m_ObjectHideFlags: 0
@@ -20606,9 +20958,10 @@ GameObject:
   - component: {fileID: 746349537}
   - component: {fileID: 746349536}
   - component: {fileID: 746349535}
+  - component: {fileID: 746349538}
   m_Layer: 0
   m_Name: Guide Ring (68)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20700,6 +21053,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746349533}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &746349538
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746349533}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794896, y: 0.02000001, z: 0.012794927}
+  m_Center: {x: 0.000000015599651, y: -0.010000003, z: 0.0000000011395047}
 --- !u!1 &746863175
 GameObject:
   m_ObjectHideFlags: 0
@@ -20712,9 +21086,10 @@ GameObject:
   - component: {fileID: 746863179}
   - component: {fileID: 746863178}
   - component: {fileID: 746863177}
+  - component: {fileID: 746863180}
   m_Layer: 0
   m_Name: Guide Ring (24)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20806,6 +21181,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746863175}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &746863180
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746863175}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794895, y: 0.020000005, z: 0.012794923}
+  m_Center: {x: -0.000000012340026, y: -0.009999049, z: 0.000000016065314}
 --- !u!1001 &746975156
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23629,9 +24025,10 @@ GameObject:
   - component: {fileID: 855274600}
   - component: {fileID: 855274599}
   - component: {fileID: 855274598}
+  - component: {fileID: 855274601}
   m_Layer: 0
   m_Name: Guide Ring (9)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23723,6 +24120,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 855274596}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &855274601
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855274596}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794892, y: 0.020000005, z: 0.012794926}
+  m_Center: {x: -0.000000014202668, y: -0.010000241, z: 0.0000000011641534}
 --- !u!1 &856675825
 GameObject:
   m_ObjectHideFlags: 0
@@ -23735,9 +24153,10 @@ GameObject:
   - component: {fileID: 856675829}
   - component: {fileID: 856675828}
   - component: {fileID: 856675827}
+  - component: {fileID: 856675830}
   m_Layer: 0
   m_Name: Guide Ring (17)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23829,6 +24248,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 856675825}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &856675830
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856675825}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794897, y: 0.02000005, z: 0.012794928}
+  m_Center: {x: -0.000000036638564, y: -0.009999049, z: 0.0000000010800031}
 --- !u!1 &862447955 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3497625570251209531, guid: d5f9256f3caa58346a11b053cf8adc33, type: 3}
@@ -24111,8 +24551,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 0
-  StrafeSpeed: 0
-  HoverSpeed: 0
   Boost: 30
   Direction: {x: 0, y: 0, z: 0}
   Rotation: {x: 0, y: 0, z: 0}
@@ -24634,9 +25072,10 @@ GameObject:
   - component: {fileID: 890642768}
   - component: {fileID: 890642767}
   - component: {fileID: 890642766}
+  - component: {fileID: 890642769}
   m_Layer: 0
   m_Name: Guide Ring (65)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24728,6 +25167,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 890642764}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &890642769
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890642764}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794892, y: 0.020000001, z: 0.012794926}
+  m_Center: {x: 0.000000045401976, y: -0.010000001, z: 0.0000000011641534}
 --- !u!1 &893883428
 GameObject:
   m_ObjectHideFlags: 0
@@ -26485,9 +26945,10 @@ GameObject:
   - component: {fileID: 943604352}
   - component: {fileID: 943604351}
   - component: {fileID: 943604350}
+  - component: {fileID: 943604353}
   m_Layer: 0
   m_Name: Guide Ring (5)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26579,6 +27040,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 943604348}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &943604353
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943604348}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794892, y: 0.020000005, z: 0.012794926}
+  m_Center: {x: -0.000000014202668, y: -0.010000241, z: -6.984917e-10}
 --- !u!1001 &954658970
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27705,9 +28187,10 @@ GameObject:
   - component: {fileID: 992290099}
   - component: {fileID: 992290098}
   - component: {fileID: 992290097}
+  - component: {fileID: 992290100}
   m_Layer: 0
   m_Name: Guide Ring (28)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27799,6 +28282,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992290095}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &992290100
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992290095}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794897, y: 0.020000061, z: 0.012794928}
+  m_Center: {x: 8.0368157e-10, y: -0.009999526, z: -8.036849e-10}
 --- !u!1001 &1001718295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28009,9 +28513,10 @@ GameObject:
   - component: {fileID: 1011554321}
   - component: {fileID: 1011554320}
   - component: {fileID: 1011554319}
+  - component: {fileID: 1011554322}
   m_Layer: 0
   m_Name: Guide Ring (6)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28103,6 +28608,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1011554317}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &1011554322
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011554317}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794897, y: 0.02000005, z: 0.012794928}
+  m_Center: {x: -0.000000014118519, y: -0.009999049, z: 0.0000000010799998}
 --- !u!1 &1013574905
 GameObject:
   m_ObjectHideFlags: 0
@@ -28461,9 +28987,10 @@ GameObject:
   - component: {fileID: 1025184067}
   - component: {fileID: 1025184066}
   - component: {fileID: 1025184065}
+  - component: {fileID: 1025184068}
   m_Layer: 0
   m_Name: Guide Ring (67)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28555,6 +29082,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1025184063}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &1025184068
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025184063}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794892, y: 0.020000005, z: 0.012794926}
+  m_Center: {x: -0.000000014202668, y: -0.01000036, z: 0.0000000011641534}
 --- !u!1 &1032511974
 GameObject:
   m_ObjectHideFlags: 0
@@ -28567,9 +29115,10 @@ GameObject:
   - component: {fileID: 1032511978}
   - component: {fileID: 1032511977}
   - component: {fileID: 1032511976}
+  - component: {fileID: 1032511979}
   m_Layer: 0
   m_Name: Guide Ring (20)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28661,6 +29210,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1032511974}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &1032511979
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032511974}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794897, y: 0.02000005, z: 0.012794928}
+  m_Center: {x: -0.000000036638564, y: -0.010000003, z: 0.0000000010800031}
 --- !u!1 &1032547331
 GameObject:
   m_ObjectHideFlags: 0
@@ -29445,9 +30015,10 @@ GameObject:
   - component: {fileID: 1049305811}
   - component: {fileID: 1049305810}
   - component: {fileID: 1049305809}
+  - component: {fileID: 1049305812}
   m_Layer: 0
   m_Name: Guide Ring (1)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29539,6 +30110,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049305807}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &1049305812
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049305807}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794896, y: 0.020000031, z: 0.012794927}
+  m_Center: {x: -0.000000014139557, y: -0.009999999, z: 0.0000000014600992}
 --- !u!1 &1051744240
 GameObject:
   m_ObjectHideFlags: 0
@@ -30449,9 +31041,10 @@ GameObject:
   - component: {fileID: 1104580151}
   - component: {fileID: 1104580150}
   - component: {fileID: 1104580149}
+  - component: {fileID: 1104580152}
   m_Layer: 0
   m_Name: Guide Ring (3)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30543,6 +31136,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1104580147}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &1104580152
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104580147}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794892, y: 0.02000002, z: 0.01279493}
+  m_Center: {x: -0.000000014202668, y: -0.0100000035, z: 0.000000016065314}
 --- !u!1 &1105904107
 GameObject:
   m_ObjectHideFlags: 0
@@ -30555,9 +31169,10 @@ GameObject:
   - component: {fileID: 1105904111}
   - component: {fileID: 1105904110}
   - component: {fileID: 1105904109}
+  - component: {fileID: 1105904112}
   m_Layer: 0
   m_Name: Guide Ring (69)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30649,6 +31264,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1105904107}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &1105904112
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105904107}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794892, y: 0.020000009, z: 0.012794923}
+  m_Center: {x: 0.000000008191149, y: -0.009999999, z: 0.0000000011641532}
 --- !u!1 &1106830250 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4829993625034012473, guid: 26f8662460806c7459670035ff64ffd3, type: 3}
@@ -34128,9 +34764,10 @@ GameObject:
   - component: {fileID: 1200661066}
   - component: {fileID: 1200661065}
   - component: {fileID: 1200661064}
+  - component: {fileID: 1200661067}
   m_Layer: 0
   m_Name: Guide Ring (60)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34222,6 +34859,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1200661062}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &1200661067
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200661062}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0127949, y: 0.02000006, z: 0.012794926}
+  m_Center: {x: -0.000000014202676, y: -0.010000003, z: 7.209423e-10}
 --- !u!1 &1203935065 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -329361410654681526, guid: d5f9256f3caa58346a11b053cf8adc33, type: 3}
@@ -35609,9 +36267,10 @@ GameObject:
   - component: {fileID: 1261728685}
   - component: {fileID: 1261728684}
   - component: {fileID: 1261728683}
+  - component: {fileID: 1261728686}
   m_Layer: 0
   m_Name: Guide Ring (25)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35703,6 +36362,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1261728681}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &1261728686
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261728681}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794897, y: 0.020000061, z: 0.012794927}
+  m_Center: {x: 0.000000015636903, y: -0.010000003, z: -8.421499e-10}
 --- !u!1001 &1263306740
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38748,9 +39428,10 @@ GameObject:
   - component: {fileID: 1312608041}
   - component: {fileID: 1312608040}
   - component: {fileID: 1312608039}
+  - component: {fileID: 1312608042}
   m_Layer: 0
   m_Name: Guide Ring (14)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38842,6 +39523,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1312608037}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &1312608042
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312608037}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794896, y: 0.020000022, z: 0.012794927}
+  m_Center: {x: 0.000000045439226, y: -0.010000003, z: 0.0000000012283256}
 --- !u!1001 &1320129534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39853,12 +40555,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1951492888}
+  - {fileID: 1934883446}
   m_Father: {fileID: 551415212}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 6, y: -153}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 16.009, y: -153}
+  m_SizeDelta: {x: 220.018, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1334013072
 MonoBehaviour:
@@ -39880,7 +40583,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Win/Lose
+  m_text: "You Win/lose\nPress \nto retry"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -39943,7 +40646,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -70.29932, w: 0}
+  m_margin: {x: 0, y: 0, z: -1.3484497, w: -72.84332}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -41586,7 +42289,7 @@ Transform:
   m_GameObject: {fileID: 1400387304}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4116, y: -97.1, z: -1135.5}
+  m_LocalPosition: {x: -3977.7, y: -196.6, z: -1143.6}
   m_LocalScale: {x: 1.5392, y: 1.5392, z: 1.5392}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -43848,9 +44551,10 @@ GameObject:
   - component: {fileID: 1475728911}
   - component: {fileID: 1475728910}
   - component: {fileID: 1475728909}
+  - component: {fileID: 1475728912}
   m_Layer: 0
   m_Name: Guide Ring (12)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43942,6 +44646,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1475728907}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &1475728912
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475728907}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794893, y: 0.020000007, z: 0.012794926}
+  m_Center: {x: 0.00000004543923, y: -0.010000001, z: 0.0000000011888013}
 --- !u!1 &1476538101
 GameObject:
   m_ObjectHideFlags: 0
@@ -44173,9 +44898,10 @@ GameObject:
   - component: {fileID: 1487205445}
   - component: {fileID: 1487205444}
   - component: {fileID: 1487205443}
+  - component: {fileID: 1487205446}
   m_Layer: 0
   m_Name: Guide Ring (15)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44267,6 +44993,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1487205441}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &1487205446
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487205441}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794892, y: 0.020000005, z: 0.012794926}
+  m_Center: {x: -0.000000014202668, y: -0.009999883, z: 0.0000000011641534}
 --- !u!1 &1494883595 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8517177181304205819, guid: d5f9256f3caa58346a11b053cf8adc33, type: 3}
@@ -47274,9 +48021,10 @@ GameObject:
   - component: {fileID: 1572468620}
   - component: {fileID: 1572468619}
   - component: {fileID: 1572468618}
+  - component: {fileID: 1572468621}
   m_Layer: 0
   m_Name: Guide Ring (16)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47368,6 +48116,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1572468616}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &1572468621
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572468616}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794896, y: 0.02000001, z: 0.012794927}
+  m_Center: {x: 0.000000015599651, y: -0.010000003, z: 0.000000001139507}
 --- !u!1001 &1572896325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48989,8 +49758,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 0
-  StrafeSpeed: 0
-  HoverSpeed: 0
   Boost: 30
   Direction: {x: 0, y: 0, z: 0}
   Rotation: {x: 0, y: 0, z: 0}
@@ -51383,15 +52150,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 82.06438
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -59.429585
+      value: -1.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.06588
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -59874,9 +60641,10 @@ GameObject:
   - component: {fileID: 1854203515}
   - component: {fileID: 1854203514}
   - component: {fileID: 1854203513}
+  - component: {fileID: 1854203516}
   m_Layer: 0
   m_Name: Guide Ring (7)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59968,6 +60736,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1854203511}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &1854203516
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854203511}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794897, y: 0.02000005, z: 0.012794928}
+  m_Center: {x: -0.000000014118519, y: -0.010000003, z: 0.0000000010799998}
 --- !u!1 &1854726852
 GameObject:
   m_ObjectHideFlags: 0
@@ -59980,9 +60769,10 @@ GameObject:
   - component: {fileID: 1854726856}
   - component: {fileID: 1854726855}
   - component: {fileID: 1854726854}
+  - component: {fileID: 1854726857}
   m_Layer: 0
   m_Name: Guide Ring (11)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60074,6 +60864,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1854726852}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &1854726857
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854726852}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794896, y: 0.02000001, z: 0.012794927}
+  m_Center: {x: -0.000000014202671, y: -0.010000956, z: 0.0000000011395047}
 --- !u!1001 &1865187125
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62676,6 +63487,81 @@ MonoBehaviour:
   Rotation: {x: 0, y: 0, z: 0}
   SpeedRotation: 0
   RandomizeXAxis: 0
+--- !u!1 &1934883445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1934883446}
+  - component: {fileID: 1934883448}
+  - component: {fileID: 1934883447}
+  m_Layer: 5
+  m_Name: StartButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1934883446
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934883445}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.54923, y: 0.54923, z: 0.54923}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1334013071}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 11.6, y: -37.7}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1934883447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934883445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: e2dcce2669c87144381fe8cbd4411ab0, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1934883448
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934883445}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1935212853
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63175,8 +64061,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.51675, y: 0}
-  m_SizeDelta: {x: 69.322, y: 100}
+  m_AnchoredPosition: {x: -0.00006628, y: -37.255737}
+  m_SizeDelta: {x: 75.868, y: 241.9293}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1951492889
 MonoBehaviour:
@@ -63538,9 +64424,10 @@ GameObject:
   - component: {fileID: 1966022179}
   - component: {fileID: 1966022178}
   - component: {fileID: 1966022177}
+  - component: {fileID: 1966022180}
   m_Layer: 0
   m_Name: Guide Ring (23)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63632,6 +64519,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1966022175}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &1966022180
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966022175}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0127949, y: 0.020000044, z: 0.012794926}
+  m_Center: {x: -0.000000014202677, y: -0.009999884, z: -0.000000013848767}
 --- !u!1 &1967503412
 GameObject:
   m_ObjectHideFlags: 0
@@ -64272,9 +65180,10 @@ GameObject:
   - component: {fileID: 1981606621}
   - component: {fileID: 1981606620}
   - component: {fileID: 1981606619}
+  - component: {fileID: 1981606622}
   m_Layer: 0
   m_Name: Guide Ring (66)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64366,6 +65275,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1981606617}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &1981606622
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981606617}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794892, y: 0.020000001, z: 0.012794926}
+  m_Center: {x: -0.000000014202668, y: -0.010000001, z: 0.000000016065314}
 --- !u!1 &1987283218
 GameObject:
   m_ObjectHideFlags: 0
@@ -68226,9 +69156,10 @@ GameObject:
   - component: {fileID: 2145739626}
   - component: {fileID: 2145739625}
   - component: {fileID: 2145739624}
+  - component: {fileID: 2145739627}
   m_Layer: 0
   m_Name: Guide Ring (8)
-  m_TagString: Track
+  m_TagString: GuidePipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68320,6 +69251,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2145739622}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
+--- !u!65 &2145739627
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145739622}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012794897, y: 0.02000005, z: 0.012794928}
+  m_Center: {x: -0.000000014118519, y: -0.009999049, z: 0.0000000010799998}
 --- !u!4 &543450652085973330 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e20885f5ae6c1184ca4baf3ae4a06aad, type: 3}
@@ -68414,8 +69366,8 @@ SceneRoots:
   - {fileID: 1641751963}
   - {fileID: 472173672}
   - {fileID: 1614059193}
-  - {fileID: 871420847}
   - {fileID: 1032547640}
+  - {fileID: 871420847}
   - {fileID: 1400387305}
   - {fileID: 928038915}
   - {fileID: 4623386449556872385}

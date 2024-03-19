@@ -144,6 +144,7 @@ public class ReticleMovement : MonoBehaviour
         else
         {
             rb.velocity = Vector3.zero;
+            Speed = 0;
             this.transform.position = ReticlePosition.position;
         }
        
