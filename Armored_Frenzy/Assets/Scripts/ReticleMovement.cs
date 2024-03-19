@@ -169,6 +169,7 @@ public class ReticleMovement : MonoBehaviour
 
         if (ReticleSpeed.IsPressed())
         {
+            UIPlayer.StartTimer = true;
             if (Speed < MaxSpeed)
             {
                 Speed += 1;

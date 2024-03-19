@@ -12,7 +12,6 @@ public enum PlayerState { Win, Lose, Active}
 public class UIPlayer : MonoBehaviour
 {
     private PlayerControls playerControls;
-    InputAction Select;
 
     [SerializeField]
     private Player player;
@@ -27,11 +26,18 @@ public class UIPlayer : MonoBehaviour
     private TextMeshProUGUI PlayerStateText;
 
     [SerializeField]
+    private TextMeshProUGUI TimerText;
+
+    [SerializeField]
     private Image BoostIcon;
 
     private int DefaultEnergy;
 
     public static PlayerState state;
+
+    public static bool StartTimer;
+
+    private float SetTime = 120f; //reads in seconds
 
     private void Awake()
     {
@@ -69,6 +75,10 @@ public class UIPlayer : MonoBehaviour
         {
             PlayerStateText = GameObject.Find("PlayerStateText").GetComponent<TextMeshProUGUI>();
         }
+        if(TimerText == null)
+        {
+            TimerText = GameObject.Find("TimerText").GetComponent<TextMeshProUGUI>();
+        }
 
         DefaultEnergy = player.Energy;
 
@@ -82,6 +92,9 @@ public class UIPlayer : MonoBehaviour
         PlayerStateText.text = "";
         PlayerStateText.gameObject.SetActive(false);
         EnergyText.text = SetText();
+        
+        StartTimer = false;
+        TimerText.text = Timer();
     }
 
     // Update is called once per frame
@@ -97,7 +110,10 @@ public class UIPlayer : MonoBehaviour
 
         BoostIcon.gameObject.SetActive(SetBoostIcon);
        
-
+        if(StartTimer)
+        {
+            TimerText.text = Timer();
+        }
     }
 
     private string SetText()
@@ -155,6 +171,28 @@ public class UIPlayer : MonoBehaviour
     private string SetState(string condition)
     {
         return $"You {condition} \nPress \nto retry";
+    }
+
+    private string Timer()
+    {
+        if(StartTimer)
+        {
+            SetTime -= Time.deltaTime;
+        }
+        
+
+        if(SetTime < 0)
+        {
+            SetTime = 0;
+            state = PlayerState.Lose;
+        }
+
+        //help from https://forum.unity.com/threads/timer-with-string-format.1276847/
+        int seconds = ((int)SetTime % 60);
+        int minutes = ((int)SetTime / 60);
+
+        //help from https://stackoverflow.com/questions/18361301/get-a-01-from-an-int-instead-of-1-in-a-for-loop
+        return string.Format($"{minutes.ToString("00")}:{seconds.ToString("00")}");
     }
 
     private void ResetGame(InputAction.CallbackContext callback)
