@@ -69,7 +69,7 @@ public class Player : Entity
 
     [SerializeField]
     private int SetEnergy; //Can set the Energy in the inspector for however much Energy the player has
-    public int Energy { get; private set; }
+    public int Energy { get; set; }
 
     [SerializeField]
     float RotationAmount;
