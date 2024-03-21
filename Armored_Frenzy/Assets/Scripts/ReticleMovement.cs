@@ -11,7 +11,7 @@ public enum Controls { Inverted, Standard}
 public class ReticleMovement : MonoBehaviour
 {
     private PlayerControls playerControls;
-    
+
     InputAction MoveReticalPosition;
     InputAction ReticleSpeed;
     InputAction ResetPosition;
@@ -21,15 +21,16 @@ public class ReticleMovement : MonoBehaviour
 
     [SerializeField]
     public float DefaultSpeed;
-    
+
+
     private float Speed;
 
     public bool Move;
 
-    [SerializeField]
+
     public float RotateAngleAddition;
 
-    public float speed { 
+    public float speed {
         get
         {
             return Speed;
@@ -40,12 +41,12 @@ public class ReticleMovement : MonoBehaviour
         }
     }
 
-   
+
 
     public bool PlayerControl;
 
     public float MaxSpeed;
-   
+
     Rigidbody rb;
 
     [SerializeField]
@@ -172,21 +173,21 @@ public class ReticleMovement : MonoBehaviour
             UIPlayer.StartTimer = true;
             if (Speed < MaxSpeed)
             {
-                Speed += 1;
+                Speed = Speed + 1;
             }
         }
         else
         {
             if (Speed > 0)
             {
-                Speed -= 0.5f;
-                this.transform.position = ReticlePosition.position; //Temp
+                Speed = Speed - 1;
+                //this.transform.position = ReticlePosition.position; //Temp
             }
             
   
         }
-
-        Move = Speed != 0.0f ? true : false;
+        
+        Move = Speed != 0 ? true : false;
 
         ResetRetPosition();
         IncreaseSharpTurn();

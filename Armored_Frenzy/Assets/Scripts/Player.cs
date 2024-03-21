@@ -78,7 +78,9 @@ public class Player : Entity
 
     Vector3 pos = Vector3.zero;
 
-    
+    private Vector3 GuideRingsLocation;
+
+    float CompareSpeed;
 
     #region InputSetUp
     private void Awake()
@@ -147,8 +149,10 @@ public class Player : Entity
             RotationAmount = 45;
         }
 
-        HasRotated = false; 
-       
+        HasRotated = false;
+
+        GuideRingsLocation = GuidePipe.transform.position;
+        CompareSpeed = reticle.DefaultSpeed / 2;
     }
 
     // Update is called once per frame
@@ -191,8 +195,9 @@ public class Player : Entity
             Shield.SetActive(false);
         }
 
-        //Quaternion guidePipeRotation = GuidePipe.transform.rotation;
-        //RotationReset = guidePipeRotation.eulerAngles.y;
+        Quaternion guidePipeRotation = GuidePipe.transform.rotation;
+        RotationReset = guidePipeRotation.eulerAngles.y;
+        GuideRingsLocation = GuidePipe.transform.position;
 
         reticle.PlayerControl = PlayerInControl;
     }
@@ -205,13 +210,23 @@ public class Player : Entity
             Vector3 velocitydir = dir;
 
             rb.velocity = velocitydir * reticle.speed;
+            //THE SPEED IS STILL MOVING EVEN THOUGH IT'S SLOWING DOWN IDK WHY UNLESS I DO TIME.DELTA? 
+            /*
+            if (reticle.speed < CompareSpeed)
+            {
+                rb.velocity = rb.velocity * 0.9f;
+            }
+            else
+            {
+                rb.velocity = velocitydir * reticle.speed;
+            }*/
+            
         }
         else
         {
             rb.velocity = Vector3.zero;
         }
 
-        //transform.LookAt(reticle.transform.localPosition);
         Vector3 rot = Quaternion.LookRotation(reticle.transform.localPosition - transform.position).eulerAngles;
         rot.z = pos.z;
 
@@ -222,8 +237,6 @@ public class Player : Entity
         
         transform.rotation = Quaternion.Lerp(current, next, t);
 
-        //transform.rotation = Quaternion.Euler(rot);
-
         RotatePlayerOnZAxis();
 
         VisualEffect();
@@ -231,15 +244,13 @@ public class Player : Entity
 
     private void RotatePlayerOnZAxis()
     {
-        //ADD: If the player rotates, it's a sharper turn
+        
         if (LeftRotation.IsPressed())
-        {
-            //pos.z = -RotationAmount;
+        {   
             pos.z = RotationAmount;
         }
         else if (RightRotation.IsPressed())
         {
-            //pos.z = RotationAmount;
             pos.z = -RotationAmount;
         }
 
@@ -273,18 +284,8 @@ public class Player : Entity
         bm[1].Shoot();
     }
 
-    //Need some changing
     private void UseBoost()
     {
-        /*
-        if (Inventory[0] != null && ActivateBoost.IsPressed() && Inventory[0].GetComponent<PowerUp>().Ability == PowerName.Boost)
-        {
-            Speed = Speed + Boost;
-            Inventory[0] = null;
-            BoostActive = true;
-            StartCoroutine(BoostCountdown(BoostTimer));
-        }*/
-
         if(ActivateBoost.IsPressed() && Inventory[0] != null) //Can only use boost if player has an item in their inventory
         {
             reticle.IncreaseSpeedWithBoost(20);
@@ -310,6 +311,10 @@ public class Player : Entity
         transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
         reticle.transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
         
+        //reset back to the previous check point after crashing
+        reticle.transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 30);
+        transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 30);
+
         StopAllCoroutines();
     }
 
@@ -324,12 +329,8 @@ public class Player : Entity
         else if(collision.gameObject.CompareTag("DestroyableObject"))
         {
             PlayerInControl = false;
+               
         }
-
-        //Energy -= 1; //should it lose Energy from hitting everything or
-                     //only with certain objects?
-                     //no, because it brings down the Energy too fast when hitting everything 
-                     //Unless that is something we want?
     }
 
     private void OnTriggerEnter(Collider other)
