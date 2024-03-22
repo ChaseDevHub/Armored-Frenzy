@@ -11,9 +11,9 @@ public enum Controls { Inverted, Standard}
 public class ReticleMovement : MonoBehaviour
 {
     private PlayerControls playerControls;
-    
+
     InputAction MoveReticalPosition;
-    InputAction ReticleSpeed;
+    internal InputAction ReticleSpeed;
     InputAction ResetPosition;
 
     [SerializeField]
@@ -21,15 +21,16 @@ public class ReticleMovement : MonoBehaviour
 
     [SerializeField]
     public float DefaultSpeed;
-    
+
+    [SerializeField]
     private float Speed;
 
     public bool Move;
 
-    [SerializeField]
+
     public float RotateAngleAddition;
 
-    public float speed { 
+    public float speed {
         get
         {
             return Speed;
@@ -40,12 +41,12 @@ public class ReticleMovement : MonoBehaviour
         }
     }
 
-   
+
 
     public bool PlayerControl;
 
     public float MaxSpeed;
-   
+
     Rigidbody rb;
 
     [SerializeField]
@@ -103,6 +104,8 @@ public class ReticleMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        controlInput = UIMenu.control;
+
         if(DefaultSpeed == 0)
         {
             DefaultSpeed = 40;
@@ -144,10 +147,12 @@ public class ReticleMovement : MonoBehaviour
         else
         {
             rb.velocity = Vector3.zero;
+            Speed = 0;
             this.transform.position = ReticlePosition.position;
         }
        
     }
+    internal bool ResetRetPos = false;
 
     private void MoveReticle()
     {
@@ -168,26 +173,41 @@ public class ReticleMovement : MonoBehaviour
 
         if (ReticleSpeed.IsPressed())
         {
+            ResetRetPos = false;
+            Move = true;
+            UIPlayer.StartTimer = true;
             if (Speed < MaxSpeed)
             {
-                Speed += 1;
+                Speed = Speed + 1;
+               
             }
         }
         else
         {
-            if (Speed > 0)
+            Move = false;
+            if (Speed > 0 && Speed != 1)
             {
-                Speed -= 0.5f;
-                this.transform.position = ReticlePosition.position; //Temp
+                Speed = Speed - 1;
+                ResetRetPos = false;
+                //this.transform.position = ReticlePosition.position; //Temp
+            }
+            else if(Speed > 0 && Speed == 1)
+            {
+                ResetRetPos = true;
+                Speed = Speed - 1;
             }
             
   
         }
-
-        Move = Speed != 0.0f ? true : false;
-
+      
         ResetRetPosition();
         IncreaseSharpTurn();
+
+        if(ResetRetPos)
+        {
+            this.transform.position = ReticlePosition.position; //Temp
+            ResetRetPos = false;
+        }
 
         //help with modifying with Chat.gpt
         Vector3 velocity = new Vector3(Direction.x, Direction.y, Direction.z) * Speed;

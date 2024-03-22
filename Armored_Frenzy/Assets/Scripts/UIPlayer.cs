@@ -4,11 +4,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
+using UnityEngine.InputSystem;
 
 public enum PlayerState { Win, Lose, Active}
 
 public class UIPlayer : MonoBehaviour
 {
+    private PlayerControls playerControls;
+
     [SerializeField]
     private Player player;
 
@@ -18,10 +22,41 @@ public class UIPlayer : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI EnergyText;
 
+    [SerializeField]
+    private TextMeshProUGUI PlayerStateText;
+
+    [SerializeField]
+    private TextMeshProUGUI TimerText;
+
+    [SerializeField]
+    private Image BoostIcon;
+
+    [SerializeField]
+    private Image FadePanel;
+
+    float FadeTime;
+
     private int DefaultEnergy;
 
-    private PlayerState state;
-   
+    public static PlayerState state;
+
+    public static bool StartTimer;
+
+    private float SetTime = 120f; //reads in seconds
+
+    private void Awake()
+    {
+        playerControls = new PlayerControls();
+        playerControls.Enable();
+        playerControls.NewPlayer.ResetButton.performed += ResetGame;
+        
+    }
+
+    private void OnDisable()
+    {
+        playerControls.NewPlayer.ResetButton.performed -= ResetGame;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,8 +70,25 @@ public class UIPlayer : MonoBehaviour
         }
         if (EnergyText == null)
         {
-            EnergyText = GameObject.FindAnyObjectByType<TextMeshProUGUI>();
+            EnergyText = GameObject.Find("EnergyText").GetComponent<TextMeshProUGUI>();
         }
+        if(BoostIcon == null)
+        {
+            BoostIcon= GameObject.Find("BoostIcon").GetComponent<Image>();
+        }
+        if(PlayerStateText == null)
+        {
+            PlayerStateText = GameObject.Find("PlayerStateText").GetComponent<TextMeshProUGUI>();
+        }
+        if(TimerText == null)
+        {
+            TimerText = GameObject.Find("TimerText").GetComponent<TextMeshProUGUI>();
+        }
+        if(FadePanel == null)
+        {
+            FadePanel = GameObject.Find("FadePanel").GetComponent<Image>();
+        }
+    
 
         DefaultEnergy = player.Energy;
 
@@ -44,6 +96,18 @@ public class UIPlayer : MonoBehaviour
         EnergyBar.minValue = 0;
 
         state = PlayerState.Active;
+
+        BoostIcon.gameObject.SetActive(false);
+
+        PlayerStateText.text = "";
+        PlayerStateText.gameObject.SetActive(false);
+        EnergyText.text = SetText();
+        
+        StartTimer = false;
+        TimerText.text = Timer();
+
+        FadePanel.color = new Color(0, 0, 0, 0);
+        FadeTime = 0;
     }
 
     // Update is called once per frame
@@ -54,6 +118,26 @@ public class UIPlayer : MonoBehaviour
         EnergyBar.value = player.Energy;
 
         PlayerGameState();
+
+        bool SetBoostIcon = player.Inventory[0] != null ? true : false;
+
+        BoostIcon.gameObject.SetActive(SetBoostIcon);
+       
+        if(StartTimer)
+        {
+            TimerText.text = Timer();
+        }
+
+        if(!player.PlayerInControl && FadeTime < 225)
+        {
+            FadeTime += 1f * Time.deltaTime;
+            FadePanel.color = new Color(0, 0, 0, FadeTime);
+        }
+        else if(player.PlayerInControl && FadeTime > 0)
+        {
+            FadeTime -= 1 * Time.deltaTime;
+            FadePanel.color = new Color(0, 0, 0, FadeTime);
+        }
     }
 
     private string SetText()
@@ -79,24 +163,71 @@ public class UIPlayer : MonoBehaviour
     {
         switch(state)
         {
-            //Replace the debug logs with proper endings as project moves forward
+            
             case PlayerState.Lose:
+                Time.timeScale = 0;
+                PlayerStateText.gameObject.SetActive(true);
                 LoseState();
+                
                 break;
             case PlayerState.Win:
-                Debug.Log("Win");
+                Time.timeScale = 0;
+                PlayerStateText.gameObject.SetActive(true);
+                WinState();
+                
                 break;
             case PlayerState.Active:
-                Debug.Log("Player is active in game"); //This might not be needed
+                Time.timeScale = 1;
                 break;
         }
     }
 
     private void LoseState()
     {
-        Debug.Log("Lose");
-        //Screen stops for all movement (like a pause)
-        //Have this be the place where the player has the ability to restart
-        //Temp text for another day
+        PlayerStateText.text = SetState("Lose");
     }
+
+    public void WinState()
+    {
+        PlayerStateText.text = SetState("Win!");
+    }
+
+    private string SetState(string condition)
+    {
+        return $"You {condition} \nPress \nto retry";
+    }
+
+    private string Timer()
+    {
+        if(StartTimer)
+        {
+            SetTime -= Time.deltaTime;
+        }
+        
+
+        if(SetTime < 0)
+        {
+            SetTime = 0;
+            state = PlayerState.Lose;
+        }
+
+        //help from https://forum.unity.com/threads/timer-with-string-format.1276847/
+        int seconds = ((int)SetTime % 60);
+        int minutes = ((int)SetTime / 60);
+
+        //help from https://stackoverflow.com/questions/18361301/get-a-01-from-an-int-instead-of-1-in-a-for-loop
+        return string.Format($"{minutes.ToString("00")}:{seconds.ToString("00")}");
+    }
+
+    private void ResetGame(InputAction.CallbackContext callback)
+    {
+        if(state == PlayerState.Win || state == PlayerState.Lose)
+        {
+            //Issue with bullets 
+            SceneManager.LoadScene(1);
+        }
+        
+    }
+    
+    
 }

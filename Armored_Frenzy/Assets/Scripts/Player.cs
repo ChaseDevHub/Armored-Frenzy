@@ -6,8 +6,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using static UnityEditor.PlayerSettings;
 using Debug = UnityEngine.Debug;
+
 
 public class Player : Entity
 {
@@ -39,15 +39,12 @@ public class Player : Entity
 
     [SerializeField]
     private int ShieldTimer;
-
-    
-    //private bool BoostActive;
     
     private bool ShieldActive;
 
     Rigidbody rb;
 
-    bool PlayerInControl;
+    public bool PlayerInControl { get; private set; }
 
     [SerializeField]
     private int ResetTimer;
@@ -71,7 +68,7 @@ public class Player : Entity
 
     [SerializeField]
     private int SetEnergy; //Can set the Energy in the inspector for however much Energy the player has
-    public int Energy { get; private set; }
+    public int Energy { get; set; }
 
     [SerializeField]
     float RotationAmount;
@@ -79,6 +76,10 @@ public class Player : Entity
     public bool HasRotated { get; private set; }
 
     Vector3 pos = Vector3.zero;
+
+    private Vector3 GuideRingsLocation;
+
+    float CompareSpeed;
 
     #region InputSetUp
     private void Awake()
@@ -111,7 +112,8 @@ public class Player : Entity
 
     private void OnDisable()
     {
-        /*ActivateShoot.Disable();
+        playerControls.NewPlayer.Shoot.performed -= ShootWeapon;
+        /*
         ActivateBoost.Disable();
         LeftRotation.Disable();
         RightRotation.Disable();*/
@@ -146,7 +148,10 @@ public class Player : Entity
             RotationAmount = 45;
         }
 
-        HasRotated = false; 
+        HasRotated = false;
+
+        GuideRingsLocation = GuidePipe.transform.position;
+        CompareSpeed = reticle.DefaultSpeed / 2;
     }
 
     // Update is called once per frame
@@ -157,19 +162,28 @@ public class Player : Entity
             StartCoroutine(TrackCollisionCooldown(10));
         }
 
-        if(PlayerInControl)
+        if(Energy > 0 && UIPlayer.state == PlayerState.Active)
         {
-            FollowReticle();
-            
-            UseBoost();
-            
+            if (PlayerInControl)
+            {
+                FollowReticle();
+
+                UseBoost();
+
+            }
+            else
+            {
+                rb.velocity = Vector3.zero;
+                transform.Rotate(new Vector3(0, 0, 360) * Time.fixedDeltaTime / 3);
+                StartCoroutine(ResetPlayerControl(ResetTimer));
+            }
         }
-        else
+        else if(Energy == 0)
         {
-            
-            transform.Rotate(new Vector3(0, 0, 360) * Time.fixedDeltaTime / 3);
-            StartCoroutine(ResetPlayerControl(ResetTimer));            
+            UIPlayer.state = PlayerState.Lose;
         }
+
+        
         
         if(ShieldActive)
         {
@@ -180,27 +194,42 @@ public class Player : Entity
             Shield.SetActive(false);
         }
 
-        //Quaternion guidePipeRotation = GuidePipe.transform.rotation;
-        //RotationReset = guidePipeRotation.eulerAngles.y;
+        Quaternion guidePipeRotation = GuidePipe.transform.rotation;
+        RotationReset = guidePipeRotation.eulerAngles.y;
+        GuideRingsLocation = GuidePipe.transform.position;
 
         reticle.PlayerControl = PlayerInControl;
     }
 
     private void FollowReticle()
     {
-        if(reticle.Move)
+        Vector3 dir = (reticle.transform.localPosition - rb.position).normalized;
+        Vector3 velocitydir = dir;
+        
+        if (reticle.Move)
         {          
-            Vector3 dir = (reticle.transform.localPosition - rb.position).normalized;
-            Vector3 velocitydir = dir;
-
+            
             rb.velocity = velocitydir * reticle.speed;
+            
+           
         }
         else
         {
-            rb.velocity = Vector3.zero;
+            if(reticle.speed > 0)
+            {
+                //Speed = Speed - 1;
+                rb.velocity = velocitydir * reticle.speed / 2; 
+            }
+            else
+            {
+
+                rb.velocity = Vector3.zero;
+            }
+           
         }
 
-        //transform.LookAt(reticle.transform.localPosition);
+       
+
         Vector3 rot = Quaternion.LookRotation(reticle.transform.localPosition - transform.position).eulerAngles;
         rot.z = pos.z;
 
@@ -211,8 +240,6 @@ public class Player : Entity
         
         transform.rotation = Quaternion.Lerp(current, next, t);
 
-        //transform.rotation = Quaternion.Euler(rot);
-
         RotatePlayerOnZAxis();
 
         VisualEffect();
@@ -220,15 +247,13 @@ public class Player : Entity
 
     private void RotatePlayerOnZAxis()
     {
-        //ADD: If the player rotates, it's a sharper turn
+        
         if (LeftRotation.IsPressed())
-        {
-            //pos.z = -RotationAmount;
+        {   
             pos.z = RotationAmount;
         }
         else if (RightRotation.IsPressed())
         {
-            //pos.z = RotationAmount;
             pos.z = -RotationAmount;
         }
 
@@ -262,43 +287,16 @@ public class Player : Entity
         bm[1].Shoot();
     }
 
-    
-
-    //Need some changing
     private void UseBoost()
     {
-        /*
-        if (Inventory[0] != null && ActivateBoost.IsPressed() && Inventory[0].GetComponent<PowerUp>().Ability == PowerName.Boost)
-        {
-            Speed = Speed + Boost;
-            Inventory[0] = null;
-            BoostActive = true;
-            StartCoroutine(BoostCountdown(BoostTimer));
-        }*/
-
         if(ActivateBoost.IsPressed() && Inventory[0] != null) //Can only use boost if player has an item in their inventory
         {
             reticle.IncreaseSpeedWithBoost(20);
             Inventory[0] = null;
             Energy -= 1;
-            Debug.Log("Boost has been pressed");
         }
     }
    
-    IEnumerator BoostCountdown(int timer)
-    {
-        yield return new WaitForSeconds(timer);
-        //BoostActive= false;
-        StopAllCoroutines();
-    }
-
-    IEnumerator ShieldCountdown(int timer)
-    {
-        yield return new WaitForSeconds(timer);
-        ShieldActive = false;
-        StopAllCoroutines();
-    }
-
     IEnumerator TrackCollisionCooldown(int timer)
     {
         yield return new WaitForSeconds(timer);
@@ -313,9 +311,13 @@ public class Player : Entity
         PlayerInControl = true;
         //Push out
 
-        //transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
+        transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
         reticle.transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
         
+        //reset back to the previous check point after crashing
+        reticle.transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 30);
+        transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 30);
+
         StopAllCoroutines();
     }
 
@@ -329,13 +331,11 @@ public class Player : Entity
         }
         else if(collision.gameObject.CompareTag("DestroyableObject"))
         {
+            HitTrack = true;
             PlayerInControl = false;
-        }
+            Energy -= 1;
 
-        //Energy -= 1; //should it lose Energy from hitting everything or
-                     //only with certain objects?
-                     //no, because it brings down the Energy too fast when hitting everything 
-                     //Unless that is something we want?
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -353,5 +353,12 @@ public class Player : Entity
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.CompareTag("FinishLine"))
+        {
+            UIPlayer.state = PlayerState.Win;
+        }
+    }
 
 }

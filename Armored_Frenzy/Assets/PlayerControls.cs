@@ -345,6 +345,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResetButton"",
+                    ""type"": ""Value"",
+                    ""id"": ""2ad7833d-f0cd-4de8-a169-a080cdb4e77f"",
+                    ""expectedControlType"": ""Dpad"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SelectControl"",
+                    ""type"": ""Value"",
+                    ""id"": ""c95bf9f6-9f6b-4202-9216-43d84b72e9f7"",
+                    ""expectedControlType"": ""Vector3"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -468,6 +486,72 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""RightRot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""252bf4b8-02da-4d8f-a9a2-f8f61a731d1f"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""ResetButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""3D Vector"",
+                    ""id"": ""f485109b-84e6-447e-84e0-62a4f5a0b0b7"",
+                    ""path"": ""3DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectControl"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""85bf50bd-ce4e-463a-aca6-e9b4d327f20f"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""SelectControl"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""74db1530-7b07-4a1c-962c-a70fe677002e"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""SelectControl"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""fa2e7f51-1b63-47e4-89da-a2bed801c9f2"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""SelectControl"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""2c1884a4-96c6-4be0-9116-0ec392f2ac48"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""SelectControl"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -505,6 +589,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_NewPlayer_ResetReticle = m_NewPlayer.FindAction("ResetReticle", throwIfNotFound: true);
         m_NewPlayer_LeftRot = m_NewPlayer.FindAction("LeftRot", throwIfNotFound: true);
         m_NewPlayer_RightRot = m_NewPlayer.FindAction("RightRot", throwIfNotFound: true);
+        m_NewPlayer_ResetButton = m_NewPlayer.FindAction("ResetButton", throwIfNotFound: true);
+        m_NewPlayer_SelectControl = m_NewPlayer.FindAction("SelectControl", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -675,6 +761,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_NewPlayer_ResetReticle;
     private readonly InputAction m_NewPlayer_LeftRot;
     private readonly InputAction m_NewPlayer_RightRot;
+    private readonly InputAction m_NewPlayer_ResetButton;
+    private readonly InputAction m_NewPlayer_SelectControl;
     public struct NewPlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -686,6 +774,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @ResetReticle => m_Wrapper.m_NewPlayer_ResetReticle;
         public InputAction @LeftRot => m_Wrapper.m_NewPlayer_LeftRot;
         public InputAction @RightRot => m_Wrapper.m_NewPlayer_RightRot;
+        public InputAction @ResetButton => m_Wrapper.m_NewPlayer_ResetButton;
+        public InputAction @SelectControl => m_Wrapper.m_NewPlayer_SelectControl;
         public InputActionMap Get() { return m_Wrapper.m_NewPlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -716,6 +806,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RightRot.started += instance.OnRightRot;
             @RightRot.performed += instance.OnRightRot;
             @RightRot.canceled += instance.OnRightRot;
+            @ResetButton.started += instance.OnResetButton;
+            @ResetButton.performed += instance.OnResetButton;
+            @ResetButton.canceled += instance.OnResetButton;
+            @SelectControl.started += instance.OnSelectControl;
+            @SelectControl.performed += instance.OnSelectControl;
+            @SelectControl.canceled += instance.OnSelectControl;
         }
 
         private void UnregisterCallbacks(INewPlayerActions instance)
@@ -741,6 +837,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RightRot.started -= instance.OnRightRot;
             @RightRot.performed -= instance.OnRightRot;
             @RightRot.canceled -= instance.OnRightRot;
+            @ResetButton.started -= instance.OnResetButton;
+            @ResetButton.performed -= instance.OnResetButton;
+            @ResetButton.canceled -= instance.OnResetButton;
+            @SelectControl.started -= instance.OnSelectControl;
+            @SelectControl.performed -= instance.OnSelectControl;
+            @SelectControl.canceled -= instance.OnSelectControl;
         }
 
         public void RemoveCallbacks(INewPlayerActions instance)
@@ -787,5 +889,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnResetReticle(InputAction.CallbackContext context);
         void OnLeftRot(InputAction.CallbackContext context);
         void OnRightRot(InputAction.CallbackContext context);
+        void OnResetButton(InputAction.CallbackContext context);
+        void OnSelectControl(InputAction.CallbackContext context);
     }
 }
