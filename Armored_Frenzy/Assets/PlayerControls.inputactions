@@ -326,12 +326,21 @@
                 },
                 {
                     "name": "ResetButton",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "2ad7833d-f0cd-4de8-a169-a080cdb4e77f",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Dpad",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SelectControl",
+                    "type": "Value",
+                    "id": "c95bf9f6-9f6b-4202-9216-43d84b72e9f7",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -466,6 +475,61 @@
                     "action": "ResetButton",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "3D Vector",
+                    "id": "f485109b-84e6-447e-84e0-62a4f5a0b0b7",
+                    "path": "3DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectControl",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "85bf50bd-ce4e-463a-aca6-e9b4d327f20f",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XboxController",
+                    "action": "SelectControl",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "74db1530-7b07-4a1c-962c-a70fe677002e",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XboxController",
+                    "action": "SelectControl",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "fa2e7f51-1b63-47e4-89da-a2bed801c9f2",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XboxController",
+                    "action": "SelectControl",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "2c1884a4-96c6-4be0-9116-0ec392f2ac48",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XboxController",
+                    "action": "SelectControl",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

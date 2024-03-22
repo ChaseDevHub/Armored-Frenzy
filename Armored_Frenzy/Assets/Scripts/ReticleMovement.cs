@@ -104,6 +104,8 @@ public class ReticleMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        controlInput = UIMenu.control;
+
         if(DefaultSpeed == 0)
         {
             DefaultSpeed = 40;
