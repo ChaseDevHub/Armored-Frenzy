@@ -45,7 +45,7 @@ public class Player : Entity
 
     Rigidbody rb;
 
-    bool PlayerInControl;
+    public bool PlayerInControl { get; private set; }
 
     [SerializeField]
     private int ResetTimer;
@@ -204,28 +204,32 @@ public class Player : Entity
 
     private void FollowReticle()
     {
-        if(reticle.Move)
+        Vector3 dir = (reticle.transform.localPosition - rb.position).normalized;
+        Vector3 velocitydir = dir;
+        
+        if (reticle.Move)
         {          
-            Vector3 dir = (reticle.transform.localPosition - rb.position).normalized;
-            Vector3 velocitydir = dir;
-
-            rb.velocity = velocitydir * reticle.speed;
-            //THE SPEED IS STILL MOVING EVEN THOUGH IT'S SLOWING DOWN IDK WHY UNLESS I DO TIME.DELTA? 
-            /*
-            if (reticle.speed < CompareSpeed)
-            {
-                rb.velocity = rb.velocity * 0.9f;
-            }
-            else
-            {
-                rb.velocity = velocitydir * reticle.speed;
-            }*/
             
+            rb.velocity = velocitydir * reticle.speed;
+            
+           
         }
         else
         {
-            rb.velocity = Vector3.zero;
+            if(reticle.speed > 0)
+            {
+                //Speed = Speed - 1;
+                rb.velocity = velocitydir * reticle.speed / 2; 
+            }
+            else
+            {
+
+                rb.velocity = Vector3.zero;
+            }
+           
         }
+
+       
 
         Vector3 rot = Quaternion.LookRotation(reticle.transform.localPosition - transform.position).eulerAngles;
         rot.z = pos.z;
@@ -328,8 +332,10 @@ public class Player : Entity
         }
         else if(collision.gameObject.CompareTag("DestroyableObject"))
         {
+            HitTrack = true;
             PlayerInControl = false;
-               
+            Energy -= 1;
+
         }
     }
 

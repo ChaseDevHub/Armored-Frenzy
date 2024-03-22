@@ -31,6 +31,11 @@ public class UIPlayer : MonoBehaviour
     [SerializeField]
     private Image BoostIcon;
 
+    [SerializeField]
+    private Image FadePanel;
+
+    float FadeTime;
+
     private int DefaultEnergy;
 
     public static PlayerState state;
@@ -79,6 +84,11 @@ public class UIPlayer : MonoBehaviour
         {
             TimerText = GameObject.Find("TimerText").GetComponent<TextMeshProUGUI>();
         }
+        if(FadePanel == null)
+        {
+            FadePanel = GameObject.Find("FadePanel").GetComponent<Image>();
+        }
+    
 
         DefaultEnergy = player.Energy;
 
@@ -95,6 +105,9 @@ public class UIPlayer : MonoBehaviour
         
         StartTimer = false;
         TimerText.text = Timer();
+
+        FadePanel.color = new Color(0, 0, 0, 0);
+        FadeTime = 0;
     }
 
     // Update is called once per frame
@@ -113,6 +126,17 @@ public class UIPlayer : MonoBehaviour
         if(StartTimer)
         {
             TimerText.text = Timer();
+        }
+
+        if(!player.PlayerInControl && FadeTime < 225)
+        {
+            FadeTime += 1f * Time.deltaTime;
+            FadePanel.color = new Color(0, 0, 0, FadeTime);
+        }
+        else if(player.PlayerInControl && FadeTime > 0)
+        {
+            FadeTime -= 1 * Time.deltaTime;
+            FadePanel.color = new Color(0, 0, 0, FadeTime);
         }
     }
 
@@ -204,4 +228,6 @@ public class UIPlayer : MonoBehaviour
         }
         
     }
+    
+    
 }

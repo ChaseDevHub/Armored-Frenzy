@@ -13,7 +13,7 @@ public class ReticleMovement : MonoBehaviour
     private PlayerControls playerControls;
 
     InputAction MoveReticalPosition;
-    InputAction ReticleSpeed;
+    internal InputAction ReticleSpeed;
     InputAction ResetPosition;
 
     [SerializeField]
@@ -22,7 +22,7 @@ public class ReticleMovement : MonoBehaviour
     [SerializeField]
     public float DefaultSpeed;
 
-
+    [SerializeField]
     private float Speed;
 
     public bool Move;
@@ -150,6 +150,7 @@ public class ReticleMovement : MonoBehaviour
         }
        
     }
+    internal bool ResetRetPos = false;
 
     private void MoveReticle()
     {
@@ -170,27 +171,41 @@ public class ReticleMovement : MonoBehaviour
 
         if (ReticleSpeed.IsPressed())
         {
+            ResetRetPos = false;
+            Move = true;
             UIPlayer.StartTimer = true;
             if (Speed < MaxSpeed)
             {
                 Speed = Speed + 1;
+               
             }
         }
         else
         {
-            if (Speed > 0)
+            Move = false;
+            if (Speed > 0 && Speed != 1)
             {
                 Speed = Speed - 1;
+                ResetRetPos = false;
                 //this.transform.position = ReticlePosition.position; //Temp
+            }
+            else if(Speed > 0 && Speed == 1)
+            {
+                ResetRetPos = true;
+                Speed = Speed - 1;
             }
             
   
         }
-        
-        Move = Speed != 0 ? true : false;
-
+      
         ResetRetPosition();
         IncreaseSharpTurn();
+
+        if(ResetRetPos)
+        {
+            this.transform.position = ReticlePosition.position; //Temp
+            ResetRetPos = false;
+        }
 
         //help with modifying with Chat.gpt
         Vector3 velocity = new Vector3(Direction.x, Direction.y, Direction.z) * Speed;
