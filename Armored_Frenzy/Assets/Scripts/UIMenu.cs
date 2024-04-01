@@ -17,13 +17,20 @@ public class UIMenu : MonoBehaviour
     private GameObject ControlsUI;
 
     [SerializeField]
+    private GameObject ObjectiveUI;
+
+    [SerializeField]
     private TextMeshProUGUI ControlsText;
 
+    [SerializeField]
     bool StartGame;
 
     public static Controls control;
 
     float condition;
+
+
+    bool ChangeScene;
 
     private void Awake()
     {
@@ -57,6 +64,9 @@ public class UIMenu : MonoBehaviour
         StartGame = false;
 
         ControlsText.text = SetControlsText();
+
+        ObjectiveUI.SetActive(false);
+        ChangeScene = true;
     }
 
     // Update is called once per frame
@@ -92,10 +102,16 @@ public class UIMenu : MonoBehaviour
         {
             SceneManager.LoadScene(1);
         }
-        else
+        else if(ChangeScene) 
         {
             MenuUI.SetActive(false);
             ControlsUI.SetActive(true);
+            ChangeScene = false;
+        }
+        else
+        {
+            ControlsUI.SetActive(false);
+            ObjectiveUI.SetActive(true);
             StartGame = true;
         }
         
