@@ -10,15 +10,15 @@ Material:
   m_Name: Tunnel Color
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 2100000, guid: 74316067531679b41a3308af4b7683cc, type: 2}
-  m_ModifiedSerializedProperties: 18
+  m_ModifiedSerializedProperties: 26
   m_ValidKeywords:
+  - _ALPHAPREMULTIPLY_ON
   - _EMISSION
-  - _SPECULARHIGHLIGHTS_OFF
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: 3000
   stringTagMap:
     RenderType: Transparent
@@ -31,21 +31,28 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Blend: 1
+    - _AlphaClip: 0
+    - _Blend: 0
+    - _BlendModePreserveSpecular: 1
+    - _Cull: 0
+    - _Cutoff: 0
     - _DstBlend: 10
     - _DstBlendAlpha: 10
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Parallax: 0.02
-    - _SpecularHighlights: 0
+    - _ReceiveShadows: 1
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _SrcBlendAlpha: 1
     - _Surface: 1
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0.3247597, g: 0.7341337, b: 0.7735849, a: 0.15686275}
-    - _Color: {r: 0.3247597, g: 0.7341337, b: 0.7735849, a: 0.15686275}
-    - _EmissionColor: {r: 0.07862775, g: 0.041384827, b: 0.09433961, a: 1}
+    - _BaseColor: {r: 0.32549018, g: 0.56899637, b: 0.77254903, a: 0.3882353}
+    - _Color: {r: 0.32549018, g: 0.56899637, b: 0.77254903, a: 0.3882353}
+    - _EmissionColor: {r: 0.048593793, g: 0.09929073, b: 0.11320752, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &9111525364199579849
 MonoBehaviour:
