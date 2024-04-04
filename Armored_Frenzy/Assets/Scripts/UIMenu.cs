@@ -31,6 +31,7 @@ public class UIMenu : MonoBehaviour
 
 
     bool ChangeScene;
+    bool ReturnScene;
 
     private void Awake()
     {
@@ -38,6 +39,7 @@ public class UIMenu : MonoBehaviour
         playerControls.Enable();
 
         playerControls.NewPlayer.Acceleration.performed += SelectToGoToNextScreen;
+        playerControls.NewPlayer.Boost.performed += ReturnToPreviousScreen;
     }
 
     private void OnEnable()
@@ -50,6 +52,7 @@ public class UIMenu : MonoBehaviour
     {
        SelectControl.Disable();
        playerControls.NewPlayer.Acceleration.performed -= SelectToGoToNextScreen;
+       playerControls.NewPlayer.Boost.performed -= ReturnToPreviousScreen;
     }
 
     // Start is called before the first frame update
@@ -67,6 +70,8 @@ public class UIMenu : MonoBehaviour
 
         ObjectiveUI.SetActive(false);
         ChangeScene = true;
+
+        ReturnScene = false;
     }
 
     // Update is called once per frame
@@ -98,23 +103,39 @@ public class UIMenu : MonoBehaviour
 
     private void SelectToGoToNextScreen(InputAction.CallbackContext callback)
     {
-        if(StartGame)
+        if (StartGame)
         {
             SceneManager.LoadScene(1);
         }
-        else if(ChangeScene) 
+        else if (ChangeScene)
         {
             MenuUI.SetActive(false);
             ControlsUI.SetActive(true);
-            ChangeScene = false;
+            ChangeScene= false;
         }
-        else
+        else 
         {
-            ControlsUI.SetActive(false);
-            ObjectiveUI.SetActive(true);
-            StartGame = true;
+            if(!ReturnScene)
+            {
+                ControlsUI.SetActive(false);
+                ObjectiveUI.SetActive(true);
+                ReturnScene = true;
+                StartGame = true;
+            }          
+            
         }
         
+    }
+
+    private void ReturnToPreviousScreen(InputAction.CallbackContext callback)
+    {
+        if(ReturnScene)
+        {
+            ControlsUI.SetActive(true);
+            ObjectiveUI.SetActive(false);
+            ReturnScene = false;
+            StartGame = false;
+        }
     }
     
     private string SetControlsText()
