@@ -283,8 +283,12 @@ public class Player : Entity
 
     private void ShootWeapon(InputAction.CallbackContext callback)
     {
-        bm[0].Shoot();
-        bm[1].Shoot();
+        if (UIPlayer.state == PlayerState.Active)
+        {
+            bm[0].Shoot();
+            bm[1].Shoot();
+        }
+        
     }
 
     private void UseBoost()

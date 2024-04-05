@@ -1,0 +1,109 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEditor.Rendering.LookDev;
+using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEditor.Rendering.CameraUI;
+
+public class GameManager : MonoBehaviour
+{
+    [SerializeField]
+    private TextMeshProUGUI CountDown;
+
+    float VisibleColorTime;
+
+    bool ShowTimer;
+    bool StartCountDown;
+
+    float TimeRemain;
+
+    int ColorValue;
+
+    [SerializeField]
+    float TimerValue;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        ColorValue = 255;
+        if (CountDown == null)
+        {
+            CountDown = GameObject.Find("CountDownTimer").GetComponent<TextMeshProUGUI>();
+        }
+
+        ShowTimer = false;
+
+        CountDown.color = new Color(ColorValue, ColorValue, ColorValue, 0);
+
+        TimeRemain = 1;
+
+        TimerValue = TimerValue == 0 ? 3 : TimerValue;
+
+        CountDown.text = $"{TimerValue.ToString("0")}";
+
+        StartCountDown = false;
+        VisibleColorTime = 0;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //Debug.Log(VisibleColorTime);
+        StartCountdown();       
+    }
+
+    private void StartCountdown()
+    {
+        if(TimeRemain > 0)
+        {
+            TimeRemain -= Time.deltaTime;
+        }
+        else
+        {
+            if (!StartCountDown)
+            {
+                if (VisibleColorTime <= 2)
+                {
+                    VisibleColorTime += 1f * Time.deltaTime;
+                    CountDown.color = new Color(ColorValue, ColorValue, ColorValue, VisibleColorTime);
+                }
+                else
+                {
+                    StartCountDown = true;
+                }
+            }
+            else //if (ShowTimer && StartCountDown)
+            {
+                if(UIPlayer.state == PlayerState.Wait)
+                {
+                    CountDown.text = ChangeText();
+                }
+                
+            }
+        }
+       
+    }
+
+    private string ChangeText()
+    {
+        //string output = $"{TimerValue.ToString("0")}";
+        if(TimerValue > 0)
+        {
+            TimerValue -= Time.deltaTime;
+            return $"{TimerValue.ToString("0")}";
+        }
+        else
+        {
+            UIPlayer.StartTimer = true;
+            UIPlayer.state = PlayerState.Active;
+            return "";
+        }
+        
+        
+
+    }
+
+    //UIPlayer.StartTimer = true;
+}

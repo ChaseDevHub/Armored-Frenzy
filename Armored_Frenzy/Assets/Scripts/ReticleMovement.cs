@@ -140,7 +140,7 @@ public class ReticleMovement : MonoBehaviour
     {
         transform.LookAt(player.transform.localPosition);
         
-        if (PlayerControl)
+        if (player.PlayerInControl && UIPlayer.state == PlayerState.Active)
         {
             MoveReticle();
         }
@@ -175,7 +175,6 @@ public class ReticleMovement : MonoBehaviour
         {
             ResetRetPos = false;
             Move = true;
-            UIPlayer.StartTimer = true;
             if (Speed < MaxSpeed)
             {
                 Speed = Speed + 1;
