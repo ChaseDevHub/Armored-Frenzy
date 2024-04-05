@@ -25,6 +25,7 @@ public class EnergyRing : MonoBehaviour
         if(other.gameObject == player.gameObject && player.Energy < MaxEnergy )
         {
             player.Energy += 1;
+            ScoreData.AddEnergyRingCount(1);
         }
     }
 }

@@ -390,7 +390,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Fly through the track as fast as possible before the timer reaches 0.
-    \n\nUse boost to go faster. found in your inventory on the bottom right of the
+    \n\nUse boost to go faster. found in your inventory on the bottom left of the
     screen.\n\nKeep track of your energy bar. Using boost or getting hit will lower
     it. \nPass through energy rings to regenerate. \n\n"
   m_isRightToLeft: 0

@@ -44,6 +44,9 @@ public class UIPlayer : MonoBehaviour
 
     private float SetTime = 120f; //reads in seconds
 
+    int seconds;
+    int minutes;
+
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -104,10 +107,14 @@ public class UIPlayer : MonoBehaviour
         EnergyText.text = SetText();
         
         StartTimer = false;
-        TimerText.text = Timer();
+        
 
         FadePanel.color = new Color(0, 0, 0, 0);
         FadeTime = 0;
+
+        seconds = ((int)SetTime % 60);
+        minutes = ((int)SetTime / 60);
+        TimerText.text = string.Format($"{minutes.ToString("00")}:{seconds.ToString("00")}");
     }
 
     // Update is called once per frame
@@ -153,8 +160,8 @@ public class UIPlayer : MonoBehaviour
         {
             tempEnergy = player.Energy;
         }
-
-        string temp = $"Energy: {tempEnergy}/{DefaultEnergy}"; //only player.Energy should change
+        //Energy: 
+        string temp = $"{tempEnergy}/{DefaultEnergy}"; //only player.Energy should change
 
         return temp;
     }
@@ -165,13 +172,14 @@ public class UIPlayer : MonoBehaviour
         {
             
             case PlayerState.Lose:
-                Time.timeScale = 0;
+                //Time.timeScale = 0;
                 PlayerStateText.gameObject.SetActive(true);
                 LoseState();
                 
                 break;
             case PlayerState.Win:
-                Time.timeScale = 0;
+                //Time.timeScale = 0;
+                ScoreData.GetEnergyCount(player.Energy);
                 PlayerStateText.gameObject.SetActive(true);
                 WinState();
                 
@@ -189,9 +197,17 @@ public class UIPlayer : MonoBehaviour
         PlayerStateText.text = SetState("Lose");
     }
 
+    private bool ReadScore = false;
+
     public void WinState()
     {
         PlayerStateText.text = SetState("Win!");
+        if(!ReadScore)
+        {
+            ScoreData.CalculateScore();
+            ReadScore= true;
+        }
+        
     }
 
     private string SetState(string condition)
@@ -201,21 +217,25 @@ public class UIPlayer : MonoBehaviour
 
     private string Timer()
     {
-        if(StartTimer)
+        if(state == PlayerState.Active)
         {
-            SetTime -= Time.deltaTime;
+            if (StartTimer)
+            {
+                SetTime -= Time.deltaTime;
+            }
+
+
+            if (SetTime < 0)
+            {
+                SetTime = 0;
+                state = PlayerState.Lose;
+            }
+
+            //help from https://forum.unity.com/threads/timer-with-string-format.1276847/
+            seconds = ((int)SetTime % 60);
+            minutes = ((int)SetTime / 60);
         }
         
-
-        if(SetTime < 0)
-        {
-            SetTime = 0;
-            state = PlayerState.Lose;
-        }
-
-        //help from https://forum.unity.com/threads/timer-with-string-format.1276847/
-        int seconds = ((int)SetTime % 60);
-        int minutes = ((int)SetTime / 60);
 
         //help from https://stackoverflow.com/questions/18361301/get-a-01-from-an-int-instead-of-1-in-a-for-loop
         return string.Format($"{minutes.ToString("00")}:{seconds.ToString("00")}");

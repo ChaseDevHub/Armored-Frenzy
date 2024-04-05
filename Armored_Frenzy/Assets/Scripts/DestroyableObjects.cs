@@ -35,6 +35,7 @@ public class DestroyableObjects : MonoBehaviour
 
         if(Health <= 0)
         {
+            ScoreData.AddDestroyedObjCount(1);
             this.gameObject.SetActive(false);
         }
     }
