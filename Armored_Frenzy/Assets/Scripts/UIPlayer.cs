@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 
-public enum PlayerState { Win, Lose, Active}
+public enum PlayerState { Win, Lose, Active, Wait}
 
 public class UIPlayer : MonoBehaviour
 {
@@ -38,7 +38,7 @@ public class UIPlayer : MonoBehaviour
 
     private int DefaultEnergy;
 
-    public static PlayerState state;
+    public static PlayerState state; //{ get; set; }
 
     public static bool StartTimer;
 
@@ -95,7 +95,7 @@ public class UIPlayer : MonoBehaviour
         EnergyBar.maxValue = player.Energy;
         EnergyBar.minValue = 0;
 
-        state = PlayerState.Active;
+        state = PlayerState.Wait;
 
         BoostIcon.gameObject.SetActive(false);
 
@@ -177,8 +177,10 @@ public class UIPlayer : MonoBehaviour
                 
                 break;
             case PlayerState.Active:
+            case PlayerState.Wait:
                 Time.timeScale = 1;
                 break;
+
         }
     }
 

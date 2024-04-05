@@ -1,29 +1,27 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using Debug = UnityEngine.Debug;
+using static UnityEngine.EventSystems.EventTrigger;
 
-
-public class Player : Entity
+public class PlayerTest : Entity
 {
     #region Input Fields
     private PlayerControls playerControls;
     InputAction ActivateBoost;
     internal InputAction LeftRotation;
     internal InputAction RightRotation;
-   
     
+    internal InputAction Gas;
+
     #endregion
 
     [SerializeField]
     private float MaxSpeed;
 
-    public float maxspeed { get
+    public float maxspeed
+    {
+        get
         {
             return MaxSpeed;
         }
@@ -31,7 +29,7 @@ public class Player : Entity
         {
             maxspeed = value;
         }
-    
+
     }
 
     [SerializeField]
@@ -39,7 +37,7 @@ public class Player : Entity
 
     [SerializeField]
     private int ShieldTimer;
-    
+
     private bool ShieldActive;
 
     Rigidbody rb;
@@ -53,7 +51,7 @@ public class Player : Entity
 
     public BulletMachine[] bm;
 
-    private GameObject Shield;
+    //private GameObject Shield;
 
     [SerializeField]
     private GameObject GuidePipe;
@@ -64,7 +62,7 @@ public class Player : Entity
     [SerializeField]
     private GameObject ParticleEffect;
 
-    private ReticleMovement reticle;
+    private ReticleTest reticle;
 
     [SerializeField]
     private int SetEnergy; //Can set the Energy in the inspector for however much Energy the player has
@@ -108,15 +106,16 @@ public class Player : Entity
 
         RightRotation = playerControls.NewPlayer.RightRot;
         RightRotation.Enable();
+
+        Gas = playerControls.NewPlayer.Acceleration;
+        Gas.Enable();
+
     }
 
     private void OnDisable()
     {
         playerControls.NewPlayer.Shoot.performed -= ShootWeapon;
-        /*
-        ActivateBoost.Disable();
-        LeftRotation.Disable();
-        RightRotation.Disable();*/
+        Gas.Disable();
     }
     #endregion
     // Start is called before the first frame update
@@ -127,23 +126,23 @@ public class Player : Entity
         ShieldActive = false;
         rb = GetComponent<Rigidbody>();
         PlayerInControl = true;
-        HitTrack= false;
-        Shield = GameObject.Find("Shield");
-        Shield.SetActive(false);
-        
-        if(GuidePipe == null)
+        HitTrack = false;
+        //Shield = GameObject.Find("Shield");
+        //Shield.SetActive(false);
+
+        if (GuidePipe == null)
         {
             GuidePipe = GameObject.FindGameObjectWithTag("GuidePipe");
         }
 
         ParticleEffect.SetActive(false);
 
-        if(reticle == null)
+        if (reticle == null)
         {
-            reticle = GameObject.Find("Reticle").GetComponent<ReticleMovement>();
+            reticle = GameObject.Find("Reticle").GetComponent<ReticleTest>();
         }
 
-        if(RotationAmount == 0)
+        if (RotationAmount == 0)
         {
             RotationAmount = 45;
         }
@@ -157,15 +156,17 @@ public class Player : Entity
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(HitTrack)
+        if (HitTrack)
         {
             StartCoroutine(TrackCollisionCooldown(10));
         }
 
-        if(Energy > 0 && UIPlayer.state == PlayerState.Active)
+        if (Energy > 0 )//&& UIPlayer.state == PlayerState.Active)
         {
             if (PlayerInControl)
             {
+                //rb.transform.LookAt(reticle.transform.position);
+
                 FollowReticle();
 
                 UseBoost();
@@ -178,21 +179,21 @@ public class Player : Entity
                 StartCoroutine(ResetPlayerControl(ResetTimer));
             }
         }
-        else if(Energy == 0)
+        else if (Energy == 0)
         {
             UIPlayer.state = PlayerState.Lose;
         }
 
-        
-        
-        if(ShieldActive)
+
+        /*
+        if (ShieldActive)
         {
             Shield.SetActive(true);
         }
         else
         {
             Shield.SetActive(false);
-        }
+        }*/
 
         Quaternion guidePipeRotation = GuidePipe.transform.rotation;
         RotationReset = guidePipeRotation.eulerAngles.y;
@@ -205,41 +206,37 @@ public class Player : Entity
     {
         Vector3 dir = (reticle.transform.localPosition - rb.position).normalized;
         Vector3 velocitydir = dir;
-        
+
         if (reticle.Move)
-        {          
-            
-            rb.velocity = velocitydir * reticle.speed;
-            
-           
+        {
+
+            rb.velocity = velocitydir * reticle.DefaultSpeed;
+
+
         }
         else
         {
-            if(reticle.speed > 0)
+            if (reticle.speed > 0)
             {
                 //Speed = Speed - 1;
-                rb.velocity = velocitydir * reticle.speed / 2; 
+                rb.velocity = velocitydir * reticle.DefaultSpeed / 2;
             }
             else
             {
 
                 rb.velocity = Vector3.zero;
             }
-           
+
         }
 
+        //Check later
+        Vector3 direction = reticle.transform.position - rb.transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        float rotationSpeed = 2.0f;
+
+        rb.transform.rotation = Quaternion.Slerp(rb.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
        
-
-        Vector3 rot = Quaternion.LookRotation(reticle.transform.localPosition - transform.position).eulerAngles;
-        rot.z = pos.z;
-
-        var currentPos = transform.eulerAngles;
-        var current = Quaternion.Euler(currentPos.x, currentPos.y, currentPos.z);
-        var next = Quaternion.Euler(rot.x, rot.y, rot.z);
-        float t = 0.1f;
-        
-        transform.rotation = Quaternion.Lerp(current, next, t);
-
         RotatePlayerOnZAxis();
 
         VisualEffect();
@@ -247,9 +244,9 @@ public class Player : Entity
 
     private void RotatePlayerOnZAxis()
     {
-        
+        reticle.IncreaseSharpTurn(this);
         if (LeftRotation.IsPressed())
-        {   
+        {
             pos.z = RotationAmount;
         }
         else if (RightRotation.IsPressed())
@@ -257,7 +254,7 @@ public class Player : Entity
             pos.z = -RotationAmount;
         }
 
-        if(LeftRotation.IsPressed() || RightRotation.IsPressed())
+        if (LeftRotation.IsPressed() || RightRotation.IsPressed())
         {
             pos.z = Mathf.Clamp(pos.z, -RotationAmount, RotationAmount);
             HasRotated = true;
@@ -271,7 +268,7 @@ public class Player : Entity
 
     private void VisualEffect()
     {
-        if(!reticle.Move)
+        if (!reticle.Move)
         {
             ParticleEffect.SetActive(false);
         }
@@ -283,24 +280,20 @@ public class Player : Entity
 
     private void ShootWeapon(InputAction.CallbackContext callback)
     {
-        if (UIPlayer.state == PlayerState.Active)
-        {
-            bm[0].Shoot();
-            bm[1].Shoot();
-        }
-        
+        bm[0].Shoot();
+        bm[1].Shoot();
     }
 
     private void UseBoost()
     {
-        if(ActivateBoost.IsPressed() && Inventory[0] != null) //Can only use boost if player has an item in their inventory
+        if (ActivateBoost.IsPressed() && Inventory[0] != null) //Can only use boost if player has an item in their inventory
         {
-            reticle.IncreaseSpeedWithBoost(20);
+            //reticle.IncreaseSpeedWithBoost(20);
             Inventory[0] = null;
             Energy -= 1;
         }
     }
-   
+
     IEnumerator TrackCollisionCooldown(int timer)
     {
         yield return new WaitForSeconds(timer);
@@ -311,13 +304,13 @@ public class Player : Entity
     IEnumerator ResetPlayerControl(int timer)
     {
         yield return new WaitForSeconds(timer);
-        
+
         PlayerInControl = true;
         //Push out
 
         transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
         reticle.transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
-        
+
         //reset back to the previous check point after crashing
         reticle.transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 30);
         transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 30);
@@ -325,44 +318,16 @@ public class Player : Entity
         StopAllCoroutines();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void IncreaseSpeedWithBoost(float sp)
     {
-        if(collision.gameObject.CompareTag("Track") && HitTrack == false)
+        if (sp != 0 && Gas.IsPressed()) //Go fast until button is released
         {
-            PlayerInControl = false;
-            HitTrack = true;
-            Energy -= 1;
-        }
-        else if(collision.gameObject.CompareTag("DestroyableObject"))
-        {
-            HitTrack = true;
-            PlayerInControl = false;
-            Energy -= 1;
-
+            Speed += sp;
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("GuidePipe"))
-        {
-            GuidePipe = other.gameObject;
-        }
 
-        //Passing through object
-        if (other.gameObject.CompareTag("PowerUp") && Inventory[0] == null)
-        {
-            Inventory[0] = other.gameObject;
-            other.gameObject.SetActive(false);
-        }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.gameObject.CompareTag("FinishLine"))
-        {
-            UIPlayer.state = PlayerState.Win;
-        }
-    }
+
 
 }

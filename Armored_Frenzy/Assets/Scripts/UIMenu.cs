@@ -17,13 +17,21 @@ public class UIMenu : MonoBehaviour
     private GameObject ControlsUI;
 
     [SerializeField]
+    private GameObject ObjectiveUI;
+
+    [SerializeField]
     private TextMeshProUGUI ControlsText;
 
+    [SerializeField]
     bool StartGame;
 
     public static Controls control;
 
     float condition;
+
+
+    bool ChangeScene;
+    bool ReturnScene;
 
     private void Awake()
     {
@@ -31,6 +39,7 @@ public class UIMenu : MonoBehaviour
         playerControls.Enable();
 
         playerControls.NewPlayer.Acceleration.performed += SelectToGoToNextScreen;
+        playerControls.NewPlayer.Boost.performed += ReturnToPreviousScreen;
     }
 
     private void OnEnable()
@@ -43,6 +52,7 @@ public class UIMenu : MonoBehaviour
     {
        SelectControl.Disable();
        playerControls.NewPlayer.Acceleration.performed -= SelectToGoToNextScreen;
+       playerControls.NewPlayer.Boost.performed -= ReturnToPreviousScreen;
     }
 
     // Start is called before the first frame update
@@ -57,6 +67,11 @@ public class UIMenu : MonoBehaviour
         StartGame = false;
 
         ControlsText.text = SetControlsText();
+
+        ObjectiveUI.SetActive(false);
+        ChangeScene = true;
+
+        ReturnScene = false;
     }
 
     // Update is called once per frame
@@ -88,17 +103,39 @@ public class UIMenu : MonoBehaviour
 
     private void SelectToGoToNextScreen(InputAction.CallbackContext callback)
     {
-        if(StartGame)
+        if (StartGame)
         {
             SceneManager.LoadScene(1);
         }
-        else
+        else if (ChangeScene)
         {
             MenuUI.SetActive(false);
             ControlsUI.SetActive(true);
-            StartGame = true;
+            ChangeScene= false;
+        }
+        else 
+        {
+            if(!ReturnScene)
+            {
+                ControlsUI.SetActive(false);
+                ObjectiveUI.SetActive(true);
+                ReturnScene = true;
+                StartGame = true;
+            }          
+            
         }
         
+    }
+
+    private void ReturnToPreviousScreen(InputAction.CallbackContext callback)
+    {
+        if(ReturnScene)
+        {
+            ControlsUI.SetActive(true);
+            ObjectiveUI.SetActive(false);
+            ReturnScene = false;
+            StartGame = false;
+        }
     }
     
     private string SetControlsText()
