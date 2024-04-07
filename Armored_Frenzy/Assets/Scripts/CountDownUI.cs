@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     float VisibleColorTime;
 
-    bool ShowTimer;
+    //bool ShowTimer;
     bool StartCountDown;
 
     float TimeRemain;
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
             CountDown = GameObject.Find("CountDownTimer").GetComponent<TextMeshProUGUI>();
         }
 
-        ShowTimer = false;
+        //ShowTimer = false;
 
         CountDown.color = new Color(ColorValue, ColorValue, ColorValue, 0);
 
