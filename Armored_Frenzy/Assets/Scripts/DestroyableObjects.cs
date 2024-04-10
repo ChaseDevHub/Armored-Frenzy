@@ -15,6 +15,11 @@ public class DestroyableObjects : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(ParticleEffect == null)
+        {
+            ParticleEffect = transform.GetChild(0).gameObject;
+        }
+
         ParticleEffect.SetActive(false);
 
         int temp = Random.Range(50, 150);

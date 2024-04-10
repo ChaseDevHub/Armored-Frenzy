@@ -23,7 +23,10 @@ public class UIScoreResult : MonoBehaviour
     [SerializeField]
     private Image FadePanel;
 
+    [SerializeField]
     float FadeTime;
+
+    bool CanDisplayScore;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +60,8 @@ public class UIScoreResult : MonoBehaviour
 
         TimeRemain = 1.5f;
         FadeTime = 0;
+
+        CanDisplayScore = false;
     }
 
     // Update is called once per frame
@@ -66,24 +71,24 @@ public class UIScoreResult : MonoBehaviour
         {
             if (TimeRemain > 0)
             {
-                TimeRemain -= Time.deltaTime;
-                
-                
+                TimeRemain -= Time.deltaTime; 
             }
             else
             {
-                if (FadeTime < 1f)
+                if (FadeTime < 1f && !CanDisplayScore)
                 {
-                    FadeTime += 1f * Time.deltaTime;
+                    FadeTime += Time.deltaTime;
                     FadePanel.color = new Color(0, 0, 0, FadeTime);
+
+                    if(FadeTime > 1)
+                    {
+                        CanDisplayScore = true;
+                    }
                 }
-                else if (FadeTime > 0)
+                else if (FadeTime > 0 && CanDisplayScore)
                 {
-                    FadeTime -= 1 * Time.deltaTime;
+                    FadeTime -= Time.deltaTime;
                     FadePanel.color = new Color(0, 0, 0, FadeTime);
-                }
-                else
-                {
                     DisplayResult();
                 }
                 
