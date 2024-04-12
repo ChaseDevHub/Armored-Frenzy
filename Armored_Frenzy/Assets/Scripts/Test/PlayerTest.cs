@@ -38,7 +38,7 @@ public class PlayerTest : Entity
     [SerializeField]
     private int ShieldTimer;
 
-    private bool ShieldActive;
+    //private bool ShieldActive;
 
     Rigidbody rb;
 
@@ -123,7 +123,7 @@ public class PlayerTest : Entity
     {
         Inventory[0] = null;
         //BoostActive = false;
-        ShieldActive = false;
+        //ShieldActive = false;
         rb = GetComponent<Rigidbody>();
         PlayerInControl = true;
         HitTrack = false;
