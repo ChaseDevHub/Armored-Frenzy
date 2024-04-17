@@ -245,8 +245,7 @@ public class UIPlayer : MonoBehaviour
     {
         if(state == PlayerState.Win || state == PlayerState.Lose)
         {
-            //Issue with bullets 
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         
     }
