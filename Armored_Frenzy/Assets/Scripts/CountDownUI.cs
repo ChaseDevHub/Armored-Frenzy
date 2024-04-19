@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     float VisibleColorTime;
 
-    bool ShowTimer;
+    //bool ShowTimer;
     bool StartCountDown;
 
     float TimeRemain;
@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     float TimerValue;
+
+    string CountText;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +35,7 @@ public class GameManager : MonoBehaviour
             CountDown = GameObject.Find("CountDownTimer").GetComponent<TextMeshProUGUI>();
         }
 
-        ShowTimer = false;
+        //ShowTimer = false;
 
         CountDown.color = new Color(ColorValue, ColorValue, ColorValue, 0);
 
@@ -45,6 +47,8 @@ public class GameManager : MonoBehaviour
 
         StartCountDown = false;
         VisibleColorTime = 0;
+
+        CountText = "";
     }
 
     // Update is called once per frame
@@ -78,7 +82,7 @@ public class GameManager : MonoBehaviour
             {
                 if(UIPlayer.state == PlayerState.Wait)
                 {
-                    CountDown.text = ChangeText();
+                    CountDown.text = ChangeText(CountText);
                 }
                 
             }
@@ -86,22 +90,29 @@ public class GameManager : MonoBehaviour
        
     }
 
-    private string ChangeText()
+    private string ChangeText(string output)
     {
         //string output = $"{TimerValue.ToString("0")}";
         if(TimerValue > 0)
         {
             TimerValue -= Time.deltaTime;
-            return $"{TimerValue.ToString("0")}";
+            if(TimerValue < 1)
+            {
+                output = $"G.0!";
+            }
+            else
+            {
+                output = $"{TimerValue.ToString("0")}";
+            }   
         }
         else
         {
             UIPlayer.StartTimer = true;
             UIPlayer.state = PlayerState.Active;
-            return "";
+            output = "";
         }
-        
-        
+
+        return output;
 
     }
 

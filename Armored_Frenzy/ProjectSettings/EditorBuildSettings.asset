@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 46a0836c6cb073b4bb3191c113b7bbdf
   - enabled: 1
-    path: Assets/Scenes/Week9-10.unity
+    path: Assets/Scenes/Week11.unity
     guid: a63bd4e1adb4acb40a822283e349c3fe
+  - enabled: 1
+    path: Assets/Scenes/Straght Track.unity
+    guid: 099ce731279f937488b12c5511c66dae
   m_configObjects: {}

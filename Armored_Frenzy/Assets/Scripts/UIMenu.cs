@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIMenu : MonoBehaviour
 {
@@ -23,15 +26,22 @@ public class UIMenu : MonoBehaviour
     private TextMeshProUGUI ControlsText;
 
     [SerializeField]
+    private Button[] ButtonTrackOption;
+
+    [SerializeField]
     bool StartGame;
 
     public static Controls control;
 
     float condition;
 
-
     bool ChangeScene;
     bool ReturnScene;
+
+    [SerializeField]
+    public static int TrackID;
+
+   
 
     private void Awake()
     {
@@ -72,6 +82,10 @@ public class UIMenu : MonoBehaviour
         ChangeScene = true;
 
         ReturnScene = false;
+
+        TrackID = 0;
+
+        ButtonTrackOption[0].Select();
     }
 
     // Update is called once per frame
@@ -105,7 +119,10 @@ public class UIMenu : MonoBehaviour
     {
         if (StartGame)
         {
-            SceneManager.LoadScene(1);
+
+            //GoIntoTrackScene(SetTrackNum(TrackID));
+            SceneManager.LoadScene(TrackID);
+           
         }
         else if (ChangeScene)
         {
@@ -144,4 +161,9 @@ public class UIMenu : MonoBehaviour
 
         return output;
     }
+
+
+    
+
+    
 }
