@@ -10,8 +10,6 @@ public class ReticleTest : MonoBehaviour
 
     InputAction MoveReticalPosition;
     
-    InputAction ResetPosition;
-
     [SerializeField]
     public Vector3 Direction;
 
@@ -42,41 +40,32 @@ public class ReticleTest : MonoBehaviour
 
     public float MaxSpeed;
 
-    //Rigidbody rb;
-
     [SerializeField]
     private Controls controlInput;
+   
+    private Vector2 ReticlePosition;
 
-    public Vector3 ForwardPosition;
-
-    //private Player player;
-
-    private Transform ReticlePosition;
-
-    private Rigidbody rb;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
+
+        playerControls.Enable();
+        playerControls.NewPlayer.ResetReticle.performed += ResetRetPosition;
     }
 
     private void OnEnable()
     {
         MoveReticalPosition = playerControls.NewPlayer.Move;
         MoveReticalPosition.Enable();
-
-       
-        ResetPosition = playerControls.NewPlayer.ResetReticle;
-        ResetPosition.Enable();
-     
     }
 
     private void OnDisable()
     {
         MoveReticalPosition.Disable();
-        
-        ResetPosition.Disable();
-        
+
+        playerControls.NewPlayer.ResetReticle.performed -= ResetRetPosition;
+
     }
 
 
@@ -87,25 +76,14 @@ public class ReticleTest : MonoBehaviour
 
         if (DefaultSpeed == 0)
         {
-            DefaultSpeed = 40;
+            DefaultSpeed = 12;
         }
-
-        if(rb == null)
-        {
-            rb = GetComponent<Rigidbody>();
-        }
-
-        MaxSpeed = DefaultSpeed;
-
-        Speed = 0;
 
         Move = false;
 
         PlayerControl = true;
 
-        ReticlePosition = GameObject.Find("ReticlePosition").GetComponent<Transform>();
-
-        this.transform.position = ReticlePosition.position;
+        ReticlePosition = transform.position; 
 
         if (RotateAngleAddition == 0)
         {
@@ -116,17 +94,15 @@ public class ReticleTest : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //transform.LookAt(player.transform.localPosition);
-
+        
         if (PlayerControl)
         {
             MoveReticle();
         }
         else
         {
-            //rb.velocity = Vector3.zero;
             Speed = 0;
-            this.transform.position = ReticlePosition.position;
+            this.transform.position = ReticlePosition;
         }
 
     }
@@ -149,20 +125,7 @@ public class ReticleTest : MonoBehaviour
                 break;
         }
         
-
-        ResetRetPosition();
-        //IncreaseSharpTurn();
-
-        
-
-        //help with modifying with Chat.gpt
-        //Vector3 velocity = new Vector3(Direction.x, Direction.y, Direction.z) * Speed;
-        Vector3 rotate = new Vector3(Direction.x, Direction.y, Direction.z) * DefaultSpeed;
-        rb.velocity = transform.rotation * rotate;
-
-        //Visual for debug
-        ForwardPosition = transform.TransformDirection(Vector3.back);
-        //Debug.DrawRay(transform.position, ForwardPosition, Color.yellow);
+        transform.Translate(Direction * Speed);
     }
 
     public void IncreaseSharpTurn(PlayerTest player)
@@ -181,12 +144,10 @@ public class ReticleTest : MonoBehaviour
    
 
 
-    private void ResetRetPosition()
+    private void ResetRetPosition(InputAction.CallbackContext callback)
     {
-        if (ResetPosition.IsPressed())
-        {
-            this.transform.position = ReticlePosition.position;
-        }
+        this.transform.position = ReticlePosition;
+        
     }
 }
 
