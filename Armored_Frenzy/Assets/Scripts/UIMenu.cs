@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -37,8 +39,9 @@ public class UIMenu : MonoBehaviour
     bool ReturnScene;
 
     [SerializeField]
-    int TrackID;
+    public static int TrackID;
 
+   
 
     private void Awake()
     {
@@ -80,14 +83,9 @@ public class UIMenu : MonoBehaviour
 
         ReturnScene = false;
 
-        for (int i = 0; i < ButtonTrackOption.Length; i++)
-        {
-            int buttonNum = i;
-            ButtonTrackOption[i].onClick.AddListener( () => GoIntoTrackScene(buttonNum) );
-            
-        }
-
         TrackID = 0;
+
+        ButtonTrackOption[0].Select();
     }
 
     // Update is called once per frame
@@ -124,7 +122,7 @@ public class UIMenu : MonoBehaviour
 
             //GoIntoTrackScene(SetTrackNum(TrackID));
             SceneManager.LoadScene(TrackID);
-
+           
         }
         else if (ChangeScene)
         {
@@ -165,26 +163,7 @@ public class UIMenu : MonoBehaviour
     }
 
 
-    //Need to fix
-    private void GoIntoTrackScene(int n)
-    {
-        switch (n)
-        {
-            case 0:
-                TrackID = 1;
-
-               
-                break; 
-            case 1:
-                TrackID = 2;
-                
-                break;
-        }
-
-    }
-
     
 
     
-   
 }

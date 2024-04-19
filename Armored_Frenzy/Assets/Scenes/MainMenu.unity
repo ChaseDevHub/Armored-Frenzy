@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 365221072}
   - component: {fileID: 365221071}
   - component: {fileID: 365221070}
+  - component: {fileID: 365221073}
   m_Layer: 5
   m_Name: Track B
   m_TagString: Untagged
@@ -261,7 +262,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.89245284, g: 0.9216511, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.13253832, g: 0.29830667, b: 0.9622642, a: 1}
+    m_SelectedColor: {r: 0.57254905, g: 0.65882355, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -319,6 +320,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 365221068}
   m_CullTransparentMesh: 1
+--- !u!114 &365221073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365221068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d63106b2ad84d764289910009d93a525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 2
 --- !u!1 &445669337
 GameObject:
   m_ObjectHideFlags: 0
@@ -1283,7 +1297,6 @@ MonoBehaviour:
   - {fileID: 2146722388}
   - {fileID: 365221070}
   StartGame: 0
-  TrackID: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2383,7 +2396,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press A to begin
+  m_text: Select track to begin
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e73d00cfa4974740baf5315bdc836d5, type: 2}
   m_sharedMaterial: {fileID: 1586952693870262828, guid: 3e73d00cfa4974740baf5315bdc836d5, type: 2}
@@ -2711,6 +2724,7 @@ GameObject:
   - component: {fileID: 2146722390}
   - component: {fileID: 2146722389}
   - component: {fileID: 2146722388}
+  - component: {fileID: 2146722392}
   m_Layer: 5
   m_Name: Track A
   m_TagString: Untagged
@@ -2742,7 +2756,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.89245284, g: 0.9216511, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.13253832, g: 0.29830667, b: 0.9622642, a: 1}
+    m_SelectedColor: {r: 0.5716981, g: 0.65695244, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -2820,6 +2834,19 @@ RectTransform:
   m_AnchoredPosition: {x: -253, y: -480}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &2146722392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146722387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d63106b2ad84d764289910009d93a525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
