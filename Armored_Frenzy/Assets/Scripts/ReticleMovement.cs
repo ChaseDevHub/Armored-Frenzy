@@ -258,5 +258,10 @@ public class ReticleMovement : MonoBehaviour
         }
     }
 
+    public void StopReticle()
+    {
+        rb.velocity = Vector3.zero;
+    }
+
 
 }

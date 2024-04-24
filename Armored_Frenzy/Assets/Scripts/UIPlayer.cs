@@ -172,6 +172,7 @@ public class UIPlayer : MonoBehaviour
             case PlayerState.Lose:
                 //Time.timeScale = 0;
                 PlayerStateText.gameObject.SetActive(true);
+                player.StopPlayer();
                 LoseState();
                 
                 break;
@@ -179,6 +180,7 @@ public class UIPlayer : MonoBehaviour
                 //Time.timeScale = 0;
                 ScoreData.GetEnergyCount(player.Energy);
                 PlayerStateText.gameObject.SetActive(true);
+                player.StopPlayer();
                 WinState();
                 
                 break;

@@ -81,6 +81,9 @@ public class Player : Entity
 
     float CompareSpeed;
 
+    [SerializeField]
+    Audio GameAudio;
+
     #region InputSetUp
     private void Awake()
     {
@@ -96,6 +99,11 @@ public class Player : Entity
         }
 
         Energy = SetEnergy;
+
+        if(GameAudio == null)
+        {
+            GameAudio = GameObject.Find("BlastSound").GetComponent<Audio>();
+        }
     }
 
     private void OnEnable()
@@ -285,6 +293,7 @@ public class Player : Entity
     {
         if (UIPlayer.state == PlayerState.Active)
         {
+            GameAudio.PlayStart();
             bm[0].Shoot();
             bm[1].Shoot();
         }
@@ -365,4 +374,9 @@ public class Player : Entity
         }
     }
 
+    public void StopPlayer()
+    {
+        rb.velocity = Vector3.zero;
+        reticle.StopReticle();
+    }
 }
