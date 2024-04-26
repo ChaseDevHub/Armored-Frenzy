@@ -41,7 +41,8 @@ public class UIMenu : MonoBehaviour
     [SerializeField]
     public static int TrackID;
 
-   
+    [SerializeField]
+    private Audio MainMenuIdle;
 
     private void Awake()
     {
@@ -83,9 +84,11 @@ public class UIMenu : MonoBehaviour
 
         ReturnScene = false;
 
-        TrackID = 0;
+        TrackID = 1;
 
         ButtonTrackOption[0].Select();
+
+        MainMenuIdle.PlayAudio();
     }
 
     // Update is called once per frame

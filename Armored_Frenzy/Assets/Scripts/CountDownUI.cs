@@ -26,6 +26,10 @@ public class GameManager : MonoBehaviour
 
     string CountText;
 
+    [SerializeField]
+    private Audio GameMusic;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +53,8 @@ public class GameManager : MonoBehaviour
         VisibleColorTime = 0;
 
         CountText = "";
+
+        GameMusic.PlayAudio();
     }
 
     // Update is called once per frame

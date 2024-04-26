@@ -331,7 +331,7 @@ public class Player : Entity
         //reset back to the previous check point after crashing
         //reticle.transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 30);
         
-        transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 50);
+        transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 30);
         reticle.RespawnPosition();
 
         StopAllCoroutines();
