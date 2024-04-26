@@ -81,6 +81,9 @@ public class Player : Entity
 
     float CompareSpeed;
 
+    [SerializeField]
+    Audio GameAudio;
+
     #region InputSetUp
     private void Awake()
     {
@@ -96,6 +99,11 @@ public class Player : Entity
         }
 
         Energy = SetEnergy;
+
+        if(GameAudio == null)
+        {
+            GameAudio = GameObject.Find("BlastSound").GetComponent<Audio>();
+        }
     }
 
     private void OnEnable()
@@ -285,6 +293,7 @@ public class Player : Entity
     {
         if (UIPlayer.state == PlayerState.Active)
         {
+            GameAudio.PlayStart();
             bm[0].Shoot();
             bm[1].Shoot();
         }
@@ -313,14 +322,17 @@ public class Player : Entity
         yield return new WaitForSeconds(timer);
         
         PlayerInControl = true;
-        //Push out
+        
 
         transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
-        reticle.transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
+        
+        //reticle.transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
         
         //reset back to the previous check point after crashing
-        reticle.transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 30);
-        transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 30);
+        //reticle.transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 30);
+        
+        transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 50);
+        reticle.RespawnPosition();
 
         StopAllCoroutines();
     }
@@ -365,4 +377,9 @@ public class Player : Entity
         }
     }
 
+    public void StopPlayer()
+    {
+        rb.velocity = Vector3.zero;
+        reticle.StopReticle();
+    }
 }

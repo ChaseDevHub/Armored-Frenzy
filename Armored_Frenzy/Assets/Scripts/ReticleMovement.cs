@@ -258,5 +258,16 @@ public class ReticleMovement : MonoBehaviour
         }
     }
 
+    //Called from player when player crashes and resets
+    public void RespawnPosition()
+    {
+        this.transform.position = ReticlePosition.position; 
+    }
+
+    public void StopReticle()
+    {
+        rb.velocity = Vector3.zero;
+    }
+    
 
 }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
+using System;
 
 public enum PlayerState { Win, Lose, Active, Wait}
 
@@ -13,25 +14,18 @@ public class UIPlayer : MonoBehaviour
 {
     private PlayerControls playerControls;
 
-    [SerializeField]
     private Player player;
 
-    [SerializeField]
     private Slider EnergyBar;
 
-    [SerializeField]
     private TextMeshProUGUI EnergyText;
 
-    [SerializeField]
     private TextMeshProUGUI PlayerStateText;
-
-    [SerializeField]
+    
     private TextMeshProUGUI TimerText;
 
-    [SerializeField]
     private Image BoostIcon;
 
-    [SerializeField]
     private Image FadePanel;
 
     float FadeTime;
@@ -46,6 +40,9 @@ public class UIPlayer : MonoBehaviour
 
     int seconds;
     int minutes;
+
+    [SerializeField]
+    private Audio[] audios;
 
     private void Awake()
     {
@@ -123,6 +120,7 @@ public class UIPlayer : MonoBehaviour
         EnergyText.text = SetText();
 
         EnergyBar.value = player.Energy;
+        EnergySound();
 
         PlayerGameState();
 
@@ -174,6 +172,7 @@ public class UIPlayer : MonoBehaviour
             case PlayerState.Lose:
                 //Time.timeScale = 0;
                 PlayerStateText.gameObject.SetActive(true);
+                player.StopPlayer();
                 LoseState();
                 
                 break;
@@ -181,6 +180,7 @@ public class UIPlayer : MonoBehaviour
                 //Time.timeScale = 0;
                 ScoreData.GetEnergyCount(player.Energy);
                 PlayerStateText.gameObject.SetActive(true);
+                player.StopPlayer();
                 WinState();
                 
                 break;
@@ -250,5 +250,50 @@ public class UIPlayer : MonoBehaviour
         
     }
     
-    
+    private void EnergySound()
+    {
+        switch(EnergyBar.value)
+        {
+            case 5:
+                PlayEnergyAudio(0);
+                break;
+            case 4:
+                PlayEnergyAudio(1);
+                break;
+            case 3:
+                PlayEnergyAudio(2);
+                break;
+            case 2:
+                PlayEnergyAudio(3);
+                break;
+            case 1:
+                PlayEnergyAudio(4);
+                break;
+            default:
+                foreach (var v in audios)
+                {
+                    v.StopAudio();
+                }
+                break;
+
+        }
+    }
+
+    private void PlayEnergyAudio(int num)
+    {
+        for(int i = 0; i < audios.Length; i++)
+        {
+            if (audios[i].audioName.isPlaying && i != num)
+            {
+                audios[i].StopAudio(); 
+            }
+            
+            if (!audios[num].audioName.isPlaying)
+            {
+                audios[num].PlayAudio();
+            }
+        }
+
+        
+    }
 }

@@ -38,7 +38,7 @@ public class PlayerTest : Entity
     [SerializeField]
     private int ShieldTimer;
 
-    //private bool ShieldActive;
+    
 
     Rigidbody rb;
 
@@ -47,14 +47,11 @@ public class PlayerTest : Entity
     [SerializeField]
     private int ResetTimer;
 
-    bool HitTrack;
+    
 
-    public BulletMachine[] bm;
+    
 
-    //private GameObject Shield;
-
-    [SerializeField]
-    private GameObject GuidePipe;
+    
 
     [SerializeField]
     float RotationReset;
@@ -75,9 +72,8 @@ public class PlayerTest : Entity
 
     Vector3 pos = Vector3.zero;
 
-    private Vector3 GuideRingsLocation;
-
-    float CompareSpeed;
+    
+    
 
     #region InputSetUp
     private void Awake()
@@ -122,18 +118,12 @@ public class PlayerTest : Entity
     void Start()
     {
         Inventory[0] = null;
-        //BoostActive = false;
-        //ShieldActive = false;
+        
         rb = GetComponent<Rigidbody>();
         PlayerInControl = true;
-        HitTrack = false;
-        //Shield = GameObject.Find("Shield");
-        //Shield.SetActive(false);
+        
 
-        if (GuidePipe == null)
-        {
-            GuidePipe = GameObject.FindGameObjectWithTag("GuidePipe");
-        }
+       
 
         ParticleEffect.SetActive(false);
 
@@ -149,24 +139,19 @@ public class PlayerTest : Entity
 
         HasRotated = false;
 
-        GuideRingsLocation = GuidePipe.transform.position;
-        CompareSpeed = reticle.DefaultSpeed / 2;
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (HitTrack)
-        {
-            StartCoroutine(TrackCollisionCooldown(10));
-        }
+        
 
-        if (Energy > 0 )//&& UIPlayer.state == PlayerState.Active)
+        if (Energy > 0 )
         {
             if (PlayerInControl)
             {
-                //rb.transform.LookAt(reticle.transform.position);
-
+                
                 FollowReticle();
 
                 UseBoost();
@@ -184,62 +169,24 @@ public class PlayerTest : Entity
             UIPlayer.state = PlayerState.Lose;
         }
 
-
-        /*
-        if (ShieldActive)
-        {
-            Shield.SetActive(true);
-        }
-        else
-        {
-            Shield.SetActive(false);
-        }*/
-
-        Quaternion guidePipeRotation = GuidePipe.transform.rotation;
-        RotationReset = guidePipeRotation.eulerAngles.y;
-        GuideRingsLocation = GuidePipe.transform.position;
-
         reticle.PlayerControl = PlayerInControl;
     }
 
     private void FollowReticle()
     {
+        transform.LookAt(reticle.transform);
+        /*
         Vector3 dir = (reticle.transform.localPosition - rb.position).normalized;
         Vector3 velocitydir = dir;
 
-        if (reticle.Move)
-        {
+        rb.velocity = velocitydir * reticle.DefaultSpeed;
+        */
 
-            rb.velocity = velocitydir * reticle.DefaultSpeed;
-
-
-        }
-        else
-        {
-            if (reticle.speed > 0)
-            {
-                //Speed = Speed - 1;
-                rb.velocity = velocitydir * reticle.DefaultSpeed / 2;
-            }
-            else
-            {
-
-                rb.velocity = Vector3.zero;
-            }
-
-        }
-
-        //Check later
-        Vector3 direction = reticle.transform.position - rb.transform.position;
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        float rotationSpeed = 2.0f;
-
-        rb.transform.rotation = Quaternion.Slerp(rb.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
+        //have it where player follows reticle UI
        
         RotatePlayerOnZAxis();
 
-        VisualEffect();
+        //VisualEffect();
     }
 
     private void RotatePlayerOnZAxis()
@@ -280,8 +227,10 @@ public class PlayerTest : Entity
 
     private void ShootWeapon(InputAction.CallbackContext callback)
     {
+        /*
         bm[0].Shoot();
         bm[1].Shoot();
+        */
     }
 
     private void UseBoost()
@@ -297,7 +246,7 @@ public class PlayerTest : Entity
     IEnumerator TrackCollisionCooldown(int timer)
     {
         yield return new WaitForSeconds(timer);
-        HitTrack = false;
+       
         StopAllCoroutines();
     }
 
@@ -311,10 +260,7 @@ public class PlayerTest : Entity
         transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
         reticle.transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
 
-        //reset back to the previous check point after crashing
-        reticle.transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 30);
-        transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 30);
-
+       
         StopAllCoroutines();
     }
 
