@@ -129,7 +129,7 @@ public class PlayerTest : Entity
 
         if (reticle == null)
         {
-            reticle = GameObject.Find("ReticleUI").GetComponent<ReticleTest>();
+            reticle = GameObject.Find("Reticle").GetComponent<ReticleTest>();
         }
 
         if (RotationAmount == 0)
@@ -174,6 +174,7 @@ public class PlayerTest : Entity
 
     private void FollowReticle()
     {
+        transform.LookAt(reticle.transform);
         /*
         Vector3 dir = (reticle.transform.localPosition - rb.position).normalized;
         Vector3 velocitydir = dir;

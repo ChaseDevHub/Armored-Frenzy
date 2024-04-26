@@ -43,7 +43,7 @@ public class ReticleTest : MonoBehaviour
     [SerializeField]
     private Controls controlInput;
    
-    private Vector2 ReticlePosition;
+    private Vector3 ReticlePosition;
 
 
     private void Awake()
@@ -77,7 +77,9 @@ public class ReticleTest : MonoBehaviour
         if (DefaultSpeed == 0)
         {
             DefaultSpeed = 12;
+            
         }
+        Speed = 5;
 
         Move = false;
 
@@ -92,7 +94,7 @@ public class ReticleTest : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         
         if (PlayerControl)
@@ -111,8 +113,6 @@ public class ReticleTest : MonoBehaviour
     private void MoveReticle()
     {
         var move = MoveReticalPosition.ReadValue<Vector3>();
-       
-
         switch (controlInput)
         {
             case Controls.Inverted:
@@ -124,8 +124,12 @@ public class ReticleTest : MonoBehaviour
                 Direction.y = move.y;
                 break;
         }
+        Direction.z = 0;
         
-        transform.Translate(Direction * Speed);
+        transform.Translate(Direction * Speed * Time.deltaTime);
+ 
+
+
     }
 
     public void IncreaseSharpTurn(PlayerTest player)

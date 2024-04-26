@@ -12,6 +12,9 @@ public class DestroyableObjects : MonoBehaviour
     [SerializeField]
     private int Health;
 
+
+    
+    Audio GameAudio;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +34,11 @@ public class DestroyableObjects : MonoBehaviour
         {
             Health = 6;
         }
+
+        if(GameAudio == null)
+        {
+            GameAudio = GameObject.Find("AlienShipDestroyed").GetComponent<Audio>();
+        }
     }
 
     // Update is called once per frame
@@ -40,6 +48,7 @@ public class DestroyableObjects : MonoBehaviour
 
         if(Health <= 0)
         {
+            GameAudio.PlayStart();
             ScoreData.AddDestroyedObjCount(1);
             this.gameObject.SetActive(false);
         }
