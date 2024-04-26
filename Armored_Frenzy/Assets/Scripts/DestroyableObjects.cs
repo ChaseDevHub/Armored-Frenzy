@@ -68,7 +68,7 @@ public class DestroyableObjects : MonoBehaviour
 
     IEnumerator WaitTimer()
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(1.5f);
 
         ParticleEffect.SetActive(false);
 

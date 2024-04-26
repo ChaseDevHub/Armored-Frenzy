@@ -322,14 +322,17 @@ public class Player : Entity
         yield return new WaitForSeconds(timer);
         
         PlayerInControl = true;
-        //Push out
+        
 
         transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
-        reticle.transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
+        
+        //reticle.transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
         
         //reset back to the previous check point after crashing
-        reticle.transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 30);
-        transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 30);
+        //reticle.transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 30);
+        
+        transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 50);
+        reticle.RespawnPosition();
 
         StopAllCoroutines();
     }

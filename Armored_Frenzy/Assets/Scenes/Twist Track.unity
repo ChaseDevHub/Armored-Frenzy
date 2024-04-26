@@ -2067,7 +2067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioName: {fileID: 0}
-  volume: 1
+  volume: 0.01
   loop: 1
 --- !u!1 &53431379
 GameObject:
@@ -21445,7 +21445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioName: {fileID: 0}
-  volume: 1
+  volume: 0.01
   loop: 1
 --- !u!1 &621032745
 GameObject:
@@ -23382,7 +23382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioName: {fileID: 0}
-  volume: 1
+  volume: 0.75
   loop: 0
 --- !u!82 &681225039
 AudioSource:
@@ -31200,7 +31200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioName: {fileID: 0}
-  volume: 1
+  volume: 0.01
   loop: 1
 --- !u!1 &917656515
 GameObject:
@@ -44766,7 +44766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioName: {fileID: 0}
-  volume: 1
+  volume: 0.01
   loop: 1
 --- !u!1 &1283257136 stripped
 GameObject:
@@ -54400,7 +54400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioName: {fileID: 0}
-  volume: 1
+  volume: 0.01
   loop: 1
 --- !u!1001 &1517494980
 PrefabInstance:
