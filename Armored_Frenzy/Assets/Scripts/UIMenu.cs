@@ -160,7 +160,7 @@ public class UIMenu : MonoBehaviour
     
     private string SetControlsText()
     {
-        string output = $"Press D-pad to select play style:\r\n{control.ToString()}";
+        string output = $"Press L or R on D-pad to select play style:\r\n{control.ToString()}";
 
         return output;
     }

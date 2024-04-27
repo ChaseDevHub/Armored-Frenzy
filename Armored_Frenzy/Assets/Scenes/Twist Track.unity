@@ -2186,6 +2186,7 @@ GameObject:
   - component: {fileID: 59102531}
   - component: {fileID: 59102533}
   - component: {fileID: 59102532}
+  - component: {fileID: 59102534}
   m_Layer: 5
   m_Name: BoostIcon
   m_TagString: Untagged
@@ -2250,6 +2251,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 59102530}
   m_CullTransparentMesh: 1
+--- !u!95 &59102534
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59102530}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 98e189f029422b24b9affc7a113708ba, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &59810341
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13666,6 +13688,7 @@ GameObject:
   - component: {fileID: 387511706}
   - component: {fileID: 387511708}
   - component: {fileID: 387511707}
+  - component: {fileID: 387511709}
   m_Layer: 5
   m_Name: CountDownTimer
   m_TagString: Untagged
@@ -13789,6 +13812,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 387511705}
   m_CullTransparentMesh: 1
+--- !u!95 &387511709
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387511705}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 231c7afa671b1de4cbbf415c560dae83, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &388613064
 GameObject:
   m_ObjectHideFlags: 0
@@ -16890,6 +16934,7 @@ GameObject:
   - component: {fileID: 529451926}
   - component: {fileID: 529451928}
   - component: {fileID: 529451927}
+  - component: {fileID: 529451929}
   m_Layer: 5
   m_Name: TotalScore
   m_TagString: Untagged
@@ -17013,6 +17058,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 529451925}
   m_CullTransparentMesh: 1
+--- !u!95 &529451929
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529451925}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 67109069897b87d4ca49d677da017211, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &530512415
 PrefabInstance:
   m_ObjectHideFlags: 0
