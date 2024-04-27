@@ -203,10 +203,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f6245e3cbe3d9744b94bf2506f48baaa, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4869611422913047224}
+      addedObject: {fileID: 5546542400952226802}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f6245e3cbe3d9744b94bf2506f48baaa, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5546542400952226802}
+      addedObject: {fileID: 4991648217681384706}
   m_SourcePrefab: {fileID: 100100000, guid: f6245e3cbe3d9744b94bf2506f48baaa, type: 3}
 --- !u!4 &8204589979697363793 stripped
 Transform:
@@ -218,8 +218,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f6245e3cbe3d9744b94bf2506f48baaa, type: 3}
   m_PrefabInstance: {fileID: 8527062733054172346}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &4869611422913047224
-BoxCollider:
+--- !u!114 &5546542400952226802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8833634409956991467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661f6507bf533e648b71f6dd2621b018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ParticleEffect: {fileID: 0}
+  Health: 0
+--- !u!64 &4991648217681384706
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -236,20 +250,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.031178214, y: 0.031178454, z: 0.00691328}
-  m_Center: {x: 0.000000490807, y: 0.00000012200326, z: 0.0011994691}
---- !u!114 &5546542400952226802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8833634409956991467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661f6507bf533e648b71f6dd2621b018, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ParticleEffect: {fileID: 0}
-  Health: 0
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2426508734089713321, guid: f6245e3cbe3d9744b94bf2506f48baaa, type: 3}

@@ -106,7 +106,7 @@ public class UIScoreResult : MonoBehaviour
 
     private string InsertDescription()
     {
-        string output = $"Destroyed: {ScoreData.DataInfo(1)}x\r\n\r\nRecovered: {ScoreData.DataInfo(2)}x\r\n\r\nEnergy Remained: {ScoreData.DataInfo(3)}";
+        string output = $"Ships Destroyed: {ScoreData.DataInfo(1)}x\r\n\r\nRecovered: {ScoreData.DataInfo(2)}x\r\n\r\nEnergy Remained: {ScoreData.DataInfo(3)}";
 
         return output;
     }
