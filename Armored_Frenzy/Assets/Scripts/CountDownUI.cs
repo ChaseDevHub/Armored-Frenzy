@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEditor.Rendering.CameraUI;
 
-public class GameManager : MonoBehaviour
+public class CountDownUI : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI CountDown;

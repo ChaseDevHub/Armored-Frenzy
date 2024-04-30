@@ -15,6 +15,13 @@ public class ScoreData : MonoBehaviour
 
     //Not Needing Start and Update methods
 
+    void Start()
+    {
+        DestroyedObjCount = 0;
+        EnergyReplenishsCount = 0;
+        EnergyBarRemainingCount = 0;
+    }
+
     public static void AddDestroyedObjCount(int num)
     {
         DestroyedObjCount += num;
@@ -32,7 +39,7 @@ public class ScoreData : MonoBehaviour
 
     public static void CalculateScore()
     {
-        TotalScore = (DestroyedObjCount * 50) + (EnergyReplenishsCount * 75) * EnergyBarRemainingCount;
+        TotalScore = ((DestroyedObjCount * 50) + (EnergyReplenishsCount * 75) + EnergyBarRemainingCount) * 10;
     }
 
     public static int DataInfo(int num)

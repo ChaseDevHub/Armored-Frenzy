@@ -20,7 +20,7 @@ public class UIPlayer : MonoBehaviour
 
     private TextMeshProUGUI EnergyText;
 
-    private TextMeshProUGUI PlayerStateText;
+    public static TextMeshProUGUI PlayerStateText;
     
     private TextMeshProUGUI TimerText;
 
@@ -186,7 +186,7 @@ public class UIPlayer : MonoBehaviour
                 break;
             case PlayerState.Active:
             case PlayerState.Wait:
-                Time.timeScale = 1;
+                //Time.timeScale = 1;
                 break;
 
         }
@@ -212,7 +212,14 @@ public class UIPlayer : MonoBehaviour
 
     private string SetState(string condition)
     {
-        return $"You {condition} \nPress \nto retry";
+        string output = $"You {condition}";
+
+        if(state == PlayerState.Lose)
+        {
+            output += " \nPress \nto retry";
+        }
+
+        return output;
     }
 
     private string Timer()
