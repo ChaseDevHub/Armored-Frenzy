@@ -89,6 +89,8 @@ public class UIMenu : MonoBehaviour
         ButtonTrackOption[0].Select();
 
         MainMenuIdle.PlayAudio();
+
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
