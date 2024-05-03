@@ -28,22 +28,34 @@ public class UIPause : MonoBehaviour
         playerControls.Enable();
 
         playerControls.NewPlayer.PauseControl.performed += PauseTheGame;
-        
+
+       
+
     }
 
     private void OnDisable()
     {
         playerControls.NewPlayer.ResetButton.performed -= PauseTheGame;
-        //playerControls.NewPlayer.Boost.performed -= ReturnToPreviousScreen;
+
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
         state = GameState.Active;
+        
+        ButtonPausedOptions = new Button[2];
+
+        if (ButtonPausedOptions[0] == null || ButtonPausedOptions[1] == null)
+        {
+            ButtonPausedOptions[0] = GameObject.Find("ReturnBTN").GetComponent<Button>();
+            ButtonPausedOptions[1] = GameObject.Find("ExitBTN").GetComponent<Button>();
+
+        }
 
         ButtonPausedOptions[0].Select();
-
+        
         for (int i = 0; i < ButtonPausedOptions.Length; i++)
         {
             int buttonNum = i;
@@ -58,6 +70,7 @@ public class UIPause : MonoBehaviour
         PauseUI.SetActive(false);
     }
 
+    
     // Update is called once per frame
     void Update()
     {

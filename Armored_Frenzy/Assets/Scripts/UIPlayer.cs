@@ -20,7 +20,7 @@ public class UIPlayer : MonoBehaviour
 
     private TextMeshProUGUI EnergyText;
 
-    public static TextMeshProUGUI PlayerStateText;
+    private TextMeshProUGUI PlayerStateText;
     
     private TextMeshProUGUI TimerText;
 
@@ -48,13 +48,13 @@ public class UIPlayer : MonoBehaviour
     {
         playerControls = new PlayerControls();
         playerControls.Enable();
-        playerControls.NewPlayer.ResetButton.performed += ResetGame;
+       // playerControls.NewPlayer.ResetButton.performed += ResetGame;
         
     }
 
     private void OnDisable()
     {
-        playerControls.NewPlayer.ResetButton.performed -= ResetGame;
+        //playerControls.NewPlayer.ResetButton.performed -= ResetGame;
     }
 
     // Start is called before the first frame update
@@ -192,6 +192,7 @@ public class UIPlayer : MonoBehaviour
         }
     }
 
+    
     private void LoseState()
     {
         PlayerStateText.text = SetState("Lose");
@@ -214,10 +215,11 @@ public class UIPlayer : MonoBehaviour
     {
         string output = $"You {condition}";
 
+        /*
         if(state == PlayerState.Lose)
         {
             output += " \nPress start\nto retry";
-        }
+        }*/
 
         return output;
     }
@@ -248,6 +250,7 @@ public class UIPlayer : MonoBehaviour
         return string.Format($"{minutes.ToString("00")}:{seconds.ToString("00")}");
     }
 
+    /*
     private void ResetGame(InputAction.CallbackContext callback)
     {
         if(state == PlayerState.Win || state == PlayerState.Lose)
@@ -255,7 +258,7 @@ public class UIPlayer : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         
-    }
+    }*/
     
     private void EnergySound()
     {

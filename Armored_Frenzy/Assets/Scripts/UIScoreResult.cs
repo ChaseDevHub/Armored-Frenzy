@@ -28,7 +28,7 @@ public class UIScoreResult : MonoBehaviour
 
     bool CanDisplayScore;
 
-    private TextMeshProUGUI PlayerWinText;
+    //private TextMeshProUGUI PlayerWinText;
 
     // Start is called before the first frame update
     void Start()
@@ -58,10 +58,11 @@ public class UIScoreResult : MonoBehaviour
             FadePanel = GameObject.Find("FadePanel").GetComponent<Image>();
         }
 
+        /*
         if (PlayerWinText == null)
         {
-            PlayerWinText = GameObject.Find("PlayerStateTextWin").GetComponent<TextMeshProUGUI>();
-        }
+            PlayerWinText = GameObject.Find("PlayerStateText").GetComponent<TextMeshProUGUI>();
+        }*/
 
         UIScoreCanvas.gameObject.SetActive(false);
 
@@ -105,7 +106,7 @@ public class UIScoreResult : MonoBehaviour
 
     private void DisplayResult()
     {
-        PlayerWinText.text = UIPlayer.PlayerStateText.text + " \nPress \nto retry";
+        //PlayerWinText.text = UIPlayer.PlayerStateText.text + " \nPress \nto retry";
         UIScoreCanvas.gameObject.SetActive(true);
         UIPlayerCanvas.gameObject.SetActive(false);
         Description.text = InsertDescription();
