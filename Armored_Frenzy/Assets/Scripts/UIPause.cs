@@ -35,9 +35,8 @@ public class UIPause : MonoBehaviour
 
     private void OnDisable()
     {
-        playerControls.NewPlayer.ResetButton.performed -= PauseTheGame;
+        playerControls.NewPlayer.PauseControl.performed -= PauseTheGame;
 
-        
     }
 
     // Start is called before the first frame update
@@ -47,11 +46,14 @@ public class UIPause : MonoBehaviour
         
         ButtonPausedOptions = new Button[2];
 
-        if (ButtonPausedOptions[0] == null || ButtonPausedOptions[1] == null)
+        if (ButtonPausedOptions[0] == null)
         {
             ButtonPausedOptions[0] = GameObject.Find("ReturnBTN").GetComponent<Button>();
-            ButtonPausedOptions[1] = GameObject.Find("ExitBTN").GetComponent<Button>();
+        }
 
+        if (ButtonPausedOptions[1] == null)
+        {
+            ButtonPausedOptions[1] = GameObject.Find("ExitBTN").GetComponent<Button>();
         }
 
         ButtonPausedOptions[0].Select();

@@ -19,6 +19,18 @@ public class UIEndState : MonoBehaviour
     {
         SetSelection = false;
 
+        ButtonOptions = new Button[2];
+
+        if (ButtonOptions[0] == null)
+        {
+            ButtonOptions[0] = GameObject.Find("Replay").GetComponent<Button>();
+        }
+
+        if (ButtonOptions[1] == null)
+        {
+            ButtonOptions[1] = GameObject.Find("SelectTrack").GetComponent<Button>();
+        }
+
         for (int i = 0; i < ButtonOptions.Length; i++)
         {
             int buttonNum = i;

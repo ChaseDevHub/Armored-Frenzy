@@ -235,7 +235,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 259.21313, y: -447.8}
+  m_AnchoredPosition: {x: 259.21313, y: -529}
   m_SizeDelta: {x: 165.8509, y: 100.58}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &365221070
@@ -549,11 +549,14 @@ MonoBehaviour:
   m_text: 'RACE TO THE FINISH!
 
 
-    USE BOOST TO SPEED UP
+    DESTROY SHIPS FOR POINTS
 
 
-    WATCH YOUR ENERGY
-    LEVEL
+    USE BOOST TO
+    SPEED UP
+
+
+    WATCH YOUR ENERGY LEVEL
 
 
     RESTORE ENERGY THROUGH RINGS
@@ -2591,11 +2594,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1261650574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -237.13, y: -376}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 10.4422, y: -434}
   m_SizeDelta: {x: 823.1156, y: 61.8379}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1694459663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3051,7 +3054,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -266.7, y: -447.8}
+  m_AnchoredPosition: {x: -266.7, y: -529}
   m_SizeDelta: {x: 165.8509, y: 100.58}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2146722392
