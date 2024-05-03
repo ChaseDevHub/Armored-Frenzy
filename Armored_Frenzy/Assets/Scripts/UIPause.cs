@@ -20,14 +20,14 @@ public class UIPause : MonoBehaviour
 
     private GameState state;
 
-    private int PauseID;
+    //private int PauseID;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
         playerControls.Enable();
 
-        playerControls.NewPlayer.ResetButton.performed += PauseTheGame;
+        playerControls.NewPlayer.PauseControl.performed += PauseTheGame;
         
     }
 
@@ -95,6 +95,7 @@ public class UIPause : MonoBehaviour
     private void PauseTheGame(InputAction.CallbackContext callback)
     {
         state = GameState.Pause;
+        ButtonPausedOptions[0].Select();
     }
 
 }

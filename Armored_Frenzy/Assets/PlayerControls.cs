@@ -363,6 +363,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PauseControl"",
+                    ""type"": ""Button"",
+                    ""id"": ""e4abbea9-97fa-475f-b1c5-9ae5590039fa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -552,6 +561,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""SelectControl"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32656d68-a380-459d-9fd5-50f74df09a3b"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""PauseControl"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -591,6 +611,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_NewPlayer_RightRot = m_NewPlayer.FindAction("RightRot", throwIfNotFound: true);
         m_NewPlayer_ResetButton = m_NewPlayer.FindAction("ResetButton", throwIfNotFound: true);
         m_NewPlayer_SelectControl = m_NewPlayer.FindAction("SelectControl", throwIfNotFound: true);
+        m_NewPlayer_PauseControl = m_NewPlayer.FindAction("PauseControl", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -763,6 +784,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_NewPlayer_RightRot;
     private readonly InputAction m_NewPlayer_ResetButton;
     private readonly InputAction m_NewPlayer_SelectControl;
+    private readonly InputAction m_NewPlayer_PauseControl;
     public struct NewPlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -776,6 +798,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @RightRot => m_Wrapper.m_NewPlayer_RightRot;
         public InputAction @ResetButton => m_Wrapper.m_NewPlayer_ResetButton;
         public InputAction @SelectControl => m_Wrapper.m_NewPlayer_SelectControl;
+        public InputAction @PauseControl => m_Wrapper.m_NewPlayer_PauseControl;
         public InputActionMap Get() { return m_Wrapper.m_NewPlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -812,6 +835,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SelectControl.started += instance.OnSelectControl;
             @SelectControl.performed += instance.OnSelectControl;
             @SelectControl.canceled += instance.OnSelectControl;
+            @PauseControl.started += instance.OnPauseControl;
+            @PauseControl.performed += instance.OnPauseControl;
+            @PauseControl.canceled += instance.OnPauseControl;
         }
 
         private void UnregisterCallbacks(INewPlayerActions instance)
@@ -843,6 +869,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SelectControl.started -= instance.OnSelectControl;
             @SelectControl.performed -= instance.OnSelectControl;
             @SelectControl.canceled -= instance.OnSelectControl;
+            @PauseControl.started -= instance.OnPauseControl;
+            @PauseControl.performed -= instance.OnPauseControl;
+            @PauseControl.canceled -= instance.OnPauseControl;
         }
 
         public void RemoveCallbacks(INewPlayerActions instance)
@@ -891,5 +920,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnRightRot(InputAction.CallbackContext context);
         void OnResetButton(InputAction.CallbackContext context);
         void OnSelectControl(InputAction.CallbackContext context);
+        void OnPauseControl(InputAction.CallbackContext context);
     }
 }

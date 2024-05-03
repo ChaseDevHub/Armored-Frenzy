@@ -140,7 +140,7 @@ public class UIPlayer : MonoBehaviour
         }
         else if(player.PlayerInControl && FadeTime > 0)
         {
-            FadeTime -= 1 * Time.deltaTime;
+            FadeTime -= 2 * Time.deltaTime;
             FadePanel.color = new Color(0, 0, 0, FadeTime);
         }
     }
@@ -216,7 +216,7 @@ public class UIPlayer : MonoBehaviour
 
         if(state == PlayerState.Lose)
         {
-            output += " \nPress \nto retry";
+            output += " \nPress start\nto retry";
         }
 
         return output;

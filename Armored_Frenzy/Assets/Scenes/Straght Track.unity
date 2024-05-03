@@ -582,6 +582,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TunnelBlocker (48)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1860,6 +1864,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TunnelBlocker (48)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2357,6 +2365,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_Name
       value: TunnelBlocker (35)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3788,6 +3800,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TunnelBlocker (48)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4623,6 +4639,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_Name
       value: TurningTunnelBlocker (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14325,6 +14345,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HalfTunnelBlocker (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15820,6 +15844,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HalfTunnelBlocker (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16951,6 +16979,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_Name
       value: TunnelBlocker (34)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21124,6 +21156,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TunnelBlocker (47)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21203,6 +21239,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_Name
       value: TunnelBlocker (48)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22145,6 +22185,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TunnelBlocker (47)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23086,6 +23130,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TunnelBlocker (49)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23681,6 +23729,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_Name
       value: TunnelBlocker (48)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24959,6 +25011,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurningTunnelBlocker
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25673,6 +25729,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TunnelBlocker (35)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26231,6 +26291,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_Name
       value: TunnelBlocker (47)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28901,6 +28965,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TunnelBlocker (48)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30584,6 +30652,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HalfTunnelBlocker (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30733,6 +30805,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurningTunnelBlocker (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30862,6 +30938,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_Name
       value: TunnelBlocker (47)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31147,6 +31227,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TunnelBlocker (49)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31263,6 +31347,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TunnelBlocker (47)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31342,6 +31430,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_Name
       value: TunnelBlocker (47)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31513,14 +31605,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Direction: {x: 0, y: 0, z: 0}
-  DefaultSpeed: 0
+  MaxSpeed: 0
+  DefaultSpeed: 40
   Speed: 0
   Move: 0
   RotateAngleAddition: 0
   PlayerControl: 0
-  MaxSpeed: 0
   controlInput: 1
   ForwardPosition: {x: 0, y: 0, z: 0}
+  timeRemain: 0
 --- !u!65 &1461171906
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34237,6 +34330,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HalfTunnelBlocker
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -34629,6 +34726,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HalfTunnelBlocker (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -34845,6 +34946,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HalfTunnelBlocker (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -35005,6 +35110,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_Name
       value: TunnelBlocker (47)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -35547,6 +35656,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_Name
       value: TunnelBlocker (48)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -36100,6 +36213,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_Name
       value: TunnelBlocker (49)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -39182,6 +39299,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TunnelBlocker (49)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -40025,6 +40146,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TunnelBlocker (47)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -40202,6 +40327,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_Name
       value: TunnelBlocker (49)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -42436,6 +42565,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TunnelBlocker (34)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -42761,6 +42894,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_Name
       value: TunnelBlocker (35)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -45966,6 +46103,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TunnelBlocker (34)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -47554,6 +47695,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
       propertyPath: m_Name
       value: TunnelBlocker (48)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c81aa989dd2d06943bbc53fde8b10ef3, type: 3}
+      propertyPath: m_TagString
+      value: Track
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
