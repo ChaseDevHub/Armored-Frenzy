@@ -159,16 +159,25 @@ public class UIMenu : MonoBehaviour
             StartGame = false;
         }
     }
-    
+
     private string SetControlsText()
     {
-        string output = $"Press L or R on D-pad to select play style:\r\n{control.ToString()}";
+        string output = $"Pick your control style:\r\n";
 
+        switch (control)
+        {
+            case Controls.Standard:
+                output += $"<< {control.ToString()} ";
+                break;
+            case Controls.Inverted:
+                output += $" {control.ToString()} >>";
+                break;
+        }
         return output;
     }
 
 
-    
 
-    
+
+
 }

@@ -99,7 +99,8 @@ public class UIPause : MonoBehaviour
         switch(button)
         {
             case 0:
-                state = GameState.Active;
+                //state = GameState.Active;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 break;
             case 1:
                 SceneManager.LoadScene(0);
