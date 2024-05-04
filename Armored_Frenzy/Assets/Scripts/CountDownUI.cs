@@ -2,10 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEditor.Rendering.CameraUI;
+using UnityEngine.UI;
 
 public class CountDownUI : MonoBehaviour
 {
