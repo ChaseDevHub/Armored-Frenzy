@@ -1583,12 +1583,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1913886094}
   - {fileID: 1078537318}
   - {fileID: 561865889}
   - {fileID: 1969723833}
   - {fileID: 1217782568}
   - {fileID: 1226274805}
-  - {fileID: 1913886094}
   - {fileID: 1419953370}
   - {fileID: 1515992843}
   - {fileID: 1491835059}
@@ -30054,9 +30054,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4011783424190196886, guid: d6d691cc0f1f3b647b16d3b4a8ccef71, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011783424190196886, guid: d6d691cc0f1f3b647b16d3b4a8ccef71, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7568526526868633476, guid: d6d691cc0f1f3b647b16d3b4a8ccef71, type: 3}
       propertyPath: m_Name
-      value: AlienShip Prefab (2)
+      value: AlienShip Prefab New
       objectReference: {fileID: 0}
     - target: {fileID: 8204589979697363793, guid: d6d691cc0f1f3b647b16d3b4a8ccef71, type: 3}
       propertyPath: m_LocalPosition.z

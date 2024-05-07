@@ -3990,10 +3990,9 @@ GameObject:
   - component: {fileID: 115188339}
   - component: {fileID: 115188338}
   - component: {fileID: 115188337}
-  - component: {fileID: 115188340}
   m_Layer: 0
-  m_Name: Guide Ring (4)
-  m_TagString: GuidePipe
+  m_Name: Guide Rings - REMOVE CHECKPOINT
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4085,27 +4084,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115188335}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
---- !u!65 &115188340
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 115188335}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.012794892, y: 0.02000002, z: 0.01279493}
-  m_Center: {x: -0.000000014202668, y: -0.0100000035, z: 0.000000016065314}
 --- !u!1001 &115435436
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7123,10 +7101,9 @@ GameObject:
   - component: {fileID: 254221408}
   - component: {fileID: 254221407}
   - component: {fileID: 254221406}
-  - component: {fileID: 254221409}
   m_Layer: 0
-  m_Name: Guide Ring (48)
-  m_TagString: GuidePipe
+  m_Name: Guide Rings - REMOVE CHECKPOINT
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7218,27 +7195,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 254221404}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
---- !u!65 &254221409
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254221404}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.0127949, y: 0.020000044, z: 0.012794926}
-  m_Center: {x: -0.000000014202677, y: -0.009999884, z: -0.000000006398186}
 --- !u!1 &255398833
 GameObject:
   m_ObjectHideFlags: 0
@@ -23688,10 +23644,9 @@ GameObject:
   - component: {fileID: 890642768}
   - component: {fileID: 890642767}
   - component: {fileID: 890642766}
-  - component: {fileID: 890642769}
   m_Layer: 0
-  m_Name: Guide Ring (65)
-  m_TagString: GuidePipe
+  m_Name: Guide Rings - REMOVE CHECKPOINT
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23783,27 +23738,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 890642764}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
---- !u!65 &890642769
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 890642764}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.012794892, y: 0.020000001, z: 0.012794926}
-  m_Center: {x: 0.000000045401976, y: -0.010000001, z: 0.0000000011641534}
 --- !u!1 &893883428
 GameObject:
   m_ObjectHideFlags: 0
@@ -29291,10 +29225,9 @@ GameObject:
   - component: {fileID: 1104580151}
   - component: {fileID: 1104580150}
   - component: {fileID: 1104580149}
-  - component: {fileID: 1104580152}
   m_Layer: 0
-  m_Name: Guide Ring (3)
-  m_TagString: GuidePipe
+  m_Name: Guide Rings - REMOVE CHECKPOINT
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29386,27 +29319,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1104580147}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
---- !u!65 &1104580152
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1104580147}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.012794892, y: 0.02000002, z: 0.01279493}
-  m_Center: {x: -0.000000014202668, y: -0.0100000035, z: 0.000000016065314}
 --- !u!1 &1105160907
 GameObject:
   m_ObjectHideFlags: 0
@@ -56111,10 +56023,9 @@ GameObject:
   - component: {fileID: 1966022179}
   - component: {fileID: 1966022178}
   - component: {fileID: 1966022177}
-  - component: {fileID: 1966022180}
   m_Layer: 0
-  m_Name: Guide Ring (23)
-  m_TagString: GuidePipe
+  m_Name: Guide Rings - REMOVE CHECKPOINT
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56206,27 +56117,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1966022175}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
---- !u!65 &1966022180
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1966022175}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.0127949, y: 0.020000044, z: 0.012794926}
-  m_Center: {x: -0.000000014202677, y: -0.009999884, z: -0.000000013848767}
 --- !u!1 &1967503412
 GameObject:
   m_ObjectHideFlags: 0
@@ -56736,10 +56626,9 @@ GameObject:
   - component: {fileID: 1981606621}
   - component: {fileID: 1981606620}
   - component: {fileID: 1981606619}
-  - component: {fileID: 1981606622}
   m_Layer: 0
-  m_Name: Guide Ring (66)
-  m_TagString: GuidePipe
+  m_Name: Guide Rings - REMOVE CHECKPOINT
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56831,27 +56720,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1981606617}
   m_Mesh: {fileID: 2528577975251314917, guid: 9f79094850687094a8296e9bd40ba316, type: 3}
---- !u!65 &1981606622
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1981606617}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.012794892, y: 0.020000001, z: 0.012794926}
-  m_Center: {x: -0.000000014202668, y: -0.010000001, z: 0.000000016065314}
 --- !u!1 &1994394349
 GameObject:
   m_ObjectHideFlags: 0

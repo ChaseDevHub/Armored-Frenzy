@@ -36,7 +36,7 @@ public class UIPlayer : MonoBehaviour
 
     public static bool StartTimer;
 
-    private float SetTime = 120f; //reads in seconds
+    private float SetTime = 150f; //reads in seconds
 
     int seconds;
     int minutes;

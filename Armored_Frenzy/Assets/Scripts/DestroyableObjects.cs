@@ -51,6 +51,7 @@ public class DestroyableObjects : MonoBehaviour
             GameAudio.PlayStart();
             ScoreData.AddDestroyedObjCount(1);
             this.gameObject.SetActive(false);
+            ParticleEffect.SetActive(true);
         }
     }
 
@@ -59,6 +60,16 @@ public class DestroyableObjects : MonoBehaviour
         if(collision.gameObject.CompareTag("Bullet"))
         {
             Health -= collision.gameObject.GetComponent<Bullet>().DamagePoint;
+
+            //ParticleEffect.SetActive(true);
+            //SOUND AUDIO HERE
+
+            StartCoroutine(WaitTimer());
+        }
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Health = 0;
 
             ParticleEffect.SetActive(true);
 
