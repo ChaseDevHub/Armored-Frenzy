@@ -65,6 +65,11 @@ public class ReticleMovement : MonoBehaviour
     private bool ResetSpeedChange;
     internal bool ResetRetPos = false;
 
+    [SerializeField]
+    GameObject TrailNormal;
+    
+    [SerializeField]
+    GameObject TrailBoost;
 
     private void Awake()
     {
@@ -138,7 +143,17 @@ public class ReticleMovement : MonoBehaviour
 
         ResetSpeedChange = false;
 
+        if(TrailNormal == null)
+        {
+            TrailNormal = GameObject.Find("EngineTrailsNormal");
+        }
+        
+        if(TrailBoost == null)
+        {
+            TrailBoost = GameObject.Find("EngineTrailsBoost");
+        }
 
+        TrailBoost.SetActive(false);
     }
 
     // Update is called once per frame
@@ -163,7 +178,6 @@ public class ReticleMovement : MonoBehaviour
            
             this.transform.position = ReticlePosition.position;
         }
-       
     }
     
     private void MoveReticle()
@@ -227,8 +241,8 @@ public class ReticleMovement : MonoBehaviour
 
     public void IncreaseSpeedWithBoost(float sp)
     {
+        SetTrails(false, true);
         MaxSpeed += sp;
-
         ResetSpeedChange = true;
     }
 
@@ -240,10 +254,17 @@ public class ReticleMovement : MonoBehaviour
         }
         else
         {
+            SetTrails(true, false);
             ResetSpeedChange = false;
             MaxSpeed = DefaultSpeed;
             timeRemain = timeDefault;
         }
+    }
+
+    private void SetTrails(bool normalCondition, bool boostCondition)
+    {
+        TrailNormal.SetActive(normalCondition);
+        TrailBoost.SetActive(boostCondition);
     }
      
     private void ResetRetPosition()

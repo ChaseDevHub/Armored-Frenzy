@@ -84,6 +84,8 @@ public class Player : Entity
     [SerializeField]
     Audio GameAudio;
 
+    bool ProtectPlayer;
+
     #region InputSetUp
     private void Awake()
     {
@@ -160,6 +162,8 @@ public class Player : Entity
 
         GuideRingsLocation = GuidePipe.transform.position;
         CompareSpeed = reticle.DefaultSpeed / 2;
+
+        ProtectPlayer = false;
     }
 
     // Update is called once per frame
@@ -191,7 +195,7 @@ public class Player : Entity
             UIPlayer.state = PlayerState.Lose;
         }
 
-        
+        ActivateShield();
         
         if(ShieldActive)
         {
@@ -322,17 +326,35 @@ public class Player : Entity
             PlayerInControl = false;
             HitTrack = true;
             Energy -= 1;
+            ProtectPlayer = true;
         }
-        else if(collision.gameObject.CompareTag("DestroyableObject"))
+        else if(collision.gameObject.CompareTag("DestroyableObject") && !ProtectPlayer)
         {
             HitTrack = true;
             PlayerInControl = false;
             Energy -= 1;
-
+            ProtectPlayer = true;
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void ActivateShield()
+    {
+        if(ProtectPlayer)
+        {
+            //ShieldActive = true;
+            StartCoroutine(DamageResistance());
+        }
+        
+    }
+
+    IEnumerator DamageResistance()
+    {
+        yield return new WaitForSeconds(3.5f);
+        ProtectPlayer = false;
+        StopAllCoroutines();
+    }
+
+    private void OnTriggerEnter(Collider other) 
     {
         if (other.gameObject.CompareTag("GuidePipe"))
         {
@@ -343,7 +365,7 @@ public class Player : Entity
         if (other.gameObject.CompareTag("PowerUp") && Inventory[0] == null)
         {
             Inventory[0] = other.gameObject;
-            other.gameObject.SetActive(false);
+            //other.gameObject.SetActive(false);
         }
     }
 
