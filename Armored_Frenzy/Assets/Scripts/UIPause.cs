@@ -28,14 +28,14 @@ public class UIPause : MonoBehaviour
         playerControls.Enable();
 
         playerControls.NewPlayer.PauseControl.performed += PauseTheGame;
-
-       
+        playerControls.NewPlayer.Boost.performed += UnpauseTheGame;
 
     }
 
     private void OnDisable()
     {
         playerControls.NewPlayer.PauseControl.performed -= PauseTheGame;
+        playerControls.NewPlayer.Boost.performed -= UnpauseTheGame;
 
     }
 
@@ -113,5 +113,13 @@ public class UIPause : MonoBehaviour
         state = GameState.Pause;
         ButtonPausedOptions[0].Select();
     }
+
+    private void UnpauseTheGame(InputAction.CallbackContext callback)
+    {
+        if(state == GameState.Pause)
+        {
+            state = GameState.Active;
+        }
+    }    
 
 }

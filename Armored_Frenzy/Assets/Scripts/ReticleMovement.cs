@@ -241,6 +241,7 @@ public class ReticleMovement : MonoBehaviour
 
     public void IncreaseSpeedWithBoost(float sp)
     {
+        timeRemain = timeDefault;
         SetTrails(false, true);
         MaxSpeed += sp;
         ResetSpeedChange = true;
@@ -258,6 +259,7 @@ public class ReticleMovement : MonoBehaviour
             ResetSpeedChange = false;
             MaxSpeed = DefaultSpeed;
             timeRemain = timeDefault;
+            ResetRetPos = true;
         }
     }
 

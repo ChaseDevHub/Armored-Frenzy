@@ -82,13 +82,14 @@ public class Player : Entity
     float CompareSpeed;
 
     [SerializeField]
-    Audio GameAudio;
+    Audio[] GameAudio;
 
     bool ProtectPlayer;
 
     #region InputSetUp
     private void Awake()
     {
+        GameAudio = new Audio[2]; 
         playerControls = new PlayerControls();
 
         playerControls.Enable();
@@ -102,9 +103,13 @@ public class Player : Entity
 
         Energy = SetEnergy;
 
-        if(GameAudio == null)
+        if (GameAudio[0] == null)
         {
-            GameAudio = GameObject.Find("BlastSound").GetComponent<Audio>();
+            GameAudio[0] = GameObject.Find("BlastSound").GetComponent<Audio>();
+        }
+        if (GameAudio[1] == null)
+        {
+            GameAudio[1] = GameObject.Find("BoostSound").GetComponent<Audio>();
         }
     }
 
@@ -281,7 +286,7 @@ public class Player : Entity
     {
         if (UIPlayer.state == PlayerState.Active)
         {
-            GameAudio.PlayStart();
+            GameAudio[0].PlayStart();
             bm[0].Shoot();
             bm[1].Shoot();
         }
@@ -292,6 +297,7 @@ public class Player : Entity
     {
         if(ActivateBoost.IsPressed() && Inventory[0] != null) //Can only use boost if player has an item in their inventory
         {
+            GameAudio[1].PlayStart();
             reticle.IncreaseSpeedWithBoost(20);
             Inventory[0] = null;
             Energy -= 1;
