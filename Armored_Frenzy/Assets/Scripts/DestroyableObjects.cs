@@ -14,10 +14,11 @@ public class DestroyableObjects : MonoBehaviour
 
 
     
-    Audio GameAudio;
+    Audio[] GameAudio;
     // Start is called before the first frame update
     void Start()
     {
+        GameAudio = new Audio[2];
         if(ParticleEffect == null)
         {
             ParticleEffect = transform.GetChild(0).gameObject;
@@ -35,9 +36,13 @@ public class DestroyableObjects : MonoBehaviour
             Health = 6;
         }
 
-        if(GameAudio == null)
+        if (GameAudio[0] == null)
         {
-            GameAudio = GameObject.Find("AlienShipDestroyed").GetComponent<Audio>();
+            GameAudio[0] = GameObject.Find("AlienShipDestroyed").GetComponent<Audio>();
+        }
+        if (GameAudio[1] == null)
+        {
+            GameAudio[1] = GameObject.Find("AlienShipTakeDamage").GetComponent<Audio>();
         }
     }
 
@@ -48,9 +53,10 @@ public class DestroyableObjects : MonoBehaviour
 
         if(Health <= 0)
         {
-            GameAudio.PlayStart();
+            GameAudio[0].PlayStart();
             ScoreData.AddDestroyedObjCount(1);
             this.gameObject.SetActive(false);
+            ParticleEffect.SetActive(true);
         }
     }
 
@@ -58,7 +64,19 @@ public class DestroyableObjects : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Bullet"))
         {
+
             Health -= collision.gameObject.GetComponent<Bullet>().DamagePoint;
+            if(Health != 0)
+            {
+                GameAudio[1].PlayStart();
+            }
+            
+            //StartCoroutine(WaitTimer());
+        }
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Health = 0;
 
             ParticleEffect.SetActive(true);
 

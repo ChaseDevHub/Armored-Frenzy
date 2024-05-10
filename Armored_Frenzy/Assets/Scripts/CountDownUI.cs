@@ -2,12 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEditor.Rendering.CameraUI;
+using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class CountDownUI : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI CountDown;
@@ -25,6 +23,10 @@ public class GameManager : MonoBehaviour
     float TimerValue;
 
     string CountText;
+
+    [SerializeField]
+    private Audio GameMusic;
+
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +51,8 @@ public class GameManager : MonoBehaviour
         VisibleColorTime = 0;
 
         CountText = "";
+
+        GameMusic.PlayAudio();
     }
 
     // Update is called once per frame

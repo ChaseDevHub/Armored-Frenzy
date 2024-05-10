@@ -341,6 +341,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "PauseControl",
+                    "type": "Button",
+                    "id": "e4abbea9-97fa-475f-b1c5-9ae5590039fa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -530,6 +539,28 @@
                     "action": "SelectControl",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "32656d68-a380-459d-9fd5-50f74df09a3b",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XboxController",
+                    "action": "PauseControl",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e0d429f-aa80-4f79-b62c-8a01a478685e",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XboxController",
+                    "action": "PauseControl",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

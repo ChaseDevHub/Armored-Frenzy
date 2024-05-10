@@ -82,11 +82,14 @@ public class Player : Entity
     float CompareSpeed;
 
     [SerializeField]
-    Audio GameAudio;
+    Audio[] GameAudio;
+
+    bool ProtectPlayer;
 
     #region InputSetUp
     private void Awake()
     {
+        GameAudio = new Audio[2]; 
         playerControls = new PlayerControls();
 
         playerControls.Enable();
@@ -100,9 +103,13 @@ public class Player : Entity
 
         Energy = SetEnergy;
 
-        if(GameAudio == null)
+        if (GameAudio[0] == null)
         {
-            GameAudio = GameObject.Find("BlastSound").GetComponent<Audio>();
+            GameAudio[0] = GameObject.Find("BlastSound").GetComponent<Audio>();
+        }
+        if (GameAudio[1] == null)
+        {
+            GameAudio[1] = GameObject.Find("BoostSound").GetComponent<Audio>();
         }
     }
 
@@ -160,6 +167,8 @@ public class Player : Entity
 
         GuideRingsLocation = GuidePipe.transform.position;
         CompareSpeed = reticle.DefaultSpeed / 2;
+
+        ProtectPlayer = false;
     }
 
     // Update is called once per frame
@@ -167,7 +176,7 @@ public class Player : Entity
     {
         if(HitTrack)
         {
-            StartCoroutine(TrackCollisionCooldown(10));
+            StartCoroutine(TrackCollisionCooldown(5));
         }
 
         if(Energy > 0 && UIPlayer.state == PlayerState.Active)
@@ -191,7 +200,7 @@ public class Player : Entity
             UIPlayer.state = PlayerState.Lose;
         }
 
-        
+        ActivateShield();
         
         if(ShieldActive)
         {
@@ -221,23 +230,7 @@ public class Player : Entity
             
            
         }
-        else
-        {
-            if(reticle.speed > 0)
-            {
-                //Speed = Speed - 1;
-                rb.velocity = velocitydir * reticle.speed / 2; 
-            }
-            else
-            {
-
-                rb.velocity = Vector3.zero;
-            }
-           
-        }
-
        
-
         Vector3 rot = Quaternion.LookRotation(reticle.transform.localPosition - transform.position).eulerAngles;
         rot.z = pos.z;
 
@@ -293,7 +286,7 @@ public class Player : Entity
     {
         if (UIPlayer.state == PlayerState.Active)
         {
-            GameAudio.PlayStart();
+            GameAudio[0].PlayStart();
             bm[0].Shoot();
             bm[1].Shoot();
         }
@@ -304,6 +297,7 @@ public class Player : Entity
     {
         if(ActivateBoost.IsPressed() && Inventory[0] != null) //Can only use boost if player has an item in their inventory
         {
+            GameAudio[1].PlayStart();
             reticle.IncreaseSpeedWithBoost(20);
             Inventory[0] = null;
             Energy -= 1;
@@ -323,15 +317,9 @@ public class Player : Entity
         
         PlayerInControl = true;
         
-
         transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
+        transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 15);
         
-        //reticle.transform.rotation = Quaternion.Euler(transform.rotation.x, RotationReset, transform.rotation.z);
-        
-        //reset back to the previous check point after crashing
-        //reticle.transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 30);
-        
-        transform.position = new Vector3(GuideRingsLocation.x, GuideRingsLocation.y, GuideRingsLocation.z + 50);
         reticle.RespawnPosition();
 
         StopAllCoroutines();
@@ -344,17 +332,35 @@ public class Player : Entity
             PlayerInControl = false;
             HitTrack = true;
             Energy -= 1;
+            ProtectPlayer = true;
         }
-        else if(collision.gameObject.CompareTag("DestroyableObject"))
+        else if(collision.gameObject.CompareTag("DestroyableObject") && !ProtectPlayer)
         {
             HitTrack = true;
             PlayerInControl = false;
             Energy -= 1;
-
+            ProtectPlayer = true;
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void ActivateShield()
+    {
+        if(ProtectPlayer)
+        {
+            //ShieldActive = true;
+            StartCoroutine(DamageResistance());
+        }
+        
+    }
+
+    IEnumerator DamageResistance()
+    {
+        yield return new WaitForSeconds(3.5f);
+        ProtectPlayer = false;
+        StopAllCoroutines();
+    }
+
+    private void OnTriggerEnter(Collider other) 
     {
         if (other.gameObject.CompareTag("GuidePipe"))
         {
@@ -365,7 +371,7 @@ public class Player : Entity
         if (other.gameObject.CompareTag("PowerUp") && Inventory[0] == null)
         {
             Inventory[0] = other.gameObject;
-            other.gameObject.SetActive(false);
+            //other.gameObject.SetActive(false);
         }
     }
 

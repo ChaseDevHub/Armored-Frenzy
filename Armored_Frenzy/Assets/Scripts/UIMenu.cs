@@ -41,7 +41,8 @@ public class UIMenu : MonoBehaviour
     [SerializeField]
     public static int TrackID;
 
-   
+    [SerializeField]
+    private Audio MainMenuIdle;
 
     private void Awake()
     {
@@ -83,9 +84,13 @@ public class UIMenu : MonoBehaviour
 
         ReturnScene = false;
 
-        TrackID = 0;
+        TrackID = 1;
 
         ButtonTrackOption[0].Select();
+
+        MainMenuIdle.PlayAudio();
+
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -154,16 +159,25 @@ public class UIMenu : MonoBehaviour
             StartGame = false;
         }
     }
-    
+
     private string SetControlsText()
     {
-        string output = $"Press D-pad to select control:\r\n{control.ToString()}";
+        string output = $"Pick your control style:\r\n";
 
+        switch (control)
+        {
+            case Controls.Standard:
+                output += $"<< {control.ToString()} ";
+                break;
+            case Controls.Inverted:
+                output += $" {control.ToString()} >>";
+                break;
+        }
         return output;
     }
 
 
-    
 
-    
+
+
 }

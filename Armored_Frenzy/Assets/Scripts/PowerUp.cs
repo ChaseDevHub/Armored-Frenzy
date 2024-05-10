@@ -6,31 +6,18 @@ public enum PowerName { Boost, Shield}
 public class PowerUp : MonoBehaviour
 {
     public PowerName Ability;
+    //Call audio
 
-    private bool Collected;
-
-    private Player player;
+    Audio gameAudio;
 
     // Start is called before the first frame update
     void Start()
     {
-        if(player == null)
+        Ability = PowerName.Boost;
+
+        if(gameAudio == null)
         {
-            player = GameObject.Find("Player").GetComponent<Player>();
-        }
-
-        Collected = false;
-
-        int ran = 0;//Random.Range(0, 2);
-
-        switch (ran)
-        {
-            case 0:
-                Ability = PowerName.Boost;
-                break;
-            /*case 1:
-                Ability = PowerName.Shield; 
-                break;*/
+            gameAudio = GameObject.Find("ItemPickUp").GetComponent<Audio>();
         }
     }
 
@@ -38,27 +25,18 @@ public class PowerUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Collected) //if powerup has been collected, turn it off/deactivate
-        {
-            this.gameObject.SetActive(false);
-            if (player.Inventory[0] == null)
-            {
-                player.Inventory[0] = this.gameObject;
-            }
-        }
+        
+   
     }
 
-    /* 
+    //Adding audio sound effect here
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Bullet")) 
+        if (other.gameObject.CompareTag("Player"))
         {
-            Collected = true;
+            this.gameObject.SetActive(false);
+            gameAudio.PlayStart();
         }
-    }*/
-
-    public void ResetPowerUp()
-    {
-        Collected = false;
     }
+    
 }

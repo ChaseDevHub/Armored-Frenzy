@@ -9,6 +9,8 @@ public class EnergyRing : MonoBehaviour
 
     private float MaxEnergy;
 
+    Audio gameAudio;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,8 @@ public class EnergyRing : MonoBehaviour
         }
 
         MaxEnergy = player.Energy;
+
+        gameAudio = GameObject.Find("EnergyRingPass").GetComponent<Audio>();
     }
 
     private void OnTriggerExit(Collider other)
@@ -26,6 +30,7 @@ public class EnergyRing : MonoBehaviour
         {
             player.Energy += 1;
             ScoreData.AddEnergyRingCount(1);
+            gameAudio.PlayStart();
         }
     }
 }

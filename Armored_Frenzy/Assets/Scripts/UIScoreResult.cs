@@ -28,6 +28,8 @@ public class UIScoreResult : MonoBehaviour
 
     bool CanDisplayScore;
 
+    //private TextMeshProUGUI PlayerWinText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +57,12 @@ public class UIScoreResult : MonoBehaviour
         {
             FadePanel = GameObject.Find("FadePanel").GetComponent<Image>();
         }
+
+        /*
+        if (PlayerWinText == null)
+        {
+            PlayerWinText = GameObject.Find("PlayerStateText").GetComponent<TextMeshProUGUI>();
+        }*/
 
         UIScoreCanvas.gameObject.SetActive(false);
 
@@ -98,6 +106,7 @@ public class UIScoreResult : MonoBehaviour
 
     private void DisplayResult()
     {
+        //PlayerWinText.text = UIPlayer.PlayerStateText.text + " \nPress \nto retry";
         UIScoreCanvas.gameObject.SetActive(true);
         UIPlayerCanvas.gameObject.SetActive(false);
         Description.text = InsertDescription();
@@ -106,7 +115,7 @@ public class UIScoreResult : MonoBehaviour
 
     private string InsertDescription()
     {
-        string output = $"Destroyed: {ScoreData.DataInfo(1)}x\r\n\r\nRecovered: {ScoreData.DataInfo(2)}x\r\n\r\nEnergy Remained: {ScoreData.DataInfo(3)}";
+        string output = $"Ships Destroyed: {ScoreData.DataInfo(1)}x\r\n\r\nRecovered: {ScoreData.DataInfo(2)}x\r\n\r\nEnergy Remained: {ScoreData.DataInfo(3)}";
 
         return output;
     }

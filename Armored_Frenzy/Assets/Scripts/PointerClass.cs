@@ -8,23 +8,14 @@ public class PointerClass : MonoBehaviour, ISelectHandler
     [SerializeField]
     private int ID;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public static int ButtonID;
 
     public void OnSelect(BaseEventData eventData)
     {
         if (eventData.selectedObject)
         {
             UIMenu.TrackID = ID;
+            //ButtonID = ID; //testing to see if I can call this instead
         }
     }
 }

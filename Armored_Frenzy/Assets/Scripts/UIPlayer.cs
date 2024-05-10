@@ -36,7 +36,7 @@ public class UIPlayer : MonoBehaviour
 
     public static bool StartTimer;
 
-    private float SetTime = 120f; //reads in seconds
+    private float SetTime = 150f; //reads in seconds
 
     int seconds;
     int minutes;
@@ -48,13 +48,13 @@ public class UIPlayer : MonoBehaviour
     {
         playerControls = new PlayerControls();
         playerControls.Enable();
-        playerControls.NewPlayer.ResetButton.performed += ResetGame;
+       // playerControls.NewPlayer.ResetButton.performed += ResetGame;
         
     }
 
     private void OnDisable()
     {
-        playerControls.NewPlayer.ResetButton.performed -= ResetGame;
+        //playerControls.NewPlayer.ResetButton.performed -= ResetGame;
     }
 
     // Start is called before the first frame update
@@ -140,7 +140,7 @@ public class UIPlayer : MonoBehaviour
         }
         else if(player.PlayerInControl && FadeTime > 0)
         {
-            FadeTime -= 1 * Time.deltaTime;
+            FadeTime -= 2 * Time.deltaTime;
             FadePanel.color = new Color(0, 0, 0, FadeTime);
         }
     }
@@ -186,12 +186,13 @@ public class UIPlayer : MonoBehaviour
                 break;
             case PlayerState.Active:
             case PlayerState.Wait:
-                Time.timeScale = 1;
+                //Time.timeScale = 1;
                 break;
 
         }
     }
 
+    
     private void LoseState()
     {
         PlayerStateText.text = SetState("Lose");
@@ -212,7 +213,15 @@ public class UIPlayer : MonoBehaviour
 
     private string SetState(string condition)
     {
-        return $"You {condition} \nPress \nto retry";
+        string output = $"You {condition}";
+
+        /*
+        if(state == PlayerState.Lose)
+        {
+            output += " \nPress start\nto retry";
+        }*/
+
+        return output;
     }
 
     private string Timer()
@@ -241,6 +250,7 @@ public class UIPlayer : MonoBehaviour
         return string.Format($"{minutes.ToString("00")}:{seconds.ToString("00")}");
     }
 
+    /*
     private void ResetGame(InputAction.CallbackContext callback)
     {
         if(state == PlayerState.Win || state == PlayerState.Lose)
@@ -248,7 +258,7 @@ public class UIPlayer : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         
-    }
+    }*/
     
     private void EnergySound()
     {

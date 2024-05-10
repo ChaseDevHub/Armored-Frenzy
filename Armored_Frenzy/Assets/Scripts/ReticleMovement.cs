@@ -13,11 +13,13 @@ public class ReticleMovement : MonoBehaviour
     private PlayerControls playerControls;
 
     InputAction MoveReticalPosition;
-    internal InputAction ReticleSpeed;
+    InputAction ReticleSpeed;
     InputAction ResetPosition;
 
     [SerializeField]
     public Vector3 Direction;
+
+    public float MaxSpeed;
 
     [SerializeField]
     public float DefaultSpeed;
@@ -45,8 +47,6 @@ public class ReticleMovement : MonoBehaviour
 
     public bool PlayerControl;
 
-    public float MaxSpeed;
-
     Rigidbody rb;
 
     [SerializeField]
@@ -58,14 +58,18 @@ public class ReticleMovement : MonoBehaviour
 
     private Transform ReticlePosition;
 
-    /*
     [SerializeField]
-    private Material NormalMaterial;
+    private float timeRemain;
+    private float timeDefault;
+
+    private bool ResetSpeedChange;
+    internal bool ResetRetPos = false;
 
     [SerializeField]
-    private Material LockedMaterial;
-
-    private Renderer rend;*/
+    GameObject TrailNormal;
+    
+    [SerializeField]
+    GameObject TrailBoost;
 
     private void Awake()
     {
@@ -100,7 +104,6 @@ public class ReticleMovement : MonoBehaviour
         ResetRetical.Disable();*/
     }
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -113,7 +116,8 @@ public class ReticleMovement : MonoBehaviour
 
         MaxSpeed = DefaultSpeed;
 
-        Speed = 0;
+        Speed = DefaultSpeed / 2;
+
 
         Move = false;
 
@@ -133,32 +137,55 @@ public class ReticleMovement : MonoBehaviour
         {
             RotateAngleAddition = 2;
         }
+
+        timeRemain = 3;
+        timeDefault = timeRemain;
+
+        ResetSpeedChange = false;
+
+        if(TrailNormal == null)
+        {
+            TrailNormal = GameObject.Find("EngineTrailsNormal");
+        }
+        
+        if(TrailBoost == null)
+        {
+            TrailBoost = GameObject.Find("EngineTrailsBoost");
+        }
+
+        TrailBoost.SetActive(false);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         transform.LookAt(player.transform.localPosition);
+
+        if(ResetSpeedChange == true)
+        {
+            ReturnSpeedToNormal();
+        }
         
+
         if (player.PlayerInControl && UIPlayer.state == PlayerState.Active)
         {
             MoveReticle();
+            
         }
         else
         {
             rb.velocity = Vector3.zero;
-            Speed = 0;
+           
             this.transform.position = ReticlePosition.position;
         }
-       
     }
-    internal bool ResetRetPos = false;
-
+    
     private void MoveReticle()
     {
         var move = MoveReticalPosition.ReadValue<Vector3>();
-        Direction.z = -ReticleSpeed.ReadValue<float>();
-        
+        Direction.z = -1;//-ReticleSpeed.ReadValue<float>();
+        Move = true;
+
         switch (controlInput)
         {
             case Controls.Inverted:
@@ -171,33 +198,16 @@ public class ReticleMovement : MonoBehaviour
                 break;
         }
 
-        if (ReticleSpeed.IsPressed())
+        
+        if (ReticleSpeed.IsPressed() || ResetSpeedChange)
         {
-            ResetRetPos = false;
-            Move = true;
-            if (Speed < MaxSpeed)
-            {
-                Speed = Speed + 1;
-               
-            }
+            Speed = MaxSpeed;
         }
-        else
+        else if(!ResetSpeedChange || !ReticleSpeed.IsPressed())
         {
-            Move = false;
-            if (Speed > 0 && Speed != 1)
-            {
-                Speed = Speed - 1;
-                ResetRetPos = false;
-                //this.transform.position = ReticlePosition.position; //Temp
-            }
-            else if(Speed > 0 && Speed == 1)
-            {
-                ResetRetPos = true;
-                Speed = Speed - 1;
-            }
-            
-  
+            Speed = DefaultSpeed / 2;
         }
+       
       
         ResetRetPosition();
         IncreaseSharpTurn();
@@ -210,22 +220,10 @@ public class ReticleMovement : MonoBehaviour
 
         //help with modifying with Chat.gpt
         Vector3 velocity = new Vector3(Direction.x, Direction.y, Direction.z) * Speed;
-        Vector3 rotate = new Vector3(Direction.x, Direction.y, Direction.z) * DefaultSpeed;
         
-        if(!Move)
-        {
-            rb.velocity = transform.rotation * rotate;
-        }
-        else
-        {
-            rb.velocity = transform.rotation * velocity;
-        }
-        
-        
+        rb.velocity = transform.rotation * velocity;
 
-        //Visual for debug
         ForwardPosition = transform.TransformDirection(Vector3.back);
-        //Debug.DrawRay(transform.position, ForwardPosition, Color.yellow);
     }
 
     private void IncreaseSharpTurn()
@@ -243,12 +241,33 @@ public class ReticleMovement : MonoBehaviour
 
     public void IncreaseSpeedWithBoost(float sp)
     {
-        if (sp != 0 && ReticleSpeed.IsPressed()) //Go fast until button is released
+        timeRemain = timeDefault;
+        SetTrails(false, true);
+        MaxSpeed += sp;
+        ResetSpeedChange = true;
+    }
+
+    private void ReturnSpeedToNormal()
+    {
+        if (timeRemain > 0)
         {
-            Speed += sp;
+            timeRemain -= Time.deltaTime;
+        }
+        else
+        {
+            SetTrails(true, false);
+            ResetSpeedChange = false;
+            MaxSpeed = DefaultSpeed;
+            timeRemain = timeDefault;
+            ResetRetPos = true;
         }
     }
 
+    private void SetTrails(bool normalCondition, bool boostCondition)
+    {
+        TrailNormal.SetActive(normalCondition);
+        TrailBoost.SetActive(boostCondition);
+    }
      
     private void ResetRetPosition()
     {
@@ -258,7 +277,7 @@ public class ReticleMovement : MonoBehaviour
         }
     }
 
-    //Called from player when player crashes and resets
+    //Called from Player class when player crashes and resets
     public void RespawnPosition()
     {
         this.transform.position = ReticlePosition.position; 

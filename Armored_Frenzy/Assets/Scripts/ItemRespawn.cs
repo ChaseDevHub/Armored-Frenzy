@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+//script no longer in use
 public class ItemRespawn : MonoBehaviour
 {
     [SerializeField]
@@ -37,6 +38,6 @@ public class ItemRespawn : MonoBehaviour
     {
         yield return new WaitForSeconds(timer);
         itemBox.gameObject.SetActive(true);
-        itemBox.ResetPowerUp();
+        //itemBox.ResetPowerUp();
     }
 }
